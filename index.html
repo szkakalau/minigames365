@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PlayCentral - Play the best free online games! No downloads required. Enjoy action, puzzle, arcade games and more on desktop and mobile.">
+    <meta name="keywords" content="free online games, no download games, browser games, mobile games, action games, puzzle games">
+    <meta name="author" content="PlayCentral">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/">
+    <meta property="og:title" content="PlayCentral - Free Online Games">
+    <meta property="og:description" content="Play the best free online games! No downloads required. Enjoy action, puzzle, arcade games and more.">
+    <meta property="og:image" content="https://minigames365.com/assets/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://minigames365.com/">
+    <meta property="twitter:title" content="PlayCentral - Free Online Games">
+    <meta property="twitter:description" content="Play the best free online games! No downloads required.">
+    <meta property="twitter:image" content="https://minigames365.com/assets/images/og-image.jpg">
+
+    <!-- Language alternatives -->
+    <link rel="alternate" hreflang="en" href="https://minigames365.com/en/">
+    <link rel="alternate" hreflang="es" href="https://minigames365.com/es/">
+    <link rel="alternate" hreflang="pt" href="https://minigames365.com/pt/">
+    <link rel="alternate" hreflang="tr" href="https://minigames365.com/tr/">
+    <link rel="alternate" hreflang="vi" href="https://minigames365.com/vi/">
+    <link rel="alternate" hreflang="hi" href="https://minigames365.com/hi/">
+    <link rel="alternate" hreflang="x-default" href="https://minigames365.com/">
+
+    <title>PlayCentral - Free Online Games | No Download Required</title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/">
+                        <img src="assets/images/logo.svg" alt="PlayCentral" class="logo-img">
+                        <span class="logo-text">PlayCentral</span>
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="#featured">Featured</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#new-games">New Games</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search games..." class="search-input">
+                        <button type="button" class="search-btn" onclick="searchGames()">🔍</button>
+                    </div>
+                    
+                    <div class="language-selector">
+                        <select id="languageSelect" onchange="changeLanguage(this.value)">
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="pt">Português</option>
+                            <option value="tr">Türkçe</option>
+                            <option value="vi">Tiếng Việt</option>
+                            <option value="hi">हिंदी</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Banner Ad -->
+    <div class="ad-banner-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXX"
+             data-ad-slot="XXXXXXXXX"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">Play the Best Free Online Games</h1>
+                    <p class="hero-description">Discover thousands of games across all categories. No downloads, no registration required. Play instantly on any device!</p>
+                    <div class="hero-stats">
+                        <span class="stat">🎮 1000+ Games</span>
+                        <span class="stat">📱 Mobile & Desktop</span>
+                        <span class="stat">🆓 Always Free</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Games -->
+            <section id="featured" class="featured-games">
+                <h2 class="section-title">🔥 Featured Games</h2>
+                <div class="games-grid">
+                    <div class="game-card" onclick="playGame('2048')">
+                        <div class="game-thumbnail">
+                            <img src="assets/images/games/2048-thumb.svg" alt="2048" loading="lazy">
+                            <div class="play-overlay">
+                                <div class="play-button">▶</div>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">2048</h3>
+                            <p class="game-description">Combine tiles to reach 2048!</p>
+                            <div class="game-meta">
+                                <span class="game-category">Puzzle</span>
+                                <span class="game-rating">⭐ 4.5</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card" onclick="playGame('flappy-bird')">
+                        <div class="game-thumbnail">
+                            <img src="assets/images/games/flappy-bird-thumb.svg" alt="Flappy Bird" loading="lazy">
+                            <div class="play-overlay">
+                                <div class="play-button">▶</div>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">Flappy Bird</h3>
+                            <p class="game-description">Tap to fly and avoid pipes.</p>
+                            <div class="game-meta">
+                                <span class="game-category">Arcade</span>
+                                <span class="game-rating">⭐ 4.6</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card" onclick="playGame('snake')">
+                        <div class="game-thumbnail">
+                            <img src="assets/images/games/snake-thumb.svg" alt="Snake" loading="lazy">
+                            <div class="play-overlay">
+                                <div class="play-button">▶</div>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">Snake</h3>
+                            <p class="game-description">Eat food, grow longer, avoid yourself.</p>
+                            <div class="game-meta">
+                                <span class="game-category">Arcade</span>
+                                <span class="game-rating">⭐ 4.7</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- More games will be added here -->
+                    <div class="game-card coming-soon">
+                        <div class="game-thumbnail">
+                            <div class="placeholder">Coming Soon</div>
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">More Games Daily!</h3>
+                            <p class="game-description">New games added every day</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section id="categories" class="categories">
+                <h2 class="section-title">🎯 Game Categories</h2>
+                <div class="categories-grid">
+                    <a href="#" class="category-card" onclick="filterByCategory('puzzle')">
+                        <div class="category-icon">🧩</div>
+                        <h3>Puzzle Games</h3>
+                        <p>Test your brain power</p>
+                    </a>
+                    <a href="#" class="category-card" onclick="filterByCategory('action')">
+                        <div class="category-icon">⚡</div>
+                        <h3>Action Games</h3>
+                        <p>Fast-paced adventures</p>
+                    </a>
+                    <a href="#" class="category-card" onclick="filterByCategory('arcade')">
+                        <div class="category-icon">🕹️</div>
+                        <h3>Arcade Games</h3>
+                        <p>Classic retro fun</p>
+                    </a>
+                    <a href="#" class="category-card" onclick="filterByCategory('sports')">
+                        <div class="category-icon">⚽</div>
+                        <h3>Sports Games</h3>
+                        <p>Athletic challenges</p>
+                    </a>
+                    <a href="#" class="category-card" onclick="filterByCategory('racing')">
+                        <div class="category-icon">🏎️</div>
+                        <h3>Racing Games</h3>
+                        <p>Speed thrills</p>
+                    </a>
+                    <a href="#" class="category-card" onclick="filterByCategory('strategy')">
+                        <div class="category-icon">🎯</div>
+                        <h3>Strategy Games</h3>
+                        <p>Think and conquer</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Sidebar Ad (Desktop) -->
+            <aside class="sidebar-ad desktop-only">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-6583243933606323"
+                     data-ad-slot="XXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>PlayCentral</h4>
+                    <p>The best destination for free online games. Play instantly without downloads on any device.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#">Puzzle Games</a></li>
+                        <li><a href="#">Action Games</a></li>
+                        <li><a href="#">Sports Games</a></li>
+                        <li><a href="#">Racing Games</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                        <li><a href="#" onclick="showPage('privacy')">Privacy Policy</a></li>
+                        <li><a href="#" onclick="showPage('terms')">Terms of Service</a></li>
+                        <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PlayCentral. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "PlayCentral",
+        "url": "https://minigames365.com",
+        "description": "Play the best free online games! No downloads required. Enjoy action, puzzle, arcade games and more on desktop and mobile.",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://minigames365.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "PlayCentral",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://minigames365.com/assets/images/logo.svg"
+            }
+        }
+    }
+    </script>
+
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Initialize Google Ads -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#6bb8da"/>
+    </linearGradient>
+    <linearGradient id="pipe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#50c236"/>
+      <stop offset="100%" stop-color="#3a9e28"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#sky)"/>
+  <!-- Pipes -->
+  <rect x="430" y="0" width="60" height="140" rx="6" fill="url(#pipe)"/>
+  <rect x="430" y="220" width="60" height="140" rx="6" fill="url(#pipe)"/>
+  <rect x="424" y="136" width="72" height="12" rx="4" fill="#2f7f1f"/>
+  <rect x="424" y="220" width="72" height="12" rx="4" fill="#2f7f1f"/>
+
+  <!-- Bird -->
+  <g transform="translate(240,160)">
+    <circle cx="0" cy="0" r="26" fill="#ffeb3b" stroke="#e0c300" stroke-width="3"/>
+    <circle cx="8" cy="-8" r="4" fill="#000"/>
+    <path d="M-16 0 L-2 6 L-2 -6 Z" fill="#ff7043"/>
+    <path d="M-10 10 Q -4 16 4 12" stroke="#f7d800" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <!-- Title Banner -->
+  <rect x="24" y="24" width="280" height="56" rx="12" fill="rgba(0,0,0,0.45)"/>
+  <text x="44" y="60" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="28" font-weight="700" fill="#fff">Flappy Bird</text>
+
+  <!-- Tag -->
+  <rect x="24" y="92" width="120" height="32" rx="8" fill="rgba(0,0,0,0.35)"/>
+  <text x="44" y="114" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="16" font-weight="600" fill="#fff">Arcade</text>
+</svg>
