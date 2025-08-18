@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Games - Retro Fun & Classics | MiniGames365</title>
+    <meta name="description" content="Enjoy classic arcade-style games like Snake and Flappy Bird. Fast, fun, and free to play instantly.">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="canonical" href="https://minigames365.com/categories/arcade">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logo.svg" alt="MiniGames365" width="40" height="40">
+                    <span class="logo-text">MiniGames365</span>
+                </a>
+                <div class="nav-search">
+                    <input type="text" placeholder="Search games..." id="searchInput" onkeyup="searchGames()">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero-section">
+                <h1>🕹️ Arcade Games</h1>
+                <p class="hero-description">
+                    Fast, fun, and timeless arcade experiences. Perfect for quick sessions and high-score chases.
+                </p>
+            </section>
+
+            <section id="arcade-games" class="featured-games">
+                <h2 class="section-title">Available Arcade Games</h2>
+                <div class="games-grid" id="arcade-games-grid"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiniGames365</h4>
+                    <p>The best destination for free online games. Play instantly without downloads on any device.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="/categories/puzzle">Puzzle Games</a></li>
+                        <li><a href="/categories/action">Action Games</a></li>
+                        <li><a href="/categories/arcade">Arcade Games</a></li>
+                        <li><a href="/categories/strategy">Strategy Games</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MiniGames365. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        const ARCADE_GAMES = [
+            {
+                slug: 'snake',
+                title: 'Snake',
+                description: 'Eat food, grow longer, avoid yourself.',
+                category: 'Arcade',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/snake-thumb.svg'
+            },
+            {
+                slug: 'flappy-bird',
+                title: 'Flappy Bird',
+                description: 'Tap to fly and avoid pipes.',
+                category: 'Arcade',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/flappy-bird-thumb.svg'
+            }
+        ];
+
+        function renderArcadeGames() {
+            const grid = document.getElementById('arcade-games-grid');
+            if (!grid) return;
+            ARCADE_GAMES.forEach(game => {
+                const el = document.createElement('div');
+                el.className = 'game-card';
+                el.onclick = () => playGame(game.slug);
+                el.innerHTML = `
+                    <div class="game-thumbnail">
+                        <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
+                        <div class="play-overlay"><div class="play-button">▶</div></div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">${game.title}</h3>
+                        <p class="game-description">${game.description}</p>
+                        <div class="game-meta">
+                            <span class="game-category">${game.category}</span>
+                            <span class="game-rating">⭐ ${game.rating}</span>
+                        </div>
+                    </div>`;
+                grid.appendChild(el);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderArcadeGames);
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Arcade Games",
+        "description": "Enjoy classic arcade-style games like Snake and Flappy Bird.",
+        "url": "https://minigames365.com/categories/arcade"
+    }
+    </script>
+</body>
+</html>

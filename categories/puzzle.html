@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Games - Free Online Brain Teasers | MiniGames365</title>
+    <meta name="description" content="Challenge your mind with our collection of free puzzle games. Play Minesweeper, 2048, and more brain-teasing games instantly in your browser.">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="canonical" href="https://minigames365.com/categories/puzzle">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logo.svg" alt="MiniGames365" width="40" height="40">
+                    <span class="logo-text">MiniGames365</span>
+                </a>
+                <div class="nav-search">
+                    <input type="text" placeholder="Search games..." id="searchInput" onkeyup="searchGames()">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero-section">
+                <h1>🧩 Puzzle Games</h1>
+                <p class="hero-description">
+                    Challenge your mind with our collection of brain-teasing puzzle games. 
+                    From classic Minesweeper to number challenges like 2048, test your logic and problem-solving skills.
+                </p>
+            </section>
+
+            <section id="puzzle-games" class="featured-games">
+                <h2 class="section-title">Available Puzzle Games</h2>
+                <div class="games-grid" id="puzzle-games-grid">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Banner Ad -->
+            <div class="ad-container mobile-only">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-6583243933606323"
+                     data-ad-slot="XXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+            <!-- Other Categories -->
+            <section class="featured-games">
+                <h2 class="section-title">🎮 Explore Other Categories</h2>
+                <div class="categories-grid">
+                    <a href="/categories/arcade" class="category-card">
+                        <div class="category-icon">🕹️</div>
+                        <h3>Arcade Games</h3>
+                        <p>Classic retro fun</p>
+                    </a>
+                    <a href="/categories/action" class="category-card">
+                        <div class="category-icon">⚡</div>
+                        <h3>Action Games</h3>
+                        <p>Fast-paced adventures</p>
+                    </a>
+                    <a href="/categories/strategy" class="category-card">
+                        <div class="category-icon">🎯</div>
+                        <h3>Strategy Games</h3>
+                        <p>Think and conquer</p>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiniGames365</h4>
+                    <p>The best destination for free online games. Play instantly without downloads on any device.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="/categories/puzzle">Puzzle Games</a></li>
+                        <li><a href="/categories/action">Action Games</a></li>
+                        <li><a href="/categories/arcade">Arcade Games</a></li>
+                        <li><a href="/categories/strategy">Strategy Games</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MiniGames365. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load shared scripts -->
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Puzzle Games Data
+        const PUZZLE_GAMES = [
+            {
+                slug: 'minesweeper',
+                title: 'Minesweeper',
+                description: 'Clear the minefield without hitting a bomb! Classic logic puzzle with multiple difficulty levels.',
+                category: 'Puzzle',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/minesweeper-thumb.svg'
+            },
+            {
+                slug: '2048',
+                title: '2048',
+                description: 'Combine tiles to reach 2048! Addictive number puzzle that challenges your strategic thinking.',
+                category: 'Puzzle', 
+                rating: 4.5,
+                thumbnail: '/assets/images/games/2048-thumb.svg'
+            }
+        ];
+
+        // Render puzzle games
+        function renderPuzzleGames() {
+            const grid = document.getElementById('puzzle-games-grid');
+            if (!grid) return;
+
+            PUZZLE_GAMES.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'game-card';
+                gameCard.onclick = () => playGame(game.slug);
+                
+                gameCard.innerHTML = `
+                    <div class="game-thumbnail">
+                        <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">${game.title}</h3>
+                        <p class="game-description">${game.description}</p>
+                        <div class="game-meta">
+                            <span class="game-category">${game.category}</span>
+                            <span class="game-rating">⭐ ${game.rating}</span>
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(gameCard);
+            });
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPuzzleGames();
+            
+            // Initialize ads
+            if (window.adsbygoogle) {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        });
+
+        // Track category view
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'category_view', {
+                category_name: 'puzzle',
+                page_title: 'Puzzle Games'
+            });
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Puzzle Games - Free Online Brain Teasers",
+        "description": "Challenge your mind with our collection of free puzzle games including Minesweeper, 2048, and more brain-teasing games.",
+        "url": "https://minigames365.com/categories/puzzle",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Puzzle Games Collection",
+            "itemListElement": [
+                {
+                    "@type": "VideoGame",
+                    "position": 1,
+                    "name": "Minesweeper",
+                    "url": "https://minigames365.com/games/minesweeper"
+                },
+                {
+                    "@type": "VideoGame", 
+                    "position": 2,
+                    "name": "2048",
+                    "url": "https://minigames365.com/games/2048"
+                }
+            ]
+        }
+    }
+    </script>
+</body>
+</html>
