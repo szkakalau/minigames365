@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minesweeper - Play Free Online | PlayCentral</title>
+  <meta name="description" content="Play classic Minesweeper online for free. Clear the minefield without hitting a bomb! Easy, Medium, and Hard difficulty levels. Works on desktop and mobile.">
+  <meta name="keywords" content="minesweeper, free online game, puzzle game, mine sweeper, logic game">
+  <link rel="canonical" href="https://minigames365.com/games/minesweeper">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Minesweeper - Play Free Online | PlayCentral">
+  <meta property="og:description" content="Clear the minefield without hitting a bomb! Classic Minesweeper with multiple difficulty levels.">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/minesweeper-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/minesweeper">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Minesweeper - Play Free Online">
+  <meta name="twitter:description" content="Clear the minefield without hitting a bomb! Classic Minesweeper with multiple difficulty levels.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/minesweeper-thumb.svg">
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QM2M85ZVEG');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="/"><img src="/assets/images/logo.svg" alt="PlayCentral" class="logo-img"><span class="logo-text">PlayCentral</span></a></div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/index.html#categories">Categories</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Minesweeper</h1>
+          <p class="hero-description">Clear the minefield without hitting a bomb! Use logic and deduction to find all the mines.</p>
+          <div class="game-instructions">
+            <strong>Controls:</strong> 
+            <span>🖱️ Left Click to reveal</span> 
+            <span>🖱️ Right Click to flag</span>
+            <span>📱 Tap to reveal, Long press to flag</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad above game canvas -->
+      <div class="ad-banner-top">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6583243933606323" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+
+      <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
+        <div id="game-root" class="game-root" style="position:relative; background:#111827; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06);">
+          <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
+            <div class="scores" style="display:flex; gap:10px;">
+              <div class="score" id="mines" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">💣 10</div>
+              <div class="best" id="timer" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">⏰ 0</div>
+            </div>
+            <div class="controls" style="display:flex; gap:8px;">
+              <select id="difficulty" class="search-btn" style="padding:8px 12px;">
+                <option value="beginner">Beginner (9x9)</option>
+                <option value="intermediate" selected>Intermediate (16x16)</option>
+                <option value="expert">Expert (16x30)</option>
+              </select>
+              <button id="restartBtn" class="search-btn">😊 New Game</button>
+            </div>
+          </div>
+          <canvas id="gameCanvas" width="480" height="480" style="touch-action: none; background:#0f172a; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
+            <h3 id="gameOverTitle">Game Over!</h3>
+            <p id="gameOverMessage">You hit a mine!</p>
+            <button onclick="restartGame()" class="search-btn">😊 Play Again</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Native recommended games -->
+      <section class="featured-games">
+        <h2 class="section-title">You may also like</h2>
+        <div class="games-grid">
+          <div class="game-card" onclick="window.location.href='/games/2048/'">
+            <div class="game-thumbnail">
+              <img src="/assets/images/games/2048-thumb.svg" alt="2048" loading="lazy">
+              <div class="play-overlay">
+                <div class="play-button">▶</div>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3 class="game-title">2048</h3>
+              <p class="game-description">Combine tiles to reach 2048!</p>
+              <div class="game-meta">
+                <span class="game-category">Puzzle</span>
+              </div>
+            </div>
+          </div>
+          <div class="game-card" onclick="window.location.href='/games/snake/'">
+            <div class="game-thumbnail">
+              <img src="/assets/images/games/snake-thumb.svg" alt="Snake" loading="lazy">
+              <div class="play-overlay">
+                <div class="play-button">▶</div>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3 class="game-title">Snake</h3>
+              <p class="game-description">Eat food, grow longer, avoid yourself.</p>
+              <div class="game-meta">
+                <span class="game-category">Arcade</span>
+              </div>
+            </div>
+          </div>
+          <div class="game-card" onclick="window.location.href='/games/flappy-bird/'">
+            <div class="game-thumbnail">
+              <img src="/assets/images/games/flappy-bird-thumb.svg" alt="Flappy Bird" loading="lazy">
+              <div class="play-overlay">
+                <div class="play-button">▶</div>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3 class="game-title">Flappy Bird</h3>
+              <p class="game-description">Tap to fly and avoid pipes.</p>
+              <div class="game-meta">
+                <span class="game-category">Arcade</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 PlayCentral. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Minesweeper",
+    "description": "Clear the minefield without hitting a bomb! Classic Minesweeper with multiple difficulty levels.",
+    "applicationCategory": "Game",
+    "genre": ["Puzzle", "Logic"],
+    "operatingSystem": "Web",
+    "url": "https://minigames365.com/games/minesweeper",
+    "image": "https://minigames365.com/assets/images/games/minesweeper-thumb.svg",
+    "author": {
+      "@type": "Organization",
+      "name": "PlayCentral"
+    },
+    "creator": {
+      "@type": "Organization", 
+      "name": "PlayCentral"
+    },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <script src="/games/minesweeper/logic.js"></script>
+  <script>
+    // Initialize ads
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    
+    // Google Analytics events
+    function trackGameEvent(action, score = null) {
+      if (typeof gtag !== 'undefined') {
+        const eventData = {
+          game_slug: 'minesweeper',
+          category: 'puzzle',
+          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+        };
+        if (score !== null) eventData.score = score;
+        gtag('event', action, eventData);
+      }
+    }
+  </script>
+</body>
+</html>
