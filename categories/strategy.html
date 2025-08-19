@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arcade Games - Retro Fun & Classics | MiniGames365</title>
-    <meta name="description" content="Enjoy classic arcade-style games like Snake and Flappy Bird. Fast, fun, and free to play instantly.">
+    <title>Strategy Games - Think and Conquer | MiniGames365</title>
+    <meta name="description" content="Plan, think, and conquer with strategy games. Enjoy thoughtful gameplay right in your browser.">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="canonical" href="https://minigames365.com/categories/arcade.html">
-    
+    <link rel="canonical" href="https://minigames365.com/categories/strategy.html">
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
     <script>
@@ -36,15 +36,45 @@
     <main>
         <div class="container">
             <section class="hero-section">
-                <h1>🕹️ Arcade Games</h1>
+                <h1>🎯 Strategy Games</h1>
                 <p class="hero-description">
-                    Fast, fun, and timeless arcade experiences. Perfect for quick sessions and high-score chases.
+                    Thoughtful, tactical gameplay that rewards planning and smart decisions.
                 </p>
             </section>
 
-            <section id="arcade-games" class="featured-games">
-                <h2 class="section-title">Available Arcade Games</h2>
-                <div class="games-grid" id="arcade-games-grid"></div>
+            <section id="strategy-games" class="featured-games">
+                <h2 class="section-title">Available Strategy Games</h2>
+                <div class="games-grid" id="strategy-games-grid"></div>
+            </section>
+
+            <div class="ad-container mobile-only">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-6583243933606323"
+                     data-ad-slot="XXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+            <section class="featured-games">
+                <h2 class="section-title">🎮 Explore Other Categories</h2>
+                <div class="categories-grid">
+                    <a href="/categories/puzzle.html" class="category-card">
+                        <div class="category-icon">🧩</div>
+                        <h3>Puzzle Games</h3>
+                        <p>Test your brain power</p>
+                    </a>
+                    <a href="/categories/arcade.html" class="category-card">
+                        <div class="category-icon">🕹️</div>
+                        <h3>Arcade Games</h3>
+                        <p>Classic retro fun</p>
+                    </a>
+                    <a href="/categories/action.html" class="category-card">
+                        <div class="category-icon">⚡</div>
+                        <h3>Action Games</h3>
+                        <p>Fast-paced adventures</p>
+                    </a>
+                </div>
             </section>
         </div>
     </main>
@@ -83,59 +113,45 @@
 
     <script src="/assets/js/main.js"></script>
     <script>
-        const ARCADE_GAMES = [
-            {
-                slug: 'snake',
-                title: 'Snake',
-                description: 'Eat food, grow longer, avoid yourself.',
-                category: 'Arcade',
-                rating: 4.6,
-                thumbnail: '/assets/images/games/snake-thumb.svg'
-            },
-            {
-                slug: 'flappy-bird',
-                title: 'Flappy Bird',
-                description: 'Tap to fly and avoid pipes.',
-                category: 'Arcade',
-                rating: 4.6,
-                thumbnail: '/assets/images/games/flappy-bird-thumb.svg'
-            }
-        ];
+        const STRATEGY_GAMES = [];
 
-        function renderArcadeGames() {
-            const grid = document.getElementById('arcade-games-grid');
+        function renderStrategyGames() {
+            const grid = document.getElementById('strategy-games-grid');
             if (!grid) return;
-            ARCADE_GAMES.forEach(game => {
-                const el = document.createElement('div');
-                el.className = 'game-card';
-                el.onclick = () => playGame(game.slug);
-                el.innerHTML = `
-                    <div class="game-thumbnail">
-                        <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
-                        <div class="play-overlay"><div class="play-button">▶</div></div>
+
+            if (STRATEGY_GAMES.length === 0) {
+                grid.innerHTML = `
+                    <div class="coming-soon-message">
+                        <h3>🧠 Strategy Games Coming Soon!</h3>
+                        <p>We're crafting thoughtful strategy games. Stay tuned!</p>
                     </div>
-                    <div class="game-info">
-                        <h3 class="game-title">${game.title}</h3>
-                        <p class="game-description">${game.description}</p>
-                        <div class="game-meta">
-                            <span class="game-category">${game.category}</span>
-                            <span class="game-rating">⭐ ${game.rating}</span>
-                        </div>
-                    </div>`;
-                grid.appendChild(el);
-            });
+                `;
+                return;
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', renderArcadeGames);
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStrategyGames();
+            if (window.adsbygoogle) {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        });
+
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'category_view', {
+                category_name: 'strategy',
+                page_title: 'Strategy Games'
+            });
+        }
     </script>
 
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        "name": "Arcade Games",
-        "description": "Enjoy classic arcade-style games like Snake and Flappy Bird.",
-        "url": "https://minigames365.com/categories/arcade.html"
+        "name": "Strategy Games",
+        "description": "Plan, think, and conquer with strategy games.",
+        "url": "https://minigames365.com/categories/strategy.html"
     }
     </script>
 </body>
