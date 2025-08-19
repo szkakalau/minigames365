@@ -3,27 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flappy Bird - Play Free Online | PlayCentral</title>
-  <meta name="description" content="Play Flappy Bird online for free. Tap to fly and avoid obstacles. Simple to start, hard to master. Works on desktop and mobile.">
-  <meta name="keywords" content="flappy bird, free online game, arcade game, mobile game, bird game">
-  <link rel="canonical" href="https://minigames365.com/games/flappy-bird">
+  <title>Tic Tac Toe - Play Free Online | PlayCentral</title>
+  <meta name="description" content="Classic Tic Tac Toe game! Play against the computer in this timeless strategy puzzle. 3x3 grid, first to get three in a row wins. Works on desktop and mobile.">
+  <meta name="keywords" content="tic tac toe, free online game, puzzle, strategy game, mobile game">
+  <link rel="canonical" href="https://minigames365.com/games/tic-tac-toe">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Flappy Bird - Play Free Online | PlayCentral">
-  <meta property="og:description" content="Tap to fly and avoid obstacles. Simple to start, hard to master. Play on mobile or desktop.">
-  <meta property="og:image" content="https://minigames365.com/assets/images/games/flappy-bird-thumb.svg">
-  <meta property="og:url" content="https://minigames365.com/games/flappy-bird">
+  <meta property="og:title" content="Tic Tac Toe - Play Free Online | PlayCentral">
+  <meta property="og:description" content="Classic Tic Tac Toe game! Play against the computer in this timeless strategy puzzle.">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/tic-tac-toe-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/tic-tac-toe">
   <meta property="og:type" content="website">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Flappy Bird - Play Free Online">
-  <meta name="twitter:description" content="Tap to fly and avoid obstacles. Simple to start, hard to master.">
-  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/flappy-bird-thumb.svg">
+  <meta name="twitter:title" content="Tic Tac Toe - Play Free Online">
+  <meta name="twitter:description" content="Classic Tic Tac Toe game! Play against the computer in this timeless strategy puzzle.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/tic-tac-toe-thumb.svg">
 
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-  
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
   <script>
@@ -53,13 +52,11 @@
     <div class="container">
       <section class="hero">
         <div class="hero-content">
-          <h1 class="hero-title">Flappy Bird</h1>
-          <p class="hero-description">Tap or press spacebar to fly. Avoid the pipes and see how far you can go!</p>
+          <h1 class="hero-title">Tic Tac Toe</h1>
+          <p class="hero-description">Classic Tic Tac Toe game! Play against the computer in this timeless strategy puzzle. First to get three in a row wins!</p>
           <div class="game-instructions">
             <strong>Controls:</strong> 
-            <span>🖱️ Click/Tap</span> 
-            <span>⌨️ Spacebar</span>
-            <span>📱 Touch Screen</span>
+            Click on empty squares to place your X. Try to get three X's in a row before the computer gets three O's!
           </div>
         </div>
       </section>
@@ -77,13 +74,13 @@
               <div class="best" id="best" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Best: 0</div>
             </div>
             <div class="controls" style="display:flex; gap:8px;">
-              <button id="restartBtn" class="search-btn">Restart</button>
+              <button id="restartBtn" class="search-btn">New Game</button>
             </div>
           </div>
-          <canvas id="gameCanvas" width="400" height="600" style="touch-action: none; background:#87CEEB; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
-          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
-            <h3>Game Over!</h3>
-            <p>Final Score: <span id="finalScore">0</span></p>
+          <canvas id="gameCanvas" width="400" height="400" style="touch-action: none; background:#0f172a; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%; cursor:pointer;"></canvas>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.85); color:white; padding:25px; border-radius:10px; text-align:center; border:1px solid rgba(255,255,255,0.1);">
+            <h3 id="gameOverTitle">Game Over!</h3>
+            <p id="gameOverMessage">Final Score: <span id="finalScore">0</span></p>
             <button onclick="restartGame()" class="search-btn">Play Again</button>
           </div>
         </div>
@@ -93,6 +90,36 @@
       <section class="featured-games">
         <h2 class="section-title">You may also like</h2>
         <div class="games-grid">
+          <div class="game-card" onclick="window.location.href='/games/memory-match/'">
+            <div class="game-thumbnail">
+              <img src="/assets/images/games/memory-match-thumb.svg" alt="Memory Match" loading="lazy">
+              <div class="play-overlay">
+                <div class="play-button">▶</div>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3 class="game-title">Memory Match</h3>
+              <p class="game-description">Flip and match pairs! Train your memory.</p>
+              <div class="game-meta">
+                <span class="game-category">Puzzle</span>
+              </div>
+            </div>
+          </div>
+          <div class="game-card" onclick="window.location.href='/games/minesweeper/'">
+            <div class="game-thumbnail">
+              <img src="/assets/images/games/minesweeper-thumb.svg" alt="Minesweeper" loading="lazy">
+              <div class="play-overlay">
+                <div class="play-button">▶</div>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3 class="game-title">Minesweeper</h3>
+              <p class="game-description">Classic logic puzzle. Flag all mines!</p>
+              <div class="game-meta">
+                <span class="game-category">Puzzle</span>
+              </div>
+            </div>
+          </div>
           <div class="game-card" onclick="window.location.href='/games/brick-breaker/'">
             <div class="game-thumbnail">
               <img src="/assets/images/games/brick-breaker-thumb.svg" alt="Brick Breaker" loading="lazy">
@@ -103,36 +130,6 @@
             <div class="game-info">
               <h3 class="game-title">Brick Breaker</h3>
               <p class="game-description">Bounce the ball and clear all bricks!</p>
-              <div class="game-meta">
-                <span class="game-category">Arcade</span>
-              </div>
-            </div>
-          </div>
-          <div class="game-card" onclick="window.location.href='/games/t-rex-runner/'">
-            <div class="game-thumbnail">
-              <img src="/assets/images/games/t-rex-runner-thumb.svg" alt="T-Rex Runner" loading="lazy">
-              <div class="play-overlay">
-                <div class="play-button">▶</div>
-              </div>
-            </div>
-            <div class="game-info">
-              <h3 class="game-title">T-Rex Runner</h3>
-              <p class="game-description">Jump over cacti and dodge pterodactyls!</p>
-              <div class="game-meta">
-                <span class="game-category">Action</span>
-              </div>
-            </div>
-          </div>
-          <div class="game-card" onclick="window.location.href='/games/snake/'">
-            <div class="game-thumbnail">
-              <img src="/assets/images/games/snake-thumb.svg" alt="Snake" loading="lazy">
-              <div class="play-overlay">
-                <div class="play-button">▶</div>
-              </div>
-            </div>
-            <div class="game-info">
-              <h3 class="game-title">Snake</h3>
-              <p class="game-description">Eat food, grow longer, avoid yourself.</p>
               <div class="game-meta">
                 <span class="game-category">Arcade</span>
               </div>
@@ -156,13 +153,13 @@
   {
     "@context": "https://schema.org",
     "@type": "VideoGame",
-    "name": "Flappy Bird",
-    "description": "Tap to fly and avoid obstacles. Simple to start, hard to master. Play on mobile or desktop.",
+    "name": "Tic Tac Toe",
+    "description": "Classic Tic Tac Toe game! Play against the computer in this timeless strategy puzzle. First to get three in a row wins!",
     "applicationCategory": "Game",
-    "genre": ["Arcade", "Action"],
+    "genre": ["Puzzle"],
     "operatingSystem": "Web",
-    "url": "https://minigames365.com/games/flappy-bird",
-    "image": "https://minigames365.com/assets/images/games/flappy-bird-thumb.svg",
+    "url": "https://minigames365.com/games/tic-tac-toe",
+    "image": "https://minigames365.com/assets/images/games/tic-tac-toe-thumb.svg",
     "author": {
       "@type": "Organization",
       "name": "PlayCentral"
@@ -175,7 +172,7 @@
   }
   </script>
 
-  <script src="/games/flappy-bird/logic.js"></script>
+  <script src="/games/tic-tac-toe/logic.js"></script>
   <script>
     // Initialize ads
     (adsbygoogle = window.adsbygoogle || []).push({});
@@ -184,8 +181,8 @@
     function trackGameEvent(action, score = null) {
       if (typeof gtag !== 'undefined') {
         const eventData = {
-          game_slug: 'flappy-bird',
-          category: 'arcade',
+          game_slug: 'tic-tac-toe',
+          category: 'puzzle',
           device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
         };
         if (score !== null) eventData.score = score;

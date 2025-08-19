@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Rex Runner - Endless Dinosaur Run Game | MiniGames365</title>
+    <meta name="description" content="Jump and dash with the T-Rex in this endless runner game! Avoid obstacles, beat your high score in this addictive dinosaur adventure game.">
+    <meta name="keywords" content="t-rex runner, dinosaur game, endless runner, jumping game, chrome dino, obstacle avoidance, free online game">
+    <link rel="canonical" href="https://minigames365.com/games/t-rex-runner">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="T-Rex Runner - Endless Dinosaur Run Game">
+    <meta property="og:description" content="Jump and dash with the T-Rex in this endless runner game! Avoid obstacles and beat your high score in this addictive dinosaur adventure.">
+    <meta property="og:image" content="https://minigames365.com/assets/images/games/t-rex-runner-thumb.svg">
+    <meta property="og:url" content="https://minigames365.com/games/t-rex-runner">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="MiniGames365">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="T-Rex Runner - Endless Dinosaur Run Game">
+    <meta name="twitter:description" content="Jump and dash with the T-Rex in this endless runner game! Avoid obstacles and beat your high score in this addictive dinosaur adventure.">
+    <meta name="twitter:image" content="https://minigames365.com/assets/images/games/t-rex-runner-thumb.svg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+    <link rel="alternate icon" href="/assets/images/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logo.svg" alt="MiniGames365">
+                    <span>MiniGames365</span>
+                </a>
+                <nav class="nav">
+                    <a href="/">Home</a>
+                    <a href="/categories/puzzle.html">Puzzle</a>
+                    <a href="/categories/arcade.html">Arcade</a>
+                    <a href="/categories/action.html">Action</a>
+                    <a href="/categories/sports.html">Sports</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
+                    <button class="search-btn" onclick="toggleSearch()">🔍</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Game Hero Section -->
+    <section class="game-hero">
+        <div class="container">
+            <div class="game-hero-content">
+                <h1 class="game-title">T-Rex Runner</h1>
+                <p class="game-description">Jump and dash with the T-Rex in this endless runner game! Avoid cacti and flying pterodactyls in this addictive dinosaur adventure. How far can you run?</p>
+                <div class="game-meta">
+                    <span class="game-category">Action</span>
+                    <span class="game-rating">⭐ 4.9</span>
+                    <span class="game-plays">🎮 Played 50K+ times</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Container -->
+    <main class="game-container">
+        <div class="container">
+            <div class="game-wrapper">
+                <!-- Game Area -->
+                <div class="game-area">
+                    <!-- Game HUD -->
+                    <div class="game-hud">
+                        <div class="hud-item">
+                            <span id="score">Score: 0</span>
+                        </div>
+                        <div class="hud-item">
+                            <span id="distance">Distance: 0m</span>
+                        </div>
+                        <div class="hud-item">
+                            <span id="speed">Speed: 6.0</span>
+                        </div>
+                        <div class="hud-item">
+                            <span id="best">Best: 0</span>
+                        </div>
+                        <div class="hud-item">
+                            <button id="pauseBtn" class="hud-button">Pause</button>
+                        </div>
+                    </div>
+
+                    <!-- Game Canvas -->
+                    <div class="game-canvas-container">
+                        <canvas id="gameCanvas" width="800" height="300"></canvas>
+                        <div class="game-instructions">
+                            <p><strong>How to Play:</strong></p>
+                            <p>🎮 Press SPACE or click to jump</p>
+                            <p>🦕 Avoid cacti and pterodactyls</p>
+                            <p>🏃 Run as far as you can!</p>
+                            <p>📱 Tap screen on mobile</p>
+                        </div>
+                    </div>
+
+                    <!-- Game Over Screen -->
+                    <div id="gameOverScreen" class="game-over-screen">
+                        <div class="game-over-content">
+                            <h2 id="gameOverTitle">Game Over</h2>
+                            <p>Distance: <span id="finalDistance">0m</span></p>
+                            <p>Final Score: <span id="finalScore">0</span></p>
+                            <button id="restartBtn" class="game-button" onclick="restartGame()">Try Again</button>
+                            <button class="game-button secondary" onclick="window.location.href='/'">More Games</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Ad -->
+                <aside class="game-sidebar">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-XXXXXXXXXX"
+                         data-ad-slot="XXXXXXXXXX"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Recommended Games -->
+    <section class="recommended-games">
+        <div class="container">
+            <h2 class="section-title">⚡ More Action Games</h2>
+            <div class="games-grid">
+                <div class="game-card" onclick="playGame('flappy-bird')">
+                    <div class="game-thumbnail">
+                        <img src="/assets/images/games/flappy-bird-thumb.svg" alt="Flappy Bird" loading="lazy">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Flappy Bird</h3>
+                        <p class="game-description">Tap to fly through pipes!</p>
+                        <div class="game-meta">
+                            <span class="game-category">Arcade</span>
+                            <span class="game-rating">⭐ 4.6</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card" onclick="playGame('snake')">
+                    <div class="game-thumbnail">
+                        <img src="/assets/images/games/snake-thumb.svg" alt="Snake" loading="lazy">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Snake</h3>
+                        <p class="game-description">Classic snake game!</p>
+                        <div class="game-meta">
+                            <span class="game-category">Arcade</span>
+                            <span class="game-rating">⭐ 4.7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-card" onclick="playGame('brick-breaker')">
+                    <div class="game-thumbnail">
+                        <img src="/assets/images/games/brick-breaker-thumb.svg" alt="Brick Breaker" loading="lazy">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Brick Breaker</h3>
+                        <p class="game-description">Classic arcade action!</p>
+                        <div class="game-meta">
+                            <span class="game-category">Arcade</span>
+                            <span class="game-rating">⭐ 4.8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="/categories/puzzle.html">Puzzle Games</a></li>
+                        <li><a href="/categories/action.html">Action Games</a></li>
+                        <li><a href="/categories/arcade.html">Arcade Games</a></li>
+                        <li><a href="/categories/sports.html">Sports Games</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Game Script -->
+    <script src="/games/t-rex-runner/logic.js"></script>
+    <script src="/assets/js/main.js"></script>
+    
+    <!-- Game Analytics -->
+    <script>
+        // Track game page view
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'game_view', {
+                game_name: 't-rex-runner',
+                game_category: 'action'
+            });
+        }
+        
+        // Game tracking data
+        window.gameData = {
+            game_slug: 't-rex-runner',
+            game_name: 'T-Rex Runner',
+            game_category: 'action'
+        };
+    </script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "T-Rex Runner",
+        "description": "Jump and dash with the T-Rex in this endless runner game! Avoid obstacles, beat your high score in this addictive dinosaur adventure game.",
+        "category": "Action",
+        "url": "https://minigames365.com/games/t-rex-runner",
+        "image": "https://minigames365.com/assets/images/games/t-rex-runner-thumb.svg",
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiniGames365"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</body>
+</html>

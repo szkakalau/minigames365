@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2048 - Play Free Online | PlayCentral</title>
   <meta name="description" content="Play 2048 online for free. Combine tiles and reach 2048! Works on desktop and mobile.">
+  <meta name="keywords" content="2048, number puzzle, tile game, brain teaser, free online game">
+  <link rel="canonical" href="https://minigames365.com/games/2048">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="2048 - Play Free Online | PlayCentral">
+  <meta property="og:description" content="Combine tiles to reach 2048! Addictive number puzzle game that challenges your strategic thinking.">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/2048-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/2048">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PlayCentral">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="2048 - Play Free Online">
+  <meta name="twitter:description" content="Combine tiles to reach 2048! Addictive number puzzle game.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/2048-thumb.svg">
+  
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
 
@@ -70,9 +87,10 @@
       <script>
         // Configurable recommendations for 2048 page (exclude self)
         window.RECOMMENDED_GAMES = [
-          { href: '/games/flappy-bird/', img: '/assets/images/games/flappy-bird-thumb.svg', title: 'Flappy Bird', desc: 'Tap to fly and avoid pipes.', category: 'Arcade' },
-          { href: '/games/snake/', img: '/assets/images/games/snake-thumb.svg', title: 'Snake', desc: 'Eat food, grow longer, avoid yourself.', category: 'Arcade' },
-          { href: '/games/minesweeper/', img: '/assets/images/games/minesweeper-thumb.svg', title: 'Minesweeper', desc: 'Classic logic puzzle. Flag all mines!', category: 'Puzzle' }
+          { href: '/games/tic-tac-toe/', img: '/assets/images/games/tic-tac-toe-thumb.svg', title: 'Tic Tac Toe', desc: 'Beat the AI in a classic 3x3 duel.', category: 'Puzzle' },
+          { href: '/games/memory-match/', img: '/assets/images/games/memory-match-thumb.svg', title: 'Memory Match', desc: 'Flip and match pairs! Train your memory.', category: 'Puzzle' },
+          { href: '/games/minesweeper/', img: '/assets/images/games/minesweeper-thumb.svg', title: 'Minesweeper', desc: 'Classic logic puzzle. Flag all mines!', category: 'Puzzle' },
+          { href: '/games/brick-breaker/', img: '/assets/images/games/brick-breaker-thumb.svg', title: 'Brick Breaker', desc: 'Bounce the ball and clear all bricks!', category: 'Arcade' }
         ];
         (function () {
           const grid = document.getElementById('recommended-grid');
@@ -129,6 +147,29 @@
   <script src="/games/2048/logic.js"></script>
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+   </script>
+
+   <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "2048",
+      "url": "https://minigames365.com/games/2048",
+      "image": "https://minigames365.com/assets/images/games/2048-thumb.svg",
+      "description": "Play 2048 online for free. Combine tiles and reach 2048!",
+      "genre": ["Puzzle"],
+      "applicationCategory": "Game",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "PlayCentral"
+      }
+    }
+    </script>
 </body>
 </html>

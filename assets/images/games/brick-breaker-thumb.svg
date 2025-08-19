@@ -1,0 +1,26 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" rx="12" fill="#0e1526"/>
+
+  <!-- Bricks -->
+  <g transform="translate(20,30)">
+    <rect x="0" y="0" width="40" height="16" rx="3" fill="#ff6b6b"/>
+    <rect x="44" y="0" width="40" height="16" rx="3" fill="#ffd166"/>
+    <rect x="88" y="0" width="40" height="16" rx="3" fill="#4ecdc4"/>
+    <rect x="132" y="0" width="40" height="16" rx="3" fill="#6fa8ff"/>
+
+    <rect x="0" y="20" width="40" height="16" rx="3" fill="#ffd166"/>
+    <rect x="44" y="20" width="40" height="16" rx="3" fill="#4ecdc4"/>
+    <rect x="88" y="20" width="40" height="16" rx="3" fill="#6fa8ff"/>
+    <rect x="132" y="20" width="40" height="16" rx="3" fill="#ff6b6b"/>
+  </g>
+
+  <!-- Ball -->
+  <circle cx="120" cy="90" r="8" fill="#dfe7ff"/>
+  <!-- Trail -->
+  <path d="M120 90 C 110 80, 90 75, 70 80" stroke="rgba(223,231,255,0.4)" stroke-width="4" fill="none"/>
+
+  <!-- Paddle -->
+  <rect x="60" y="150" width="80" height="12" rx="6" fill="#6fa8ff"/>
+
+  <text x="100" y="185" text-anchor="middle" fill="#dfe7ff" font-family="Arial, sans-serif" font-size="14" font-weight="bold">BRICK BREAKER</text>
+</svg>
