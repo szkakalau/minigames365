@@ -40,4 +40,24 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://minigames365.com/games/ludo-king</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/futebol-frenzy</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/cookie-clicker</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/tro-choi-dan-gian</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

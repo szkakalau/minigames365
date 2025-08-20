@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" style="background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);">
+  <defs>
+    <linearGradient id="grass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2ecc71"/>
+      <stop offset="100%" stop-color="#27ae60"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Stadium Grass -->
+  <rect x="0" y="200" width="400" height="200" fill="url(#grass)"/>
+  
+  <!-- Goal -->
+  <rect x="300" y="220" width="70" height="40" fill="none" stroke="#ecf0f1" stroke-width="3"/>
+  <line x1="300" y1="240" x2="370" y2="240" stroke="#ecf0f1" stroke-width="2"/>
+
+  <!-- Soccer ball -->
+  <circle cx="120" cy="300" r="40" fill="#ffffff" stroke="#2c3e50" stroke-width="3"/>
+  <polygon points="120,270 136,282 130,300 110,300 104,282" fill="#2c3e50"/>
+  <polygon points="90,295 104,282 110,300 100,315 85,305" fill="#2c3e50"/>
+  <polygon points="150,295 136,282 130,300 140,315 155,305" fill="#2c3e50"/>
+  
+  <!-- Motion lines -->
+  <path d="M60,300 C90,290 100,285 120,280" stroke="#2c3e50" stroke-width="3" fill="none" opacity="0.6"/>
+  <path d="M60,310 C90,300 100,295 120,290" stroke="#2c3e50" stroke-width="3" fill="none" opacity="0.4"/>
+
+  <!-- Brazil flag hint -->
+  <polygon points="200,40 240,80 200,120 160,80" fill="#009c3b" opacity="0.85"/>
+  <polygon points="200,60 220,80 200,100 180,80" fill="#ffdf00"/>
+  <circle cx="200" cy="80" r="12" fill="#002776"/>
+
+  <!-- Title -->
+  <text x="200" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2d3436">Futebol Frenzy</text>
+</svg>

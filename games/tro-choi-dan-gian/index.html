@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trò Chơi Dân Gian - Game Cờ Carô Miễn Phí | MiniGames365</title>
+    <meta name="description" content="Chơi cờ carô truyền thống Việt Nam! Một game chiến thuật đơn giản và thú vị để đấu với máy tính. Miễn phí và không cần đăng ký.">
+    <meta name="keywords" content="cờ carô, trò chơi dân gian, game việt nam, chiến thuật, puzzle, cờ cáro, game miễn phí">
+    <link rel="canonical" href="https://minigames365.com/games/tro-choi-dan-gian">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Trò Chơi Dân Gian - Game Cờ Carô Miễn Phí">
+    <meta property="og:description" content="Chơi cờ carô truyền thống Việt Nam! Game chiến thuật đơn giản và thú vị với AI thông minh.">
+    <meta property="og:image" content="https://minigames365.com/assets/images/games/tro-choi-dan-gian-thumb.svg">
+    <meta property="og:url" content="https://minigames365.com/games/tro-choi-dan-gian">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="MiniGames365">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Trò Chơi Dân Gian - Game Cờ Carô Miễn Phí">
+    <meta name="twitter:description" content="Chơi cờ carô truyền thống Việt Nam! Game chiến thuật đơn giản và thú vị với AI thông minh.">
+    <meta name="twitter:image" content="https://minigames365.com/assets/images/games/tro-choi-dan-gian-thumb.svg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+    <link rel="alternate icon" href="/assets/images/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QM2M85ZVEG');
+  </script>
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logo.svg" alt="MiniGames365">
+                    <span>MiniGames365</span>
+                </a>
+                <nav class="nav">
+                    <a href="/">Trang Chủ</a>
+                    <a href="/categories/puzzle.html">Giải Đố</a>
+                    <a href="/categories/arcade.html">Arcade</a>
+                    <a href="/categories/strategy.html">Chiến Thuật</a>
+                    <a href="/categories/sports.html">Thể Thao</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="lang-toggle" onclick="toggleLanguage()">VI</button>
+                    <button class="search-btn" onclick="toggleSearch()">🔍</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Game Hero Section -->
+    <section class="game-hero">
+        <div class="container">
+            <div class="game-hero-content">
+                <h1 class="game-title">Trò Chơi Dân Gian</h1>
+                <p class="game-description">Trải nghiệm cờ carô truyền thống Việt Nam! Đặt 5 quân cờ liên tiếp để thắng trong trò chơi chiến thuật kinh điển này.</p>
+                <div class="game-meta">
+                    <span class="game-category">Chiến Thuật</span>
+                    <span class="game-rating">⭐ 4.8</span>
+                    <span class="game-plays">🎮 Đã chơi 12K+ lần</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Container -->
+    <main class="game-container">
+        <div class="container">
+            <div class="game-wrapper">
+                <!-- Game Area -->
+                <div class="game-area">
+                    <!-- Game HUD -->
+                    <div class="game-hud">
+                        <div class="hud-item">
+                            <span id="score">Điểm: 0</span>
+                        </div>
+                        <div class="hud-item">
+                            <span id="wins">Thắng: 0</span>
+                        </div>
+                        <div class="hud-item">
+                            <span id="best">Tốt Nhất: 0</span>
+                        </div>
+                        <div class="hud-item">
+                            <button id="newGameBtn" class="hud-button">Ván Mới</button>
+                        </div>
+                    </div>
+
+                    <!-- Game Canvas -->
+                    <div class="game-canvas-container">
+                        <canvas id="gameCanvas" width="600" height="600"></canvas>
+                        <div class="game-instructions">
+                            <p><strong>Cách Chơi:</strong></p>
+                            <p>🖱️ Nhấp để đặt quân cờ</p>
+                            <p>🔥 Đặt 5 quân liên tiếp để thắng</p>
+                            <p>🧠 Chặn đối thủ và tấn công!</p>
+                        </div>
+                    </div>
+
+                    <!-- Game Over Screen -->
+                    <div id="gameOverScreen" class="game-over-screen">
+                        <div class="game-over-content">
+                            <h2 id="gameOverTitle">Kết Thúc!</h2>
+                            <p>Điểm Số: <span id="finalScore">0</span></p>
+                            <button id="restartBtn" class="game-button" onclick="restartGame()">Chơi Lại</button>
+                            <button class="game-button secondary" onclick="window.location.href='/'">Thêm Game</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Ad -->
+                <aside class="game-sidebar">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-6583243933606323"
+                         data-ad-slot="XXXXXXXXXX"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Recommended Games -->
+    <section class="recommended-games">
+        <div class="container">
+            <h2 class="section-title">🎯 Game Chiến Thuật Khác</h2>
+            <div class="games-grid">
+                <div class="game-card" onclick="playGame('tic-tac-toe')">
+                    <div class="game-thumbnail">
+                        <img src="/assets/images/games/tic-tac-toe-thumb.svg" alt="Tic Tac Toe" loading="lazy">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Tic Tac Toe</h3>
+                        <p class="game-description">Game chiến thuật kinh điển!</p>
+                        <div class="game-meta">
+                            <span class="game-category">Chiến Thuật</span>
+                            <span class="game-rating">⭐ 4.4</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card" onclick="playGame('ludo-king')">
+                    <div class="game-thumbnail">
+                        <img src="/assets/images/games/ludo-king-thumb.svg" alt="Ludo King" loading="lazy">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Ludo King</h3>
+                        <p class="game-description">Game cờ cá ngựa truyền thống!</p>
+                        <div class="game-meta">
+                            <span class="game-category">Chiến Thuật</span>
+                            <span class="game-rating">⭐ 4.6</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-card" onclick="playGame('minesweeper')">
+                    <div class="game-thumbnail">
+                        <img src="/assets/images/games/minesweeper-thumb.svg" alt="Minesweeper" loading="lazy">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Minesweeper</h3>
+                        <p class="game-description">Game giải đố logic!</p>
+                        <div class="game-meta">
+                            <span class="game-category">Giải Đố</span>
+                            <span class="game-rating">⭐ 4.6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Danh Mục</h4>
+                    <ul>
+                        <li><a href="/categories/strategy.html">Game Chiến Thuật</a></li>
+                        <li><a href="/categories/puzzle.html">Game Giải Đố</a></li>
+                        <li><a href="/categories/arcade.html">Game Arcade</a></li>
+                        <li><a href="/categories/sports.html">Game Thể Thao</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Thông Tin</h4>
+                    <ul>
+                        <li><a href="/about.html">Về Chúng Tôi</a></li>
+                        <li><a href="/privacy.html">Chính Sách Bảo Mật</a></li>
+                        <li><a href="/terms.html">Điều Khoản Dịch Vụ</a></li>
+                        <li><a href="/contact.html">Liên Hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MiniGames365. Bảo lưu mọi quyền.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Game Script -->
+    <script src="/games/tro-choi-dan-gian/logic.js"></script>
+    <script src="/assets/js/main.js"></script>
+    
+    <!-- Game Analytics -->
+    <script>
+        // Track game page view
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'game_view', {
+                game_name: 'tro-choi-dan-gian',
+                game_category: 'strategy'
+            });
+        }
+        
+        // Game tracking data
+        window.gameData = {
+            game_slug: 'tro-choi-dan-gian',
+            game_name: 'Trò Chơi Dân Gian',
+            game_category: 'strategy'
+        };
+        
+        function playGame(slug) {
+            window.location.href = `/games/${slug}/`;
+        }
+        
+        function restartGame() {
+            document.getElementById('gameOverScreen').style.display = 'none';
+            if (typeof window.newGame === 'function') {
+                window.newGame();
+            }
+        }
+        
+        function trackGameEvent(action, score) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'game_action', {
+                    game_name: window.gameData.game_slug,
+                    game_category: window.gameData.game_category,
+                    action: action,
+                    score: score || 0
+                });
+            }
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Trò Chơi Dân Gian",
+        "description": "Trải nghiệm cờ carô truyền thống Việt Nam! Đặt 5 quân cờ liên tiếp để thắng trong trò chơi chiến thuật kinh điển này.",
+        "category": "Strategy",
+        "url": "https://minigames365.com/games/tro-choi-dan-gian",
+        "image": "https://minigames365.com/assets/images/games/tro-choi-dan-gian-thumb.svg",
+        "provider": {
+            "@type": "Organization",
+            "name": "MiniGames365"
+        },
+        "inLanguage": "vi"
+    }
+    </script>
+</body>
+</html>

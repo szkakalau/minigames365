@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+  <!-- Board Background -->
+  <rect width="400" height="400" fill="url(#boardGradient)"/>
+  
+  <!-- Define gradients and patterns -->
+  <defs>
+    <linearGradient id="boardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff5b4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f7d794;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="redPiece" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c92a2a;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="bluePiece" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1890ff;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="greenPiece" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#51cf66;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2b8a3e;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="yellowPiece" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffd43b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fd7e14;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Ludo Board Outline -->
+  <rect x="50" y="50" width="300" height="300" fill="none" stroke="#2d3436" stroke-width="4" rx="15"/>
+  
+  <!-- Board Divisions -->
+  <line x1="50" y1="200" x2="350" y2="200" stroke="#2d3436" stroke-width="3"/>
+  <line x1="200" y1="50" x2="200" y2="350" stroke="#2d3436" stroke-width="3"/>
+  
+  <!-- Home areas -->
+  <!-- Red Home (top-left) -->
+  <rect x="50" y="50" width="150" height="150" fill="#ff6b6b" opacity="0.3" rx="10"/>
+  <rect x="80" y="80" width="90" height="90" fill="#ff6b6b" opacity="0.6" rx="8"/>
+  
+  <!-- Blue Home (top-right) -->
+  <rect x="200" y="50" width="150" height="150" fill="#4ecdc4" opacity="0.3" rx="10"/>
+  <rect x="230" y="80" width="90" height="90" fill="#4ecdc4" opacity="0.6" rx="8"/>
+  
+  <!-- Green Home (bottom-left) -->
+  <rect x="50" y="200" width="150" height="150" fill="#51cf66" opacity="0.3" rx="10"/>
+  <rect x="80" y="230" width="90" height="90" fill="#51cf66" opacity="0.6" rx="8"/>
+  
+  <!-- Yellow Home (bottom-right) -->
+  <rect x="200" y="200" width="150" height="150" fill="#ffd43b" opacity="0.3" rx="10"/>
+  <rect x="230" y="230" width="90" height="90" fill="#ffd43b" opacity="0.6" rx="8"/>
+  
+  <!-- Game Pieces -->
+  <!-- Red pieces -->
+  <circle cx="100" cy="100" r="12" fill="url(#redPiece)" stroke="#fff" stroke-width="2"/>
+  <circle cx="150" cy="130" r="12" fill="url(#redPiece)" stroke="#fff" stroke-width="2"/>
+  
+  <!-- Blue pieces -->
+  <circle cx="250" cy="100" r="12" fill="url(#bluePiece)" stroke="#fff" stroke-width="2"/>
+  <circle cx="300" cy="130" r="12" fill="url(#bluePiece)" stroke="#fff" stroke-width="2"/>
+  
+  <!-- Green pieces -->
+  <circle cx="100" cy="250" r="12" fill="url(#greenPiece)" stroke="#fff" stroke-width="2"/>
+  <circle cx="150" cy="280" r="12" fill="url(#greenPiece)" stroke="#fff" stroke-width="2"/>
+  
+  <!-- Yellow pieces -->
+  <circle cx="250" cy="250" r="12" fill="url(#yellowPiece)" stroke="#fff" stroke-width="2"/>
+  <circle cx="300" cy="280" r="12" fill="url(#yellowPiece)" stroke="#fff" stroke-width="2"/>
+  
+  <!-- Dice -->
+  <rect x="330" y="20" width="40" height="40" fill="#fff" stroke="#2d3436" stroke-width="2" rx="6"/>
+  <circle cx="340" cy="30" r="2" fill="#2d3436"/>
+  <circle cx="350" cy="40" r="2" fill="#2d3436"/>
+  <circle cx="360" cy="50" r="2" fill="#2d3436"/>
+  
+  <!-- Title -->
+  <text x="200" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2d3436">Ludo King</text>
+</svg>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Futebol Frenzy - Jogo de Futebol Grátis Online | MiniGames365</title>
+  <meta name="description" content="Jogue Futebol Frenzy online! Chute, passe e marque gols neste mini jogo de futebol arcade. Perfeito para partidas rápidas. Criado especialmente para o Brasil.">
+  <meta name="keywords" content="futebol frenzy, jogo de futebol, arcade, brasil, gratis, online, futebol brasileiro">
+  <link rel="canonical" href="https://minigames365.com/games/futebol-frenzy">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Futebol Frenzy - Jogo de Futebol Grátis Online | MiniGames365">
+  <meta property="og:description" content="Jogue Futebol Frenzy online! Chute, passe e marque gols neste mini jogo de futebol arcade.">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/futebol-frenzy-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/futebol-frenzy">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Futebol Frenzy - Jogo de Futebol Grátis Online">
+  <meta name="twitter:description" content="Jogue Futebol Frenzy online! Chute, passe e marque gols neste mini jogo de futebol arcade.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/futebol-frenzy-thumb.svg">
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="/"><img src="/assets/images/logo.svg" alt="MiniGames365" class="logo-img"><span class="logo-text">MiniGames365</span></a></div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="/">Início</a></li>
+            <li><a href="/index.html#categories">Categorias</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">⚽ Futebol Frenzy</h1>
+          <p class="hero-description">Viva a paixão do futebol brasileiro! Chute, passe e marque gols neste jogo arcade de futebol. Controle seu jogador, desvie dos adversários e marque o máximo de gols possível!</p>
+          <div class="game-instructions">
+            <strong>Como Jogar:</strong> 
+            Use as setas para mover seu jogador. Espaço para chutar. Desvie dos defensores e marque gols para aumentar sua pontuação!
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad above game canvas -->
+      <div class="ad-banner-top">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6583243933606323" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+
+      <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
+        <div id="game-root" class="game-root" style="position:relative; background:#111827; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06);">
+          <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
+            <div class="scores" style="display:flex; gap:10px;">
+              <div class="score" id="score" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Gols: 0</div>
+              <div class="best" id="best" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Melhor: 0</div>
+            </div>
+            <div class="controls" style="display:flex; gap:8px;">
+              <button id="restartBtn" class="search-btn">Reiniciar</button>
+            </div>
+          </div>
+          <canvas id="gameCanvas" width="600" height="400" style="touch-action: none; background:#228B22; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
+            <h3>🏆 Fim de Jogo!</h3>
+            <p>Gols Marcados: <span id="finalScore">0</span></p>
+            <button onclick="restartGame()" class="search-btn">Jogar Novamente</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Native recommended games -->
+      <section class="featured-games">
+        <h2 class="section-title">Você também pode gostar</h2>
+        <div class="games-grid" id="recommended-grid"></div>
+      </section>
+      <script>
+        // Recommended games for Futebol Frenzy
+        window.RECOMMENDED_GAMES = [
+          { href: '/games/brick-breaker/', img: '/assets/images/games/brick-breaker-thumb.svg', title: 'Brick Breaker', desc: 'Jogo arcade clássico', category: 'Arcade' },
+          { href: '/games/snake/', img: '/assets/images/games/snake-thumb.svg', title: 'Snake', desc: 'Come, cresça, evite a si mesmo', category: 'Arcade' },
+          { href: '/games/flappy-bird/', img: '/assets/images/games/flappy-bird-thumb.svg', title: 'Flappy Bird', desc: 'Toque para voar e evite os canos', category: 'Arcade' },
+          { href: '/games/memory-match/', img: '/assets/images/games/memory-match-thumb.svg', title: 'Memory Match', desc: 'Teste sua memória', category: 'Puzzle' }
+        ];
+        (function () {
+          const grid = document.getElementById('recommended-grid');
+          if (!grid) return;
+          const items = Array.isArray(window.RECOMMENDED_GAMES) ? window.RECOMMENDED_GAMES : [];
+          items.forEach((item) => {
+            if (!item || !item.href) return;
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.addEventListener('click', () => { window.location.href = item.href; });
+            card.innerHTML = `
+              <div class="game-thumbnail">
+                <img src="${item.img || ''}" alt="${item.title || ''}" loading="lazy">
+                <div class="play-overlay">
+                  <div class="play-button">▶</div>
+                </div>
+              </div>
+              <div class="game-info">
+                <h3 class="game-title">${item.title || ''}</h3>
+                <p class="game-description">${item.desc || ''}</p>
+                <div class="game-meta">
+                  <span class="game-category">${item.category || ''}</span>
+                </div>
+              </div>`;
+            grid.appendChild(card);
+          });
+        })();
+      </script>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 MiniGames365. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Futebol Frenzy",
+    "description": "Jogue Futebol Frenzy online! Chute, passe e marque gols neste mini jogo de futebol arcade. Perfeito para partidas rápidas e criado especialmente para o Brasil.",
+    "applicationCategory": "Game",
+    "genre": ["Sports", "Arcade"],
+    "operatingSystem": "Web",
+    "url": "https://minigames365.com/games/futebol-frenzy",
+    "image": "https://minigames365.com/assets/images/games/futebol-frenzy-thumb.svg",
+    "author": {
+      "@type": "Organization",
+      "name": "MiniGames365"
+    },
+    "creator": {
+      "@type": "Organization", 
+      "name": "MiniGames365"
+    },
+    "inLanguage": "pt-BR",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    }
+  }
+  </script>
+
+  <script src="/games/futebol-frenzy/logic.js"></script>
+  <script>
+    // Initialize ads
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    
+    // Google Analytics events
+    function trackGameEvent(action, score = null) {
+      if (typeof gtag !== 'undefined') {
+        const eventData = {
+          game_slug: 'futebol-frenzy',
+          category: 'sports',
+          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+        };
+        if (score !== null) eventData.score = score;
+        gtag('event', action, eventData);
+      }
+    }
+  </script>
+</body>
+</html>

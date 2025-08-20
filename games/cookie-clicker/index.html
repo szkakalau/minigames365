@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brick Breaker - Classic Arcade Game | MiniGames365</title>
-    <meta name="description" content="Play the classic brick breaker game! Control the paddle, bounce the ball, and destroy all bricks in this addictive arcade game with power-ups.">
-    <meta name="keywords" content="brick breaker, breakout, arcade game, paddle game, ball game, retro game, classic game, free online game">
-    <link rel="canonical" href="https://minigames365.com/games/brick-breaker">
+    <title>Cookie Clicker - Free Online Idle Clicker Game | MiniGames365</title>
+    <meta name="description" content="Click to bake cookies, buy upgrades, and build your cookie empire! The ultimate idle clicker game with endless progression and automation.">
+    <meta name="keywords" content="cookie clicker, idle game, clicker game, incremental game, automation, cookies, upgrades, free online game">
+    <link rel="canonical" href="https://minigames365.com/games/cookie-clicker">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Brick Breaker - Classic Arcade Game">
-    <meta property="og:description" content="Play the classic brick breaker game! Control the paddle, bounce the ball, and destroy all bricks in this addictive arcade game.">
-    <meta property="og:image" content="https://minigames365.com/assets/images/games/brick-breaker-thumb.svg">
-    <meta property="og:url" content="https://minigames365.com/games/brick-breaker">
+    <meta property="og:title" content="Cookie Clicker - Free Online Idle Clicker Game">
+    <meta property="og:description" content="Click to bake cookies, buy upgrades, and build your cookie empire! The ultimate idle clicker game with endless progression.">
+    <meta property="og:image" content="https://minigames365.com/assets/images/games/cookie-clicker-thumb.svg">
+    <meta property="og:url" content="https://minigames365.com/games/cookie-clicker">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="MiniGames365">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Brick Breaker - Classic Arcade Game">
-    <meta name="twitter:description" content="Play the classic brick breaker game! Control the paddle, bounce the ball, and destroy all bricks in this addictive arcade game.">
-    <meta name="twitter:image" content="https://minigames365.com/assets/images/games/brick-breaker-thumb.svg">
+    <meta name="twitter:title" content="Cookie Clicker - Free Online Idle Clicker Game">
+    <meta name="twitter:description" content="Click to bake cookies, buy upgrades, and build your cookie empire! The ultimate idle clicker game.">
+    <meta name="twitter:image" content="https://minigames365.com/assets/images/games/cookie-clicker-thumb.svg">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
@@ -30,16 +30,16 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     
     <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QM2M85ZVEG');
-  </script>
-
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QM2M85ZVEG');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header -->
@@ -52,10 +52,10 @@
                 </a>
                 <nav class="nav">
                     <a href="/">Home</a>
-                    <a href="/categories/puzzle.html">Puzzle</a>
                     <a href="/categories/arcade.html">Arcade</a>
+                    <a href="/categories/puzzle.html">Puzzle</a>
+                    <a href="/categories/strategy.html">Strategy</a>
                     <a href="/categories/action.html">Action</a>
-                    <a href="/categories/sports.html">Sports</a>
                 </nav>
                 <div class="header-actions">
                     <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
@@ -69,12 +69,12 @@
     <section class="game-hero">
         <div class="container">
             <div class="game-hero-content">
-                <h1 class="game-title">Brick Breaker</h1>
-                <p class="game-description">Play the classic brick breaker game! Control the paddle, bounce the ball, and destroy all bricks in this addictive arcade game with power-ups and multiple levels.</p>
+                <h1 class="game-title">Cookie Clicker</h1>
+                <p class="game-description">Click to bake cookies, buy upgrades, and build your cookie empire! The ultimate idle clicker game with endless progression and automation systems.</p>
                 <div class="game-meta">
                     <span class="game-category">Arcade</span>
-                    <span class="game-rating">⭐ 4.8</span>
-                    <span class="game-plays">🎮 Played 25K+ times</span>
+                    <span class="game-rating">⭐ 4.7</span>
+                    <span class="game-plays">🎮 Played 50K+ times</span>
                 </div>
             </div>
         </div>
@@ -89,46 +89,34 @@
                     <!-- Game HUD -->
                     <div class="game-hud">
                         <div class="hud-item">
-                            <span id="score">Score: 0</span>
+                            <span id="score">Cookies: 0</span>
                         </div>
                         <div class="hud-item">
-                            <span id="level">Level: 1</span>
+                            <span id="cps">Per second: 0</span>
                         </div>
                         <div class="hud-item">
-                            <span id="lives">Lives: 3</span>
+                            <span id="best">All time: 0</span>
                         </div>
                         <div class="hud-item">
-                            <span id="bricks">Bricks: 48</span>
-                        </div>
-                        <div class="hud-item">
-                            <span id="best">Best: 0</span>
-                        </div>
-                        <div class="hud-item">
-                            <button id="pauseBtn" class="hud-button">Pause</button>
+                            <button id="resetBtn" class="hud-button">Reset</button>
                         </div>
                     </div>
 
                     <!-- Game Canvas -->
                     <div class="game-canvas-container">
-                        <canvas id="gameCanvas" width="800" height="600"></canvas>
+                        <canvas id="gameCanvas" width="600" height="600"></canvas>
                         <div class="game-instructions">
                             <p><strong>How to Play:</strong></p>
-                            <p>🖱️ Move mouse to control paddle</p>
-                            <p>🏓 Keep the ball in play</p>
-                            <p>🧱 Break all bricks to advance!</p>
-                            <p>📱 Touch & drag on mobile</p>
+                            <p>🖱️ Click the big cookie to bake</p>
+                            <p>💰 Buy upgrades with cookies</p>
+                            <p>🏭 Automate production and idle!</p>
                         </div>
                     </div>
 
-                    <!-- Game Over Screen -->
-                    <div id="gameOverScreen" class="game-over-screen">
-                        <div class="game-over-content">
-                            <h2 id="gameOverTitle">Game Over</h2>
-                            <p>Final Score: <span id="finalScore">0</span></p>
-                            <p>Level Reached: <span id="finalLevel">1</span></p>
-                            <button id="restartBtn" class="game-button" onclick="restartGame()">Play Again</button>
-                            <button class="game-button secondary" onclick="window.location.href='/'">More Games</button>
-                        </div>
+                    <!-- Upgrades Panel -->
+                    <div id="upgradesPanel" class="upgrades-panel">
+                        <h3>Upgrades</h3>
+                        <div id="upgradesList" class="upgrades-list"></div>
                     </div>
                 </div>
 
@@ -148,7 +136,7 @@
     <!-- Recommended Games -->
     <section class="recommended-games">
         <div class="container">
-            <h2 class="section-title">🕹️ More Arcade Games</h2>
+            <h2 class="section-title">🎯 More Arcade Games</h2>
             <div class="games-grid">
                 <div class="game-card" onclick="playGame('snake')">
                     <div class="game-thumbnail">
@@ -159,10 +147,10 @@
                     </div>
                     <div class="game-info">
                         <h3 class="game-title">Snake</h3>
-                        <p class="game-description">Classic snake game!</p>
+                        <p class="game-description">Classic arcade action!</p>
                         <div class="game-meta">
                             <span class="game-category">Arcade</span>
-                            <span class="game-rating">⭐ 4.7</span>
+                            <span class="game-rating">⭐ 4.6</span>
                         </div>
                     </div>
                 </div>
@@ -176,7 +164,7 @@
                     </div>
                     <div class="game-info">
                         <h3 class="game-title">Flappy Bird</h3>
-                        <p class="game-description">Tap to fly through pipes!</p>
+                        <p class="game-description">Tap to fly and avoid pipes!</p>
                         <div class="game-meta">
                             <span class="game-category">Arcade</span>
                             <span class="game-rating">⭐ 4.6</span>
@@ -184,19 +172,19 @@
                     </div>
                 </div>
 
-                <div class="game-card" onclick="playGame('memory-match')">
+                <div class="game-card" onclick="playGame('brick-breaker')">
                     <div class="game-thumbnail">
-                        <img src="/assets/images/games/memory-match-thumb.svg" alt="Memory Match" loading="lazy">
+                        <img src="/assets/images/games/brick-breaker-thumb.svg" alt="Brick Breaker" loading="lazy">
                         <div class="play-overlay">
                             <div class="play-button">▶</div>
                         </div>
                     </div>
                     <div class="game-info">
-                        <h3 class="game-title">Memory Match</h3>
-                        <p class="game-description">Test your memory skills!</p>
+                        <h3 class="game-title">Brick Breaker</h3>
+                        <p class="game-description">Bounce ball to break bricks!</p>
                         <div class="game-meta">
-                            <span class="game-category">Puzzle</span>
-                            <span class="game-rating">⭐ 4.7</span>
+                            <span class="game-category">Arcade</span>
+                            <span class="game-rating">⭐ 4.8</span>
                         </div>
                     </div>
                 </div>
@@ -211,18 +199,30 @@
                 <div class="footer-section">
                     <h4>Categories</h4>
                     <ul>
-                        <li><a href="/categories/puzzle.html">Puzzle Games</a></li>
-                        <li><a href="/categories/action.html">Action Games</a></li>
                         <li><a href="/categories/arcade.html">Arcade Games</a></li>
-                        <li><a href="/categories/sports.html">Sports Games</a></li>
+                        <li><a href="/categories/puzzle.html">Puzzle Games</a></li>
+                        <li><a href="/categories/strategy.html">Strategy Games</a></li>
+                        <li><a href="/categories/action.html">Action Games</a></li>
                     </ul>
                 </div>
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Service</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MiniGames365. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Load Game Script -->
-    <script src="/games/brick-breaker/logic.js"></script>
+    <script src="/games/cookie-clicker/logic.js"></script>
     <script src="/assets/js/main.js"></script>
     
     <!-- Game Analytics -->
@@ -230,17 +230,32 @@
         // Track game page view
         if (typeof gtag !== 'undefined') {
             gtag('event', 'game_view', {
-                game_name: 'brick-breaker',
+                game_name: 'cookie-clicker',
                 game_category: 'arcade'
             });
         }
         
         // Game tracking data
         window.gameData = {
-            game_slug: 'brick-breaker',
-            game_name: 'Brick Breaker',
+            game_slug: 'cookie-clicker',
+            game_name: 'Cookie Clicker',
             game_category: 'arcade'
         };
+        
+        function playGame(slug) {
+            window.location.href = `/games/${slug}/`;
+        }
+        
+        function trackGameEvent(action, score) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'game_action', {
+                    game_name: window.gameData.game_slug,
+                    game_category: window.gameData.game_category,
+                    action: action,
+                    score: score || 0
+                });
+            }
+        }
     </script>
 
     <!-- JSON-LD Structured Data -->
@@ -248,20 +263,16 @@
     {
         "@context": "https://schema.org",
         "@type": "VideoGame",
-        "name": "Brick Breaker",
-        "description": "Play the classic brick breaker game! Control the paddle, bounce the ball, and destroy all bricks in this addictive arcade game with power-ups and multiple levels.",
+        "name": "Cookie Clicker",
+        "description": "Click to bake cookies, buy upgrades, and build your cookie empire! The ultimate idle clicker game with endless progression and automation systems.",
         "category": "Arcade",
-        "url": "https://minigames365.com/games/brick-breaker",
-        "image": "https://minigames365.com/assets/images/games/brick-breaker-thumb.svg",
-        "publisher": {
+        "url": "https://minigames365.com/games/cookie-clicker",
+        "image": "https://minigames365.com/assets/images/games/cookie-clicker-thumb.svg",
+        "provider": {
             "@type": "Organization",
             "name": "MiniGames365"
         },
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        }
+        "inLanguage": "en"
     }
     </script>
 </body>

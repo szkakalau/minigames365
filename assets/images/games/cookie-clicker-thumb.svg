@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+  <!-- Giant Cookie -->
+  <circle cx="200" cy="180" r="110" fill="#d2691e" stroke="#8b4513" stroke-width="6"/>
+  
+  <!-- Chocolate Chips -->
+  <circle cx="150" cy="140" r="10" fill="#5d4037"/>
+  <circle cx="220" cy="120" r="12" fill="#5d4037"/>
+  <circle cx="260" cy="170" r="9" fill="#5d4037"/>
+  <circle cx="170" cy="200" r="11" fill="#5d4037"/>
+  <circle cx="230" cy="220" r="10" fill="#5d4037"/>
+  <circle cx="200" cy="170" r="8" fill="#5d4037"/>
+
+  <!-- Click cursor -->
+  <path d="M80 240 L120 260 L110 270 L120 280 L90 290 Z" fill="#2d3436" opacity="0.85"/>
+  <path d="M110 270 L120 280 L130 265" stroke="#2d3436" stroke-width="6"/>
+
+  <!-- Sparkles -->
+  <circle cx="300" cy="90" r="4" fill="#fff"/>
+  <circle cx="320" cy="110" r="3" fill="#fff"/>
+  <circle cx="280" cy="80" r="3" fill="#fff"/>
+
+  <!-- Title -->
+  <text x="200" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2d3436">Cookie Clicker</text>
+</svg>

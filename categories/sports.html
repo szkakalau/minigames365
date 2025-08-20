@@ -9,12 +9,12 @@
     <link rel="canonical" href="https://minigames365.com/categories/sports.html">
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);} 
+        function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXX');
+        gtag('config', 'G-QM2M85ZVEG');
     </script>
 </head>
 <body>
@@ -113,23 +113,45 @@
 
     <script src="/assets/js/main.js"></script>
     <script>
-        const SPORTS_GAMES = [];
-
+        const SPORTS_GAMES = [
+            {
+                slug: 'futebol-frenzy',
+                title: 'Futebol Frenzy',
+                description: 'Arcade soccer mini game – shoot, pass, and score! Perfect for quick matches.',
+                category: 'Sports',
+                rating: 4.5,
+                thumbnail: '/assets/images/games/futebol-frenzy-thumb.svg'
+            }
+        ];
+    
+        function playGame(slug) {
+            window.location.href = `/games/${slug}/`;
+        }
+    
         function renderSportsGames() {
             const grid = document.getElementById('sports-games-grid');
             if (!grid) return;
-
-            if (SPORTS_GAMES.length === 0) {
-                grid.innerHTML = `
-                    <div class="coming-soon-message">
-                        <h3>🏅 Sports Games Coming Soon!</h3>
-                        <p>We're preparing fun sports games. Check back soon!</p>
+            SPORTS_GAMES.forEach(game => {
+                const el = document.createElement('div');
+                el.className = 'game-card';
+                el.onclick = () => playGame(game.slug);
+                el.innerHTML = `
+                    <div class="game-thumbnail">
+                        <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
+                        <div class="play-overlay"><div class="play-button">▶</div></div>
                     </div>
-                `;
-                return;
-            }
+                    <div class="game-info">
+                        <h3 class="game-title">${game.title}</h3>
+                        <p class="game-description">${game.description}</p>
+                        <div class="game-meta">
+                            <span class="game-category">${game.category}</span>
+                            <span class="game-rating">⭐ ${game.rating}</span>
+                        </div>
+                    </div>`;
+                grid.appendChild(el);
+            });
         }
-
+    
         document.addEventListener('DOMContentLoaded', () => {
             renderSportsGames();
             if (window.adsbygoogle) {

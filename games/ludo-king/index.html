@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ludo King - Play Traditional Board Game Free Online | MiniGames365</title>
+  <meta name="description" content="Play the classic Ludo King board game online! Roll dice, move pieces, and race to victory in this timeless family favorite. Perfect for India and worldwide players.">
+  <meta name="keywords" content="ludo king, board game, dice game, family game, strategy, india, traditional game">
+  <link rel="canonical" href="https://minigames365.com/games/ludo-king">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Ludo King - Play Traditional Board Game Free Online | MiniGames365">
+  <meta property="og:description" content="Play the classic Ludo King board game online! Roll dice, move pieces, and race to victory in this timeless family favorite.">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/ludo-king-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/ludo-king">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ludo King - Play Traditional Board Game Free Online">
+  <meta name="twitter:description" content="Play the classic Ludo King board game online! Roll dice, move pieces, and race to victory in this timeless family favorite.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/ludo-king-thumb.svg">
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="/"><img src="/assets/images/logo.svg" alt="MiniGames365" class="logo-img"><span class="logo-text">MiniGames365</span></a></div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/index.html#categories">Categories</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">🎲 Ludo King</h1>
+          <p class="hero-description">Play the classic Ludo board game online! Roll the dice, move your pieces strategically, and be the first to get all four pieces home. This timeless family game brings joy across generations.</p>
+          <div class="game-instructions">
+            <strong>How to Play:</strong> 
+            Click "Roll Dice" to move your pieces. Get a 6 to bring new pieces out. Race around the board and reach home first!
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad above game canvas -->
+      <div class="ad-banner-top">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6583243933606323" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+
+      <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
+        <div id="game-root" class="game-root" style="position:relative; background:#111827; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06);">
+          <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
+            <div class="scores" style="display:flex; gap:10px;">
+              <div class="score" id="score" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Turn: Player 1</div>
+              <div class="dice" id="dice" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Dice: -</div>
+            </div>
+            <div class="controls" style="display:flex; gap:8px;">
+              <button id="rollBtn" class="search-btn">Roll Dice</button>
+              <button id="restartBtn" class="search-btn">Restart</button>
+            </div>
+          </div>
+          <canvas id="gameCanvas" width="500" height="500" style="touch-action: none; background:#f7d794; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
+            <h3>🎉 Game Complete!</h3>
+            <p>Winner: <span id="winner">Player 1</span></p>
+            <button onclick="restartGame()" class="search-btn">Play Again</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Native recommended games -->
+      <section class="featured-games">
+        <h2 class="section-title">You may also like</h2>
+        <div class="games-grid" id="recommended-grid"></div>
+      </section>
+      <script>
+        // Recommended games for Ludo King
+        window.RECOMMENDED_GAMES = [
+          { href: '/games/tic-tac-toe/', img: '/assets/images/games/tic-tac-toe-thumb.svg', title: 'Tic Tac Toe', desc: 'Classic strategy puzzle game', category: 'Strategy' },
+          { href: '/games/memory-match/', img: '/assets/images/games/memory-match-thumb.svg', title: 'Memory Match', desc: 'Test your memory skills', category: 'Puzzle' },
+          { href: '/games/2048/', img: '/assets/images/games/2048-thumb.svg', title: '2048', desc: 'Combine tiles to reach 2048', category: 'Puzzle' },
+          { href: '/games/snake/', img: '/assets/images/games/snake-thumb.svg', title: 'Snake', desc: 'Classic arcade game', category: 'Arcade' }
+        ];
+        (function () {
+          const grid = document.getElementById('recommended-grid');
+          if (!grid) return;
+          const items = Array.isArray(window.RECOMMENDED_GAMES) ? window.RECOMMENDED_GAMES : [];
+          items.forEach((item) => {
+            if (!item || !item.href) return;
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.addEventListener('click', () => { window.location.href = item.href; });
+            card.innerHTML = `
+              <div class="game-thumbnail">
+                <img src="${item.img || ''}" alt="${item.title || ''}" loading="lazy">
+                <div class="play-overlay">
+                  <div class="play-button">▶</div>
+                </div>
+              </div>
+              <div class="game-info">
+                <h3 class="game-title">${item.title || ''}</h3>
+                <p class="game-description">${item.desc || ''}</p>
+                <div class="game-meta">
+                  <span class="game-category">${item.category || ''}</span>
+                </div>
+              </div>`;
+            grid.appendChild(card);
+          });
+        })();
+      </script>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 MiniGames365. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Ludo King",
+    "description": "Play the classic Ludo board game online! Roll the dice, move your pieces strategically, and be the first to get all four pieces home. This timeless family game brings joy across generations.",
+    "applicationCategory": "Game",
+    "genre": ["Strategy", "Board Game"],
+    "operatingSystem": "Web",
+    "url": "https://minigames365.com/games/ludo-king",
+    "image": "https://minigames365.com/assets/images/games/ludo-king-thumb.svg",
+    "author": {
+      "@type": "Organization",
+      "name": "MiniGames365"
+    },
+    "creator": {
+      "@type": "Organization", 
+      "name": "MiniGames365"
+    },
+    "inLanguage": "en",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script src="/games/ludo-king/logic.js"></script>
+  <script>
+    // Initialize ads
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    
+    // Google Analytics events
+    function trackGameEvent(action, score = null) {
+      if (typeof gtag !== 'undefined') {
+        const eventData = {
+          game_slug: 'ludo-king',
+          category: 'strategy',
+          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+        };
+        if (score !== null) eventData.score = score;
+        gtag('event', action, eventData);
+      }
+    }
+  </script>
+</body>
+</html>
