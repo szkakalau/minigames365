@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <!-- Lanes -->
+  <g>
+    <rect x="0" y="120" width="800" height="60" fill="#1f2937"/>
+    <rect x="0" y="180" width="800" height="60" fill="#111827"/>
+    <rect x="0" y="240" width="800" height="60" fill="#1f2937"/>
+  </g>
+  <!-- Finish line -->
+  <rect x="700" y="120" width="6" height="180" fill="#e5e7eb"/>
+  <!-- Runners -->
+  <g>
+    <rect x="300" y="140" width="28" height="38" fill="#22d3ee"/>
+    <circle cx="314" cy="134" r="8" fill="#93c5fd"/>
+    <rect x="260" y="260" width="28" height="38" fill="#ef4444"/>
+    <circle cx="274" cy="254" r="8" fill="#93c5fd"/>
+    <rect x="240" y="200" width="28" height="38" fill="#f59e0b"/>
+    <circle cx="254" cy="194" r="8" fill="#93c5fd"/>
+  </g>
+  <!-- Title bar -->
+  <rect x="0" y="0" width="800" height="70" fill="rgba(0,0,0,0.55)"/>
+  <text x="24" y="46" fill="#e2e8f0" font-size="34" font-weight="700" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial">Sprint League</text>
+</svg>

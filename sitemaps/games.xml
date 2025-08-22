@@ -75,4 +75,24 @@
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
   </url>
+  <url>
+    <loc>https://minigames365.com/games/rumble-rush</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/sprint-league</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/minefun-io</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/shark-io</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
 </urlset>

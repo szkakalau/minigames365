@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shark.io - Ocean Dash & Hunt | PlayCentral</title>
+  <meta name="description" content="Glide through the ocean as a shark! Move with WASD/Arrow keys or the mouse, dash with Space or Left Click, and defeat enemies with your horn.">
+  <meta name="keywords" content="shark.io, shark game, ocean dash, io game, WASD, dash, horn attack, underwater">
+  <link rel="canonical" href="https://minigames365.com/games/shark-io">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Shark.io - Ocean Dash & Hunt | PlayCentral">
+  <meta property="og:description" content="Swim fast, dash through the water, and take down enemies with your horn!">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/shark-io-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/shark-io">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shark.io - Ocean Dash & Hunt">
+  <meta name="twitter:description" content="Control a fast shark, dash to defeat enemies, survive the deep sea!">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/shark-io-thumb.svg">
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+      gtag('config', 'G-QM2M85ZVEG');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="/"><img src="/assets/images/logo.svg" alt="PlayCentral" class="logo-img"><span class="logo-text">PlayCentral</span></a></div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/index.html#categories">Categories</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Shark.io</h1>
+          <p class="hero-description">Speed through the ocean and take down foes with powerful dashes! Can you become the apex predator?</p>
+          <div class="game-instructions">
+            <strong>Controls:</strong> 
+            Move: WASD, Arrow keys or Mouse • Dash: Space or Left Click • Defeat enemies by ramming with your horn while dashing
+          </div>
+        </div>
+      </section>
+
+      <div class="ad-banner-top">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6583243933606323" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+
+      <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
+        <div id="game-root" class="game-root" style="position:relative; background:#0b1220; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06);">
+          <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
+            <div class="scores" style="display:flex; gap:10px;">
+              <div class="score" id="score" style="background:#07101d; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Score: 0</div>
+              <div class="best" id="best" style="background:#07101d; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Best: 0</div>
+              <div class="health" id="health" style="background:#07101d; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">HP: 100</div>
+            </div>
+            <div class="controls" style="display:flex; gap:8px;">
+              <button id="restartBtn" class="search-btn">Restart</button>
+            </div>
+          </div>
+          <canvas id="gameCanvas" width="720" height="480" style="touch-action: none; background:#05223a; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
+            <h3>Shark Down!</h3>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <button onclick="restartGame()" class="search-btn">Swim Again</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="featured-games">
+        <h2 class="section-title">🌊 More Action & IO</h2>
+        <div class="games-grid" id="recommended-grid"></div>
+      </section>
+      <script>
+        window.RECOMMENDED_GAMES = [
+          { href: '/games/rumble-rush/', img: '/assets/images/games/rumble-rush-thumb.svg', title: 'Rumble Rush', desc: '3D arena action', category: 'Action' },
+          { href: '/games/sprint-league/', img: '/assets/images/games/sprint-league-thumb.svg', title: 'Sprint League', desc: 'Track racing championship', category: 'Sports' },
+          { href: '/games/t-rex-runner/', img: '/assets/images/games/t-rex-runner-thumb.svg', title: 'T-Rex Runner', desc: 'Endless runner', category: 'Arcade' }
+        ];
+        (function(){
+          const grid = document.getElementById('recommended-grid');
+          (window.RECOMMENDED_GAMES||[]).forEach(item=>{
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.addEventListener('click', ()=> location.href=item.href);
+            card.innerHTML = `
+              <div class="game-thumbnail">
+                <img src="${item.img}" alt="${item.title}" loading="lazy">
+                <div class="play-overlay"><div class="play-button">▶</div></div>
+              </div>
+              <div class="game-info">
+                <h3 class="game-title">${item.title}</h3>
+                <p class="game-description">${item.desc}</p>
+                <div class="game-meta"><span class="game-category">${item.category}</span></div>
+              </div>`;
+            grid.appendChild(card);
+          })
+        })();
+      </script>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 PlayCentral. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"VideoGame",
+    "name":"Shark.io",
+    "description":"Glide through the ocean as a shark! Move with WASD/Arrow keys or the mouse, dash with Space or Left Click, and defeat enemies with your horn.",
+    "applicationCategory":"Game",
+    "genre":["Action","IO"],
+    "operatingSystem":"Web",
+    "url":"https://minigames365.com/games/shark-io",
+    "image":"https://minigames365.com/assets/images/games/shark-io-thumb.svg",
+    "author":{"@type":"Organization","name":"PlayCentral"},
+    "creator":{"@type":"Organization","name":"PlayCentral"},
+    "inLanguage":"en"
+  }
+  </script>
+
+  <script src="/games/shark-io/logic.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    function trackGameEvent(action, score=null){
+      if (typeof gtag !== 'undefined'){
+        const eventData = { game_slug:'shark-io', category:'Action', device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop' };
+        if (score!==null) eventData.score = score;
+        gtag('event', action, eventData);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rumble Rush - 3D Action Arena | PlayCentral</title>
+  <meta name="description" content="Fast-paced 3D action game with WASD movement, mouse camera control, and jumping. Battle in the arena and survive the rush!">
+  <meta name="keywords" content="rumble rush, 3D action game, arena battle, WASD controls, camera control, jumping game, action adventure">
+  <link rel="canonical" href="https://minigames365.com/games/rumble-rush">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Rumble Rush - 3D Action Arena | PlayCentral">
+  <meta property="og:description" content="Fast-paced 3D action game with WASD movement, mouse camera control, and jumping. Battle in the arena and survive the rush!">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/rumble-rush-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/rumble-rush">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rumble Rush - 3D Action Arena">
+  <meta name="twitter:description" content="Battle in 3D arenas with smooth controls and dynamic camera angles.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/rumble-rush-thumb.svg">
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QM2M85ZVEG');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="/"><img src="/assets/images/logo.svg" alt="PlayCentral" class="logo-img"><span class="logo-text">PlayCentral</span></a></div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/index.html#categories">Categories</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Rumble Rush</h1>
+          <p class="hero-description">Fast-paced 3D action arena game. Navigate dynamic battlefields with fluid movement controls and strategic camera positioning!</p>
+          <div class="game-instructions">
+            <strong>Controls:</strong> 
+            WASD or Arrow Keys to move • Mouse to adjust camera angle • Space bar to jump • Survive the arena rush!
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad above game canvas -->
+      <div class="ad-banner-top">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6583243933606323" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+
+      <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
+        <div id="game-root" class="game-root" style="position:relative; background:#111827; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06);">
+          <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
+            <div class="scores" style="display:flex; gap:10px;">
+              <div class="score" id="score" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Score: 0</div>
+              <div class="best" id="best" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Best: 0</div>
+              <div class="health" id="health" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">HP: 100</div>
+            </div>
+            <div class="controls" style="display:flex; gap:8px;">
+              <button id="restartBtn" class="search-btn">Restart</button>
+            </div>
+          </div>
+          <canvas id="gameCanvas" width="640" height="480" style="touch-action: none; background:#0f172a; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
+            <h3>Arena Conquered!</h3>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <button onclick="restartGame()" class="search-btn">Rush Again</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related games -->
+      <section class="featured-games">
+        <h2 class="section-title">⚡ More Action Games</h2>
+        <div class="games-grid" id="recommended-grid"></div>
+      </section>
+      <script>
+        // Action game recommendations
+        window.RECOMMENDED_GAMES = [
+          { href: '/games/t-rex-runner/', img: '/assets/images/games/t-rex-runner-thumb.svg', title: 'T-Rex Runner', desc: 'Endless dinosaur runner action', category: 'Action' },
+          { href: '/games/subway-surfers/', img: '/assets/images/games/subway-surfers-thumb.svg', title: 'Subway Surfers', desc: 'Run, dodge, and collect!', category: 'Arcade' },
+          { href: '/games/moto-race-go/', img: '/assets/images/games/moto-race-go-thumb.svg', title: 'Moto Race Go', desc: 'High-speed racing thrills', category: 'Racing' }
+        ];
+        (function () {
+          const grid = document.getElementById('recommended-grid');
+          if (!grid) return;
+          const items = Array.isArray(window.RECOMMENDED_GAMES) ? window.RECOMMENDED_GAMES : [];
+          items.forEach((item) => {
+            if (item && item.placeholder) {
+              const card = document.createElement('div');
+              card.className = 'game-card coming-soon';
+              card.innerHTML = `
+                <div class="game-thumbnail">
+                  <div class="placeholder">More games coming</div>
+                </div>
+                <div class="game-info">
+                  <h3 class="game-title">${item.title || 'Coming Soon'}</h3>
+                  <p class="game-description">${item.desc || ''}</p>
+                </div>`;
+              grid.appendChild(card);
+              return;
+            }
+            if (!item || !item.href) return;
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.addEventListener('click', () => { window.location.href = item.href; });
+            card.innerHTML = `
+              <div class="game-thumbnail">
+                <img src="${item.img || ''}" alt="${item.title || ''}" loading="lazy">
+                <div class="play-overlay">
+                  <div class="play-button">▶</div>
+                </div>
+              </div>
+              <div class="game-info">
+                <h3 class="game-title">${item.title || ''}</h3>
+                <p class="game-description">${item.desc || ''}</p>
+                <div class="game-meta">
+                  <span class="game-category">${item.category || ''}</span>
+                </div>
+              </div>`;
+            grid.appendChild(card);
+          });
+        })();
+      </script>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 PlayCentral. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Rumble Rush",
+    "description": "Fast-paced 3D action game with WASD movement, mouse camera control, and jumping. Battle in the arena and survive the rush!",
+    "applicationCategory": "Game",
+    "genre": ["Action", "3D"],
+    "operatingSystem": "Web",
+    "url": "https://minigames365.com/games/rumble-rush",
+    "image": "https://minigames365.com/assets/images/games/rumble-rush-thumb.svg",
+    "author": {
+      "@type": "Organization",
+      "name": "PlayCentral"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "PlayCentral"
+    },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <script src="/games/rumble-rush/logic.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    function trackGameEvent(action, score = null) {
+      if (typeof gtag !== 'undefined') {
+        const eventData = {
+          game_slug: 'rumble-rush',
+          category: 'Action',
+          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+        };
+        if (score !== null) eventData.score = score;
+        gtag('event', action, eventData);
+      }
+    }
+  </script>
+</body>
+</html>

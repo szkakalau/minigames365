@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <!-- Arena ring -->
+  <circle cx="400" cy="260" r="160" fill="none" stroke="#334155" stroke-width="6"/>
+  <!-- Enemies -->
+  <g fill="#f59e0b" opacity="0.9">
+    <circle cx="560" cy="240" r="18"/>
+    <circle cx="260" cy="320" r="14"/>
+    <circle cx="480" cy="350" r="12"/>
+  </g>
+  <!-- Player -->
+  <g>
+    <ellipse cx="400" cy="310" rx="20" ry="8" fill="rgba(0,0,0,0.35)"/>
+    <circle cx="400" cy="290" r="16" fill="#4ade80" stroke="#16a34a" stroke-width="3"/>
+  </g>
+  <!-- Speed lines -->
+  <g stroke="#64748b" stroke-width="3" opacity="0.5">
+    <line x1="120" y1="110" x2="200" y2="120"/>
+    <line x1="140" y1="140" x2="220" y2="148"/>
+    <line x1="100" y1="170" x2="200" y2="176"/>
+  </g>
+  <!-- Title bar -->
+  <rect x="0" y="0" width="800" height="70" fill="rgba(0,0,0,0.55)"/>
+  <text x="24" y="46" fill="#e2e8f0" font-size="34" font-weight="700" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial">Rumble Rush</text>
+</svg>
