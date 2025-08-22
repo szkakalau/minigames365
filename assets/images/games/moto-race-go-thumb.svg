@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="background: linear-gradient(135deg, #1e293b, #334155);">
+  <!-- Road -->
+  <rect x="20" y="0" width="160" height="150" fill="#0f172a" rx="2"/>
+  <rect x="30" y="0" width="140" height="150" fill="#111827"/>
+  
+  <!-- Lane markings -->
+  <g stroke="#374151" stroke-width="2" stroke-dasharray="8,6" opacity="0.6">
+    <line x1="80" y1="0" x2="80" y2="150"/>
+    <line x1="120" y1="0" x2="120" y2="150"/>
+  </g>
+  
+  <!-- Traffic cars -->
+  <rect x="66" y="30" width="28" height="40" rx="6" fill="#ef4444"/>
+  <rect x="106" y="80" width="28" height="40" rx="6" fill="#3b82f6"/>
+  
+  <!-- Player bike (main focus) -->
+  <g transform="translate(100, 110)">
+    <!-- Bike body -->
+    <rect x="-12" y="-15" width="24" height="30" rx="4" fill="#22c55e"/>
+    <!-- Wheels -->
+    <circle cx="-8" cy="8" r="4" fill="#1f2937"/>
+    <circle cx="8" cy="8" r="4" fill="#1f2937"/>
+    <!-- Rider -->
+    <circle cx="0" cy="-20" r="6" fill="#fbbf24"/>
+    <!-- Handle bars -->
+    <rect x="-10" y="-18" width="20" height="3" rx="1" fill="#374151"/>
+  </g>
+  
+  <!-- Speed lines for motion effect -->
+  <g stroke="#374151" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="40" x2="15" y2="40"/>
+    <line x1="0" y1="60" x2="12" y2="60"/>
+    <line x1="0" y1="80" x2="18" y2="80"/>
+    <line x1="185" y1="50" x2="200" y2="50"/>
+    <line x1="182" y1="70" x2="200" y2="70"/>
+    <line x1="188" y1="90" x2="200" y2="90"/>
+  </g>
+  
+  <!-- Coins -->
+  <circle cx="65" cy="60" r="4" fill="#fbbf24"/>
+  <circle cx="135" cy="25" r="4" fill="#fbbf24"/>
+  
+  <!-- Title overlay -->
+  <rect x="0" y="0" width="200" height="30" fill="rgba(0,0,0,0.7)"/>
+  <text x="100" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Moto Race Go</text>
+</svg>

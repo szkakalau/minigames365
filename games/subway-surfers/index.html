@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subway Surfers - Endless Runner & Collector | PlayCentral</title>
+  <meta name="description" content="Dash through the subway, dodge trains, and collect coins in this fast-paced endless runner inspired by street sports.">
+  <meta name="keywords" content="subway surfers, endless runner, parkour, street sports, collect coins, dodge trains, arcade game">
+  <link rel="canonical" href="https://minigames365.com/games/subway-surfers">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Subway Surfers - Endless Runner & Collector | PlayCentral">
+  <meta property="og:description" content="Dash through the subway, dodge trains, and collect coins in this fast-paced endless runner.">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/subway-surfers-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/subway-surfers">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Subway Surfers - Endless Runner & Collector">
+  <meta name="twitter:description" content="Run, jump, and dodge trains while collecting coins in the subway.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/subway-surfers-thumb.svg">
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QM2M85ZVEG');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="/"><img src="/assets/images/logo.svg" alt="PlayCentral" class="logo-img"><span class="logo-text">PlayCentral</span></a></div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/index.html#categories">Categories</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Subway Surfers</h1>
+          <p class="hero-description">Dash through the subway tunnels, avoid obstacles, and collect as many coins as you can in this endless runner.</p>
+          <div class="game-instructions">
+            <strong>Controls:</strong> 
+            Arrow Keys/WASD to move lanes • Space to jump • Down arrow to roll • Collect power-ups to boost your score!
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad above game canvas -->
+      <div class="ad-banner-top">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6583243933606323" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+
+      <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
+        <div id="game-root" class="game-root" style="position:relative; background:#111827; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06);">
+          <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
+            <div class="scores" style="display:flex; gap:10px;">
+              <div class="score" id="score" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Score: 0</div>
+              <div class="best" id="best" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Best: 0</div>
+              <div class="coins" id="coins" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Coins: 0</div>
+            </div>
+            <div class="controls" style="display:flex; gap:8px;">
+              <button id="restartBtn" class="search-btn">Restart</button>
+            </div>
+          </div>
+          <canvas id="gameCanvas" width="400" height="600" style="touch-action: none; background:#0f172a; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
+            <h3>Game Over!</h3>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <p>Total Coins: <span id="finalCoins">0</span></p>
+            <button onclick="restartGame()" class="search-btn">Try Again</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related games -->
+      <section class="featured-games">
+        <h2 class="section-title">🚇 More Runner & Arcade Games</h2>
+        <div class="games-grid" id="recommended-grid"></div>
+      </section>
+      <script>
+        window.RECOMMENDED_GAMES = [
+          { href: '/games/t-rex-runner/', img: '/assets/images/games/t-rex-runner-thumb.svg', title: 'T-Rex Runner', desc: 'Classic dino run', category: 'Arcade' },
+          { href: '/games/moto-race-go/', img: '/assets/images/games/moto-race-go-thumb.svg', title: 'Moto Race Go', desc: 'Fast bike racing', category: 'Racing' },
+          { href: '/games/fifa-mobile/', img: '/assets/images/games/fifa-mobile-thumb.svg', title: 'FIFA Mobile', desc: 'Quick football matches', category: 'Sports' }
+        ];
+        (function () {
+          const grid = document.getElementById('recommended-grid');
+          if (!grid) return;
+          const items = Array.isArray(window.RECOMMENDED_GAMES) ? window.RECOMMENDED_GAMES : [];
+          items.forEach((item) => {
+            if (item && item.placeholder) {
+              const card = document.createElement('div');
+              card.className = 'game-card coming-soon';
+              card.innerHTML = `
+                <div class="game-thumbnail">
+                  <div class="placeholder">More games coming</div>
+                </div>
+                <div class="game-info">
+                  <h3 class="game-title">${item.title || 'Coming Soon'}</h3>
+                  <p class="game-description">${item.desc || ''}</p>
+                </div>`;
+              grid.appendChild(card);
+              return;
+            }
+            if (!item || !item.href) return;
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.addEventListener('click', () => { window.location.href = item.href; });
+            card.innerHTML = `
+              <div class="game-thumbnail">
+                <img src="${item.img || ''}" alt="${item.title || ''}" loading="lazy">
+                <div class="play-overlay">
+                  <div class="play-button">▶</div>
+                </div>
+              </div>
+              <div class="game-info">
+                <h3 class="game-title">${item.title || ''}</h3>
+                <p class="game-description">${item.desc || ''}</p>
+                <div class="game-meta">
+                  <span class="game-category">${item.category || ''}</span>
+                </div>
+              </div>`;
+            grid.appendChild(card);
+          });
+        })();
+      </script>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 PlayCentral. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Subway Surfers",
+    "description": "Dash through the subway, dodge trains, and collect coins in this fast-paced endless runner inspired by street sports.",
+    "applicationCategory": "Game",
+    "genre": ["Arcade", "Runner"],
+    "operatingSystem": "Web",
+    "url": "https://minigames365.com/games/subway-surfers",
+    "image": "https://minigames365.com/assets/images/games/subway-surfers-thumb.svg",
+    "author": {
+      "@type": "Organization",
+      "name": "PlayCentral"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "PlayCentral"
+    },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <script src="/games/subway-surfers/logic.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    function trackGameEvent(action, score = null) {
+      if (typeof gtag !== 'undefined') {
+        const eventData = {
+          game_slug: 'subway-surfers',
+          category: 'Arcade',
+          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+        };
+        if (score !== null) eventData.score = score;
+        gtag('event', action, eventData);
+      }
+    }
+  </script>
+</body>
+</html>
