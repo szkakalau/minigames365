@@ -167,23 +167,12 @@
   }
   </script>
 
-  <script src="/games/GAME_SLUG/logic.js"></script>
   <script>
-    // Initialize ads
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    
-    // Google Analytics events
-    function trackGameEvent(action, score = null) {
-      if (typeof gtag !== 'undefined') {
-        const eventData = {
-          game_slug: 'GAME_SLUG',
-          category: 'GAME_CATEGORY',
-          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
-        };
-        if (score !== null) eventData.score = score;
-        gtag('event', action, eventData);
-      }
+    // Local analytics helper for development/local preview
+    function trackGameEvent(action, data){
+      console.log('[track]', action, data || {});
     }
   </script>
+  <script src="logic.js?v=3"></script>
 </body>
 </html>

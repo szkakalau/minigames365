@@ -27,7 +27,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
   <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){dataLayer.push(arguments);} 
       gtag('js', new Date());
       gtag('config', 'G-QM2M85ZVEG');
   </script>
@@ -74,6 +74,7 @@
               <div class="best" id="best" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Best: 0</div>
             </div>
             <div class="controls" style="display:flex; gap:8px;">
+              <button id="pauseBtn" class="search-btn">Pause</button>
               <button id="restartBtn" class="search-btn">Restart</button>
             </div>
           </div>
@@ -172,21 +173,20 @@
   }
   </script>
 
-  <script src="/games/snake/logic.js"></script>
+  <script src="/games/snake/logic.js?v=4"></script>
   <script>
     // Initialize ads
     (adsbygoogle = window.adsbygoogle || []).push({});
     
     // Google Analytics events
-    function trackGameEvent(action, score = null) {
+    function trackGameEvent(action, extras = {}) {
       if (typeof gtag !== 'undefined') {
-        const eventData = {
+        gtag('event', action, {
           game_slug: 'snake',
           category: 'arcade',
-          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
-        };
-        if (score !== null) eventData.score = score;
-        gtag('event', action, eventData);
+          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          ...extras
+        });
       }
     }
   </script>

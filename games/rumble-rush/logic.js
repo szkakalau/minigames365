@@ -34,6 +34,7 @@
   let best = Number(localStorage.getItem('rumble-rush_best') || 0);
   let hp = 100;
   let running = true;
+  let paused = false;
 
   function init(){
     enemies = [];
@@ -42,6 +43,9 @@
     hp = 100;
     player.x = W/2; player.y = H/2; player.z = 0; player.vx = player.vy = player.vz = 0; player.onGround = true;
     running = true;
+    paused = false;
+    const pbtn = document.getElementById('pauseBtn');
+    if (pbtn) pbtn.textContent = 'Pause';
     document.getElementById('score').textContent = 'Score: ' + score;
     document.getElementById('best').textContent = 'Best: ' + best;
     document.getElementById('health').textContent = 'HP: ' + hp;
@@ -51,8 +55,19 @@
 
   function loop(){
     if (!running) return;
-    update();
-    draw();
+    if (!paused) {
+      update();
+      draw();
+    } else {
+      draw();
+      // draw pause overlay
+      ctx.fillStyle = 'rgba(0,0,0,0.35)';
+      ctx.fillRect(0,0,W,H);
+      ctx.fillStyle = 'white';
+      ctx.font = 'bold 28px system-ui, -apple-system, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Paused', W/2, H/2);
+    }
     requestAnimationFrame(loop);
   }
 
@@ -209,6 +224,9 @@
 
   function gameOver(){
     running = false;
+    paused = false;
+    const pbtn = document.getElementById('pauseBtn');
+    if (pbtn) pbtn.textContent = 'Pause';
     best = Math.max(best, score);
     localStorage.setItem('rumble-rush_best', String(best));
     document.getElementById('finalScore').textContent = score;
@@ -221,23 +239,65 @@
     init();
   }
 
+  function togglePause(){
+    if (!running) return;
+    paused = !paused;
+    const pbtn = document.getElementById('pauseBtn');
+    if (pbtn) pbtn.textContent = paused ? 'Resume' : 'Pause';
+  }
+
   // Input events
   window.addEventListener('keydown', (e)=>{
+    if (e.code === 'KeyP') { togglePause(); return; }
+    if (paused) return;
     keys[e.code] = true;
     if ((e.code === 'Space' || e.key === ' ') && player.onGround){
       player.vz = 7.5; player.onGround = false;
     }
   });
-  window.addEventListener('keyup', (e)=>{ keys[e.code] = false; });
-  canvas.addEventListener('mousemove', (e)=>{
+  window.addEventListener('keyup', (e)=>{ if (paused) return; keys[e.code] = false; });
+  const updateMouseFromPoint = (clientX)=>{
     const rect = canvas.getBoundingClientRect();
-    mouseX = e.clientX - rect.left;
-  });
+    mouseX = clientX - rect.left;
+  };
+  canvas.addEventListener('mousemove', (e)=>{ if (paused) return; updateMouseFromPoint(e.clientX); });
   canvas.addEventListener('touchmove', (e)=>{
+    if (paused) return;
     const t = e.touches[0]; if (!t) return;
-    const rect = canvas.getBoundingClientRect();
-    mouseX = t.clientX - rect.left;
+    updateMouseFromPoint(t.clientX);
   }, {passive:true});
+
+  // Mobile/Screen controls
+  const bindHoldButton = (id, code) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const down = (e)=>{ e.preventDefault(); keys[code] = true; };
+    const up = (e)=>{ e.preventDefault(); keys[code] = false; };
+    el.addEventListener('touchstart', down, {passive:false});
+    el.addEventListener('touchend', up);
+    el.addEventListener('touchcancel', up);
+    el.addEventListener('mousedown', down);
+    el.addEventListener('mouseup', up);
+    el.addEventListener('mouseleave', up);
+  };
+  bindHoldButton('btnUp', 'ArrowUp');
+  bindHoldButton('btnDown', 'ArrowDown');
+  bindHoldButton('btnLeft', 'ArrowLeft');
+  bindHoldButton('btnRight', 'ArrowRight');
+  const jumpBtn = document.getElementById('btnJump');
+  if (jumpBtn){
+    const jump = (e)=>{ e.preventDefault(); if (!paused && player.onGround){ player.vz = 7.5; player.onGround = false; }};
+    jumpBtn.addEventListener('touchstart', jump, {passive:false});
+    jumpBtn.addEventListener('mousedown', jump);
+  }
+
+  // Pause button
+  const pauseBtn = document.getElementById('pauseBtn');
+  if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+
+  // Restart button (existing)
+  const restartBtn = document.getElementById('restartBtn');
+  if (restartBtn) restartBtn.addEventListener('click', ()=>{ if (!running) return; restartGame(); });
 
   // Expose restart for button
   window.restartGame = restartGame;

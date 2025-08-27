@@ -7,6 +7,7 @@
   // Game state
   let bird, pipes, score, best, gravity, lift, speed, running, frame, groundY;
   let lastTapTime = 0;
+  let paused = false;
 
   function reset() {
     bird = { x: 80, y: H/2, r: 14, vy: 0 };
@@ -19,6 +20,9 @@
     running = true;
     frame = 0;
     groundY = H - 40;
+    paused = false;
+    const pb = document.getElementById('pauseBtn');
+    if (pb) pb.textContent = 'Pause';
     document.getElementById('score').textContent = 'Score: ' + score;
     document.getElementById('best').textContent = 'Best: ' + best;
     hideGameOver();
@@ -50,42 +54,52 @@
 
   function update() {
     if (!running) return;
+    if (paused) {
+      draw();
+      requestAnimationFrame(update);
+      return;
+    }
     frame++;
     // Bird physics
     bird.vy += gravity;
     bird.y += bird.vy;
 
-    // Spawn pipes
-    if (frame % 90 === 0) spawnPipe();
-
-    // Move pipes
-    for (let i = 0; i < pipes.length; i++) {
-      pipes[i].x -= speed;
+    // Pipes spawn
+    if (frame % 90 === 0) {
+      const gap = 110;
+      const topH = 40 + Math.random() * (H - 160);
+      pipes.push({ x: W + 20, top: topH, bottom: topH + gap, w: 60, passed: false });
     }
-    // Remove off-screen pipes
-    pipes = pipes.filter(p => p.x + p.w > -10);
 
-    // Collision and scoring
-    for (let i = 0; i < pipes.length; i++) {
+    // Pipes update & collide
+    for (let i = pipes.length - 1; i >= 0; i--) {
       const p = pipes[i];
-      const inPipeX = bird.x + bird.r > p.x && bird.x - bird.r < p.x + p.w;
-      const topBottom = bird.y - bird.r < p.top || bird.y + bird.r > p.top + p.gap;
-      if (inPipeX && topBottom) {
+      p.x -= speed;
+      // scoring
+      if (!p.passed && p.x + p.w < bird.x - bird.r) {
+        score++;
+        document.getElementById('score').textContent = 'Score: ' + score;
+        p.passed = true;
+      }
+      // collide
+      const hitX = bird.x + bird.r > p.x && bird.x - bird.r < p.x + p.w;
+      const hitY = bird.y - bird.r < p.top || bird.y + bird.r > p.bottom;
+      if (hitX && hitY) {
         gameOver();
         return;
       }
-      if (!p.scored && p.x + p.w < bird.x - bird.r) {
-        p.scored = true;
-        score++;
-        document.getElementById('score').textContent = 'Score: ' + score;
-        track && track('score_update', score);
-      }
+      // remove off screen
+      if (p.x + p.w < -20) pipes.splice(i, 1);
     }
 
-    // Ground / ceiling collision
-    if (bird.y - bird.r < 0 || bird.y + bird.r > groundY) {
+    // Ground collide
+    if (bird.y + bird.r > groundY) {
       gameOver();
       return;
+    }
+    if (bird.y - bird.r < 0) {
+      bird.y = bird.r;
+      bird.vy = 0;
     }
 
     draw();
@@ -129,6 +143,14 @@
     ctx.font = 'bold 48px system-ui, -apple-system, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText(score, W/2, 80);
+
+    if (paused) {
+      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#fff';
+      ctx.font = '24px system-ui, -apple-system, sans-serif';
+      ctx.fillText('Paused - Press P or Pause', W/2, H/2);
+    }
   }
 
   function gameOver() {
@@ -146,19 +168,42 @@
     requestAnimationFrame(update);
   }
 
+  function togglePause(){
+    if (!running) return;
+    paused = !paused;
+    const pb = document.getElementById('pauseBtn');
+    if (pb) pb.textContent = paused ? 'Resume' : 'Pause';
+    // Unify analytics event name
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'pause_toggle', { game_name: 'flappy-bird', paused });
+    }
+    // Keep existing tracker without payload changes
+    track && track('pause_toggle');
+  }
+
   // Input
   window.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' || e.key === ' ') {
+    const isJumpKey = e.code === 'Space' || e.key === ' ' || e.code === 'ArrowUp' || e.code === 'KeyW';
+    if (isJumpKey) {
       e.preventDefault();
-      flap();
+      if (!paused && running) flap();
+      // Allow space to restart when stopped
+      if (!running && (e.code === 'Space' || e.key === ' ')) {
+        restartGame();
+      }
+      return;
     }
-    if (!running && (e.code === 'Space' || e.key === ' ')) {
-      restartGame();
-    }
+    if (e.code === 'KeyP') { e.preventDefault(); togglePause(); return; }
   }, { passive: false });
+
+  const pauseBtn = document.getElementById('pauseBtn');
+  if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+  const restartBtn = document.getElementById('restartBtn');
+  if (restartBtn) restartBtn.addEventListener('click', restartGame);
 
   canvas.addEventListener('pointerdown', () => {
     const now = Date.now();
+    if (paused) return;
     // Double tap to restart when game over
     if (!running && now - lastTapTime < 300) {
       restartGame();

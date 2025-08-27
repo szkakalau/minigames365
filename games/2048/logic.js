@@ -6,10 +6,23 @@
   const canvas = document.getElementById('board');
   const ctx = canvas.getContext('2d');
   const cell = canvas.width / size;
+  let paused = false;
 
   document.getElementById('score').textContent = 'Score: ' + score;
   document.getElementById('best').textContent = 'Best: ' + best;
   document.getElementById('restartBtn').addEventListener('click', restart);
+  const pauseBtn = document.getElementById('pauseBtn');
+  if (pauseBtn) pauseBtn.addEventListener('click', () => { togglePause(); });
+
+  function setPauseUI(){
+    if (pauseBtn) pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+  }
+
+  function togglePause(){
+    paused = !paused;
+    setPauseUI();
+    draw();
+  }
 
   function createEmptyBoard(){
     return Array.from({length: size}, () => Array(size).fill(0));
@@ -28,6 +41,8 @@
   function restart(){
     board = createEmptyBoard();
     score = 0;
+    paused = false;
+    setPauseUI();
     addRandomTile();
     addRandomTile();
     draw();
@@ -146,10 +161,35 @@
         }
       }
     }
+    // paused overlay
+    if (paused) {
+      ctx.save();
+      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fillRect(0,0,canvas.width, canvas.height);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 28px system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('Paused', canvas.width/2, canvas.height/2);
+      ctx.restore();
+    }
   }
 
   // input handlers
   document.addEventListener('keydown', (e)=>{
+    // toggle pause with P/p
+    if (e.key === 'p' || e.key === 'P') {
+      e.preventDefault();
+      togglePause();
+      return;
+    }
+    // block movement while paused
+    if (paused) {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.preventDefault();
+      }
+      return;
+    }
     switch(e.key){
       case 'ArrowLeft': e.preventDefault(); moveLeft(); break;
       case 'ArrowRight': e.preventDefault(); moveRight(); break;
@@ -163,6 +203,7 @@
     const t = e.touches[0]; touchStartX = t.clientX; touchStartY = t.clientY;
   }, {passive:true});
   canvas.addEventListener('touchend', (e)=>{
+    if (paused) return;
     const t = e.changedTouches[0]; const dx = t.clientX - touchStartX; const dy = t.clientY - touchStartY;
     if(Math.abs(dx) > Math.abs(dy)){
       if(dx>20) moveRight(); else if(dx<-20) moveLeft();

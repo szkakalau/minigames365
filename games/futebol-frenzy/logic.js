@@ -7,6 +7,7 @@
   let score = 0;
   let best = Number(localStorage.getItem('futebol-frenzy_best') || 0);
   let running = true;
+  let paused = false;
 
   const player = { x: 60, y: H/2, r: 14, speed: 3.5 };
   const ball = { x: 100, y: H/2, r: 8, vx: 0, vy: 0 };
@@ -14,6 +15,15 @@
   const goal = { x: W - 40, y: H/2 - 60, w: 10, h: 120 };
 
   const keys = { ArrowUp:false, ArrowDown:false, ArrowLeft:false, ArrowRight:false, Space:false };
+
+  // Controls DOM
+  const restartBtn = document.getElementById('restartBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const btnUp = document.getElementById('btnUp');
+  const btnDown = document.getElementById('btnDown');
+  const btnLeft = document.getElementById('btnLeft');
+  const btnRight = document.getElementById('btnRight');
+  const btnShoot = document.getElementById('btnShoot');
 
   function spawnDefender() {
     const y = 40 + Math.random() * (H - 80);
@@ -26,6 +36,8 @@
   function init(){
     score = 0;
     running = true;
+    paused = false;
+    if (pauseBtn) pauseBtn.textContent = 'Pausar';
     player.x = 60; player.y = H/2;
     ball.x = 100; ball.y = H/2; ball.vx = 0; ball.vy = 0;
     defenders.length = 0;
@@ -33,16 +45,20 @@
     draw();
     loop();
     track('game_start');
+    document.getElementById('score').textContent = 'Gols: ' + score;
+    document.getElementById('best').textContent = 'Melhor: ' + best;
   }
 
   function loop(){
     if (!running) return;
     update();
     draw();
+    if (paused) drawPauseOverlay();
     requestAnimationFrame(loop);
   }
 
   function update(){
+    if (paused) return;
     // Player move
     if (keys.ArrowUp) player.y -= player.speed;
     if (keys.ArrowDown) player.y += player.speed;
@@ -167,6 +183,17 @@
     ctx.fillText('Melhor: ' + best, W - 12, 24);
   }
 
+  function drawPauseOverlay(){
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 28px system-ui, -apple-system, Segoe UI, Roboto, sans-serif';
+    ctx.fillText('Pausado', W/2, H/2);
+    ctx.font = '14px system-ui, -apple-system, Segoe UI, Roboto, sans-serif';
+    ctx.fillText('Pressione P ou toque em Retomar', W/2, H/2 + 28);
+  }
+
   function gameOver(){
     running = false;
     document.getElementById('finalScore').textContent = score;
@@ -181,8 +208,42 @@
 
   window.restartGame = restartGame;
 
-  window.addEventListener('keydown', (e) => { if (e.key in keys) keys[e.key] = true; if (e.code === 'Space') keys.Space = true; });
+  // Key events
+  window.addEventListener('keydown', (e) => { 
+    if (e.code === 'KeyP'){ e.preventDefault(); togglePause(); return; }
+    if (!paused && e.key in keys) keys[e.key] = true; 
+    if (!paused && e.code === 'Space') { e.preventDefault(); keys.Space = true; }
+  });
   window.addEventListener('keyup',   (e) => { if (e.key in keys) keys[e.key] = false; if (e.code === 'Space') keys.Space = false; });
+
+  // Pause binding
+  function togglePause(){
+    if (!running) return; // when game over, ignore
+    paused = !paused;
+    if (pauseBtn) pauseBtn.textContent = paused ? 'Retomar' : 'Pausar';
+    track(paused ? 'pause' : 'resume');
+  }
+  if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+  if (restartBtn) restartBtn.addEventListener('click', restartGame);
+
+  // Mobile controls mapping
+  const hold = (el, setFn, clearFn) => {
+    if (!el) return;
+    el.addEventListener('touchstart', (e)=>{ e.preventDefault(); if (!paused && running) setFn(); }, { passive:false });
+    el.addEventListener('touchend',   (e)=>{ e.preventDefault(); clearFn(); }, { passive:false });
+    el.addEventListener('mousedown',  (e)=>{ e.preventDefault(); if (!paused && running) setFn(); });
+    document.addEventListener('mouseup', ()=> clearFn());
+    document.addEventListener('touchend', ()=> clearFn(), { passive:true });
+  };
+
+  hold(btnUp,   ()=> keys.ArrowUp = true,   ()=> keys.ArrowUp = false);
+  hold(btnDown, ()=> keys.ArrowDown = true, ()=> keys.ArrowDown = false);
+  hold(btnLeft, ()=> keys.ArrowLeft = true, ()=> keys.ArrowLeft = false);
+  hold(btnRight,()=> keys.ArrowRight = true,()=> keys.ArrowRight = false);
+  if (btnShoot){
+    btnShoot.addEventListener('click', ()=>{ if (!paused && running){ keys.Space = true; setTimeout(()=> keys.Space = false, 80); }});
+    btnShoot.addEventListener('touchstart', (e)=>{ e.preventDefault(); if (!paused && running){ keys.Space = true; setTimeout(()=> keys.Space = false, 80); }}, { passive:false });
+  }
 
   function track(action, score){ if (typeof window.trackGameEvent === 'function') window.trackGameEvent(action, score); }
 

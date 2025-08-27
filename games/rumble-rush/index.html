@@ -78,10 +78,24 @@
               <div class="health" id="health" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">HP: 100</div>
             </div>
             <div class="controls" style="display:flex; gap:8px;">
+              <button id="pauseBtn" class="search-btn">Pause</button>
               <button id="restartBtn" class="search-btn">Restart</button>
             </div>
           </div>
           <canvas id="gameCanvas" width="640" height="480" style="touch-action: none; background:#0f172a; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          
+          <div id="mobileControls">
+            <div class="mobile-grid">
+              <button id="btnUp" class="mobileControlBtn" aria-label="Up" style="grid-column:2; grid-row:1;">▲</button>
+              <button id="btnLeft" class="mobileControlBtn" aria-label="Left" style="grid-column:1; grid-row:2;">◀</button>
+              <button id="btnDown" class="mobileControlBtn" aria-label="Down" style="grid-column:2; grid-row:3;">▼</button>
+              <button id="btnRight" class="mobileControlBtn" aria-label="Right" style="grid-column:3; grid-row:2;">▶</button>
+            </div>
+            <div class="jump-row">
+              <button id="btnJump" class="mobileControlBtn jump-btn" aria-label="Jump">Jump</button>
+            </div>
+          </div>
+          
           <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
             <h3>Arena Conquered!</h3>
             <p>Final Score: <span id="finalScore">0</span></p>
@@ -195,3 +209,34 @@
   </script>
 </body>
 </html>
+<style>
+  /* Mobile controls hidden by default */
+  #mobileControls { display: none; margin-top: 10px; width: 100%; }
+  #mobileControls .mobile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    touch-action: manipulation;
+  }
+  #mobileControls .mobileControlBtn {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    padding: 8px;
+  }
+  #mobileControls .mobileControlBtn:active { background: rgba(255,255,255,0.18); }
+  #mobileControls .jump-row { display: flex; justify-content: center; margin-top: 8px; }
+  #mobileControls .jump-btn { width: 200px; height: 50px; font-weight: 600; }
+
+  @media (max-width: 768px) {
+    #mobileControls { display: block; }
+  }
+</style>

@@ -46,11 +46,14 @@
     player.onGround = true;
 
     document.getElementById('gameOverScreen').style.display = 'none';
+    document.getElementById('pauseBtn').textContent = 'Pause';
     updateHUD();
   }
 
   function restartGame(){
     resetGame();
+    if (typeof trackGameEvent === 'function') trackGameEvent('restart');
+    requestAnimationFrame(update);
   }
   window.restartGame = restartGame;
 
@@ -58,6 +61,18 @@
     if(!running || gameOver) return;
     paused = !paused;
     document.getElementById('pauseBtn').textContent = paused ? 'Resume' : 'Pause';
+    // analytics: unify pause toggle event
+    if (typeof trackGameEvent === 'function') {
+      trackGameEvent('pause_toggle', { state: paused ? 'paused' : 'resumed' });
+    }
+    if(paused){
+      // draw one frame with overlay so user sees paused state
+      render();
+      drawPauseOverlay();
+    } else {
+      // resume loop
+      requestAnimationFrame(update);
+    }
   }
 
   function updateHUD(){
@@ -90,11 +105,12 @@
   }
 
   function jump(){
+    if(!running || paused || gameOver) return;
     if(player.onGround){
       player.vy = jumpVelocity;
       player.onGround = false;
       // analytics
-      if(typeof gtag !== 'undefined') gtag('event', 'jump', {game_name: 't-rex-runner'});
+      if (typeof trackGameEvent === 'function') trackGameEvent('jump');
     }
   }
 
@@ -155,9 +171,8 @@
     document.getElementById('finalScore').textContent = `${Math.floor(score)}`;
     document.getElementById('gameOverScreen').style.display = 'flex';
 
-    if(typeof gtag !== 'undefined'){
-      gtag('event', 'game_over', {
-        game_name: 't-rex-runner',
+    if (typeof trackGameEvent === 'function'){
+      trackGameEvent('game_over', {
         score: Math.floor(score),
         distance: Math.floor(distance)
       });
@@ -196,6 +211,24 @@
 
     // clouds
     drawParallax();
+
+    // pause overlay
+    if(paused){
+      drawPauseOverlay();
+    }
+  }
+
+  function drawPauseOverlay(){
+    ctx.save();
+    ctx.fillStyle = 'rgba(11,18,32,0.6)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#dfe7ff';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 32px system-ui, -apple-system, Segoe UI, Roboto, Arial';
+    ctx.fillText('Paused', canvas.width/2, canvas.height/2 - 10);
+    ctx.font = '16px system-ui, -apple-system, Segoe UI, Roboto, Arial';
+    ctx.fillText('Press P or click Pause to resume', canvas.width/2, canvas.height/2 + 20);
+    ctx.restore();
   }
 
   const clouds = Array.from({length:5},()=>({x:Math.random()*800,y:40+Math.random()*100,s:0.3+Math.random()*0.4}));
@@ -247,14 +280,21 @@
   function onKey(e){
     if(e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW'){
       e.preventDefault();
-      jump();
+      if(!paused && !gameOver && running){
+        jump();
+      }
     }else if(e.code === 'KeyP'){
+      e.preventDefault();
       togglePause();
     }
   }
   document.addEventListener('keydown', onKey);
-  canvas.addEventListener('mousedown', jump);
-  canvas.addEventListener('touchstart', function(e){ e.preventDefault(); jump(); }, {passive:false});
+  // Control keys set: suppress browser defaults on keyup as well
+  const controlCodes = new Set(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','KeyA','KeyD','KeyW','KeyS','Space','KeyP','Enter']);
+  window.addEventListener('keyup', (e)=>{ if (controlCodes.has(e.code) && e.preventDefault) e.preventDefault(); });
+
+  canvas.addEventListener('mousedown', () => { if(!paused && !gameOver && running) jump(); });
+  canvas.addEventListener('touchstart', function(e){ if (paused || !running || gameOver) { if (e.preventDefault) e.preventDefault(); return; } e.preventDefault(); jump(); }, {passive:false});
   document.getElementById('pauseBtn').addEventListener('click', togglePause);
 
   // Start game when page ready

@@ -15,6 +15,7 @@
   let score = 0;
   let best = Number(localStorage.getItem('fifa_best') || 0);
   let timeLeft = 60 * 1000; // 60 sec in ms
+  let paused = false;
 
   const scoreEl = document.getElementById('score');
   const bestEl = document.getElementById('best');
@@ -22,6 +23,7 @@
   const overEl = document.getElementById('gameOverScreen');
   const finalScoreEl = document.getElementById('finalScore');
   const restartBtn = document.getElementById('restartBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
 
   function updateHUD() {
     scoreEl.textContent = `Score: ${score}`;
@@ -49,6 +51,8 @@
     keeper.x = W/2 - 20; keeper.vx = 2;
     resetBall();
     overEl.style.display = 'none';
+    paused = false;
+    if (pauseBtn) pauseBtn.textContent = 'Pause';
     updateHUD();
   }
 
@@ -59,12 +63,13 @@
     if (score > best) { best = score; localStorage.setItem('fifa_best', best); }
     updateHUD();
     if (typeof trackGameEvent === 'function') {
-      trackGameEvent('game_over', score);
+      trackGameEvent('game_over', { score });
     }
   }
 
   function update(dt) {
-    if (!running) return;
+-    if (!running) return;
++    if (!running || paused) return;
 
     // time
     timeLeft -= dt;
@@ -102,7 +107,8 @@
           score += 1;
           resetBall();
           if (typeof trackGameEvent === 'function') {
-            trackGameEvent('score_goal', score);
+-            trackGameEvent('score_goal', score);
++            trackGameEvent('score_goal', { score });
           }
         }
       }
@@ -118,63 +124,124 @@
     updateHUD();
   }
 
-  function draw() {
-    // pitch
-    ctx.fillStyle = '#064e3b';
-    ctx.fillRect(0, 0, W, H);
-
-    // penalty box / goal area simplified
-    ctx.strokeStyle = 'rgba(255,255,255,0.7)';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(goal.x, goal.y, goal.w, goal.h);
-
-    // keeper
-    ctx.fillStyle = '#f59e0b';
-    ctx.fillRect(keeper.x, keeper.y, keeper.w, keeper.h);
-
-    // ball
-    ctx.fillStyle = '#e5e7eb';
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
-    ctx.fill();
-
-    // aim indicator
-    if (!ball.moving) {
-      ctx.strokeStyle = 'rgba(255,255,255,0.6)';
-      ctx.setLineDash([5, 5]);
-      ctx.beginPath();
-      ctx.moveTo(ball.x, ball.y);
-      ctx.lineTo(ball.x + Math.cos(aim.angle) * 60, ball.y + Math.sin(aim.angle) * 60);
-      ctx.stroke();
-      ctx.setLineDash([]);
+  function togglePause(){
+    if (!running) return;
+    paused = !paused;
+    if (pauseBtn) pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+    if (typeof trackGameEvent === 'function') {
+-      trackGameEvent('pause_toggle', { state: paused ? 1 : 0 });
++      trackGameEvent('pause_toggle', { state: paused ? 'paused' : 'resumed' });
     }
-  }
-
-  function shoot() {
-    if (ball.moving) return;
-    ball.moving = true;
-    const p = aim.power;
-    ball.vx = Math.cos(aim.angle) * p;
-    ball.vy = Math.sin(aim.angle) * p;
-  }
-
-  function move(dir) {
-    if (ball.moving) return;
-    aim.angle += dir * 0.05;
   }
 
   window.restartGame = function () { resetGame(); };
 
   window.addEventListener('keydown', (e) => {
-    if (!running && e.key.toLowerCase() === 'enter') { resetGame(); return; }
-    if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') move(-1);
-    if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') move(1);
-    if (e.key === ' ' || e.key === 'Spacebar') shoot();
+    const key = (e.key || '').toLowerCase();
+    const code = e.code;
+    const isArrow = key.startsWith('arrow');
+    const isWASD = key === 'w' || key === 'a' || key === 's' || key === 'd';
+    const isSpace = code === 'Space' || key === ' ';
+    const isP = code === 'KeyP' || key === 'p';
+    if (isArrow || isWASD || isSpace || isP) { e.preventDefault(); }
+    if (isP) { if (!running) return; togglePause(); return; }
+    if (paused) { return; }
+    if (!running && key === 'enter') { resetGame(); return; }
+    if (key === 'arrowleft' || key === 'a') move(-1);
+    if (key === 'arrowright' || key === 'd') move(1);
+    if (isSpace) shoot();
   });
++
++  // 控制键集合 + 键盘 keyup 屏蔽默认
++  const controlCodes = new Set(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','KeyA','KeyD','KeyW','KeyS','Space','KeyP','Enter','KeyX','KeyC']);
++  window.addEventListener('keyup', (e)=>{ if (controlCodes.has(e.code) && e.preventDefault) e.preventDefault(); });
 
-  canvas.addEventListener('click', shoot);
+-  canvas.addEventListener('click', (e)=>{ if (paused) { e.preventDefault(); return; } shoot(); });
++  canvas.addEventListener('click', (e)=>{ if (paused || !running) { e.preventDefault(); return; } shoot(); });
 
-  restartBtn.addEventListener('click', resetGame);
+-  restartBtn.addEventListener('click', resetGame);
++  restartBtn.addEventListener('click', ()=>{ resetGame(); if (typeof trackGameEvent==='function') trackGameEvent('restart'); });
++  window.restartGame = function () { resetGame(); if (typeof trackGameEvent==='function') trackGameEvent('restart'); };
+
+  // Gameplay controls and rendering
+  function move(dir) {
+    if (paused || !running) return;
+    if (ball.moving) return;
+    // Adjust aiming angle within bounds
+    aim.angle += dir * 0.06;
+    const minAng = -Math.PI/2 - 0.4;
+    const maxAng = -Math.PI/2 + 0.4;
+    if (aim.angle < minAng) aim.angle = minAng;
+    if (aim.angle > maxAng) aim.angle = maxAng;
+  }
+
+  function shoot() {
+    if (paused || !running) return;
+    if (ball.moving) return;
+    // Launch ball based on current aim
+    ball.vx = Math.cos(aim.angle) * aim.power;
+    ball.vy = Math.sin(aim.angle) * aim.power;
+    ball.moving = true;
+  }
+
+  function draw() {
+    // background
+    ctx.fillStyle = '#0f172a';
+    ctx.fillRect(0, 0, W, H);
+
+    // goal frame (top bar + posts)
+    ctx.fillStyle = '#e5e7eb';
+    // top bar
+    ctx.fillRect(goal.x, goal.y, goal.w, goal.h);
+    // left and right posts
+    ctx.fillRect(goal.x - 6, goal.y, 6, 60);
+    ctx.fillRect(goal.x + goal.w, goal.y, 6, 60);
+
+    // keeper
+    ctx.fillStyle = '#fbbf24'; // amber
+    ctx.fillRect(keeper.x, keeper.y, keeper.w, keeper.h);
+
+    // ball
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fillStyle = '#ffffff';
+    ctx.fill();
+
+    // aim guide (only when ball is stationary)
+    if (!ball.moving) {
+      const len = 28 + aim.power * 4;
+      const ex = ball.x + Math.cos(aim.angle) * len;
+      const ey = ball.y + Math.sin(aim.angle) * len;
+      ctx.strokeStyle = '#22c55e'; // green
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(ball.x, ball.y);
+      ctx.lineTo(ex, ey);
+      ctx.stroke();
+
+      // arrowhead
+      const ah = 6;
+      const leftAng = aim.angle + Math.PI * 0.85;
+      const rightAng = aim.angle - Math.PI * 0.85;
+      ctx.beginPath();
+      ctx.moveTo(ex, ey);
+      ctx.lineTo(ex + Math.cos(leftAng) * ah, ey + Math.sin(leftAng) * ah);
+      ctx.moveTo(ex, ey);
+      ctx.lineTo(ex + Math.cos(rightAng) * ah, ey + Math.sin(rightAng) * ah);
+      ctx.stroke();
+    }
+
+    // paused overlay
+    if (paused && running) {
+      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '16px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('Paused - Press P or click Resume', W / 2, H / 2);
+    }
+  }
 
   let last = 0;
   function loop(ts) {
@@ -188,3 +255,5 @@
   resetGame();
   requestAnimationFrame(loop);
 })();
+
+// Removed dangling global togglePause; now defined within IIFE for proper scope

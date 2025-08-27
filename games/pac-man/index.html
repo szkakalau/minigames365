@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pac-Man - Classic Maze Chase | PlayCentral</title>
+  <meta name="description" content="Play the classic Pac-Man arcade game! Navigate mazes, eat dots, avoid ghosts. Works on desktop and mobile.">
+  <meta name="keywords" content="pac-man, free online game, arcade, maze, mobile game">
+  <link rel="canonical" href="https://minigames365.com/games/pac-man">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pac-Man - Classic Maze Chase | PlayCentral">
+  <meta property="og:description" content="Play the classic Pac-Man arcade game! Navigate mazes, eat dots, avoid ghosts.">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/pac-man-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/pac-man">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pac-Man - Classic Maze Chase">
+  <meta name="twitter:description" content="Play the classic Pac-Man arcade game! Navigate mazes, eat dots, avoid ghosts.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/pac-man-thumb.svg">
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="/"><img src="/assets/images/logo.svg" alt="PlayCentral" class="logo-img"><span class="logo-text">PlayCentral</span></a></div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/index.html#categories">Categories</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Pac-Man</h1>
+          <p class="hero-description">Navigate the maze, eat dots, and avoid the colorful ghosts in this classic arcade game!</p>
+          <div class="game-instructions">
+            <strong>Controls:</strong> 
+            Arrow Keys / WASD - Move, P - Pause/Resume
+          </div>
+        </div>
+      </section>
+
+      <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
+        <div id="game-root" class="game-root" style="position:relative; background:#111827; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06);">
+          <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
+            <div class="scores" style="display:flex; gap:10px;">
+              <div class="score" id="score" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Score: 0</div>
+              <div class="level" id="level" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Level: 1</div>
+              <div class="lives" id="lives" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Lives: 3</div>
+            </div>
+            <div class="controls" style="display:flex; gap:8px;">
+              <button id="pauseBtn" class="search-btn">Pause</button>
+              <button id="restartBtn" class="search-btn">Restart</button>
+            </div>
+          </div>
+          <canvas id="gameCanvas" width="520" height="600" style="touch-action: none; background:#000; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <div id="mobileControls" style="display:none; margin-top:8px; gap:10px; grid-template-columns: repeat(3, minmax(0, 1fr)); width:100%;">
+            <div></div>
+            <button id="btnUp" class="search-btn" style="padding:10px 12px;">▲</button>
+            <div></div>
+            <button id="btnLeft" class="search-btn" style="padding:10px 12px;">◀</button>
+            <button id="btnDown" class="search-btn" style="padding:10px 12px;">▼</button>
+            <button id="btnRight" class="search-btn" style="padding:10px 12px;">▶</button>
+          </div>
+          <style>
+            @media (max-width: 768px) { #mobileControls { display: grid; } }
+          </style>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
+            <h3>Game Over!</h3>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <p>Level Reached: <span id="finalLevel">0</span></p>
+            <button onclick="restartGame()" class="search-btn">Play Again</button>
+          </div>
+        </div>
+      </section>
+
+      
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 PlayCentral. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  
+
+  <script src="/games/pac-man/logic.js?v=3"></script>
+  <script>
+    function trackGameEvent(action, extras = null) {
+      if (typeof gtag !== 'undefined') {
+        const eventData = {
+          game_slug: 'pac-man',
+          category: 'arcade',
+          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+        };
+        if (extras && typeof extras === 'object') Object.assign(eventData, extras);
+        gtag('event', action, eventData);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -7,34 +7,13 @@
   <meta name="description" content="Dig through blocks, collect resources, and explore! Move with WASD/Arrow keys, jump with Space, and crouch with C.">
   <meta name="keywords" content="minefun, minefun.io, mining game, crafting, sandbox, block game, WASD, space jump, crouch">
   <link rel="canonical" href="https://minigames365.com/games/minefun-io">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Minefun.io - Craft, Mine, and Explore | PlayCentral">
-  <meta property="og:description" content="Dig through blocks, collect resources, and explore! Move with WASD/Arrow keys, jump with Space, and crouch with C.">
-  <meta property="og:image" content="https://minigames365.com/assets/images/games/minefun-io-thumb.svg">
-  <meta property="og:url" content="https://minigames365.com/games/minefun-io">
-  <meta property="og:type" content="website">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Minefun.io - Craft, Mine, and Explore">
-  <meta name="twitter:description" content="Explore a blocky world! Mine blocks with the mouse, jump with Space, crouch with C.">
-  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/minefun-io-thumb.svg">
-
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);} 
-      gtag('js', new Date());
-      gtag('config', 'G-QM2M85ZVEG');
-  </script>
-
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+  <style>
+    @media (max-width: 768px) {
+      #mobileControls { display: grid !important; }
+    }
+  </style>
 </head>
 <body>
   <header class="header">
@@ -64,10 +43,6 @@
         </div>
       </section>
 
-      <div class="ad-banner-top">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6583243933606323" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      </div>
-
       <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
         <div id="game-root" class="game-root" style="position:relative; background:#111827; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06);">
           <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
@@ -77,10 +52,22 @@
               <div class="health" id="health" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">HP: 100</div>
             </div>
             <div class="controls" style="display:flex; gap:8px;">
+              <button id="pauseBtn" class="search-btn">Pause</button>
               <button id="restartBtn" class="search-btn">Restart</button>
             </div>
           </div>
           <canvas id="gameCanvas" width="720" height="480" style="touch-action: none; background:#0f172a; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <div id="mobileControls" style="display:none; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; gap:8px; margin-top:8px; max-width:240px; align-self:center;">
+            <div></div>
+            <button id="btnUp" class="search-btn" style="min-height:48px;">▲</button>
+            <button id="btnJump" class="search-btn" style="min-height:48px;">Jump</button>
+            <button id="btnLeft" class="search-btn" style="min-height:48px;">◀</button>
+            <button id="btnDown" class="search-btn" style="min-height:48px;">▼</button>
+            <button id="btnRight" class="search-btn" style="min-height:48px;">▶</button>
+            <button id="btnCrouch" class="search-btn" style="min-height:48px;">Crouch</button>
+            <div></div>
+            <button id="btnMine" class="search-btn" style="min-height:48px;">Mine</button>
+          </div>
           <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
             <h3>Game Over!</h3>
             <p>Mined Blocks: <span id="finalBlocks">0</span></p>
@@ -88,38 +75,6 @@
           </div>
         </div>
       </section>
-
-      <section class="featured-games">
-        <h2 class="section-title">🧱 More Sandbox & Arcade</h2>
-        <div class="games-grid" id="recommended-grid"></div>
-      </section>
-      <script>
-        window.RECOMMENDED_GAMES = [
-          { href: '/games/subway-surfers/', img: '/assets/images/games/subway-surfers-thumb.svg', title: 'Subway Surfers', desc: 'Run and collect coins', category: 'Arcade' },
-          { href: '/games/rumble-rush/', img: '/assets/images/games/rumble-rush-thumb.svg', title: 'Rumble Rush', desc: '3D action arena battles', category: 'Action' },
-          { href: '/games/minesweeper/', img: '/assets/images/games/minesweeper-thumb.svg', title: 'Minesweeper', desc: 'Classic logic puzzle', category: 'Puzzle' }
-        ];
-        (function(){
-          const grid = document.getElementById('recommended-grid');
-          const items = window.RECOMMENDED_GAMES || [];
-          items.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.addEventListener('click', ()=> location.href=item.href);
-            card.innerHTML = `
-            <div class="game-thumbnail">
-              <img src="${item.img}" alt="${item.title}" loading="lazy">
-              <div class="play-overlay"><div class="play-button">▶</div></div>
-            </div>
-            <div class="game-info">
-              <h3 class="game-title">${item.title}</h3>
-              <p class="game-description">${item.desc}</p>
-              <div class="game-meta"><span class="game-category">${item.category}</span></div>
-            </div>`;
-            grid.appendChild(card);
-          })
-        })();
-      </script>
     </div>
   </main>
 
@@ -131,32 +86,15 @@
     </div>
   </footer>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoGame",
-    "name": "Minefun.io",
-    "description": "Dig through blocks, collect resources, and explore! Move with WASD/Arrow keys, jump with Space, and crouch with C.",
-    "applicationCategory": "Game",
-    "genre": ["Sandbox","Arcade"],
-    "operatingSystem": "Web",
-    "url": "https://minigames365.com/games/minefun-io",
-    "image": "https://minigames365.com/assets/images/games/minefun-io-thumb.svg",
-    "author": {"@type":"Organization","name":"PlayCentral"},
-    "creator": {"@type":"Organization","name":"PlayCentral"},
-    "inLanguage": "en"
-  }
-  </script>
-
-  <script src="/games/minefun-io/logic.js"></script>
+  <script src="/games/minefun-io/logic.js?v=3"></script>
   <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    function trackGameEvent(action, score=null){
-      if (typeof gtag !== 'undefined'){
-        const eventData = { game_slug:'minefun-io', category:'Sandbox', device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop' };
-        if (score!==null) eventData.score = score;
-        gtag('event', action, eventData);
-      }
+    function trackGameEvent(action, extras = {}){
+      try {
+        if (typeof gtag !== 'undefined'){
+          const eventData = { game_slug:'minefun-io', category:'Sandbox', device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop', ...extras };
+          gtag('event', action, eventData);
+        }
+      } catch (err) { /* no-op in preview */ }
     }
   </script>
 </body>

@@ -147,6 +147,12 @@
             }
         ];
 
+        // NEW/HOT flags & weights
+        const GAME_FLAGS = {
+            'rumble-rush': { badge: 'NEW', weight: 100 },
+            'shark-io': { badge: 'NEW', weight: 100 }
+        };
+
         // Render action games
         function renderActionGames() {
             const grid = document.getElementById('action-games-grid');
@@ -164,13 +170,21 @@
                 return;
             }
 
-            ACTION_GAMES.forEach(game => {
+            const sorted = ACTION_GAMES.slice().sort((a,b)=>{
+                const wa = (GAME_FLAGS[a.slug]?.weight)||0;
+                const wb = (GAME_FLAGS[b.slug]?.weight)||0;
+                return wb - wa;
+            });
+
+            sorted.forEach(game => {
+                const flags = GAME_FLAGS[game.slug] || {};
                 const gameCard = document.createElement('div');
                 gameCard.className = 'game-card';
                 gameCard.onclick = () => playGame(game.slug);
                 
                 gameCard.innerHTML = `
                     <div class="game-thumbnail">
+                        ${flags.badge ? `<span class="badge" style="position:absolute;top:8px;left:8px;background:#ef4444;color:#fff;font-weight:700;font-size:12px;padding:2px 6px;border-radius:6px;">${flags.badge}</span>` : ''}
                         <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
                         <div class="play-overlay">
                             <div class="play-button">▶</div>

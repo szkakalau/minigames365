@@ -15,6 +15,7 @@
   const lanes = [W * 0.2, W * 0.5, W * 0.8];
 
   let running = true;
+  let paused = false;
   let score = 0;
   let best = Number(localStorage.getItem('subway_best') || 0);
   let coins = 0;
@@ -27,6 +28,7 @@
   const finalScoreEl = document.getElementById('finalScore');
   const finalCoinsEl = document.getElementById('finalCoins');
   const restartBtn = document.getElementById('restartBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
 
   function updateHUD() {
     scoreEl.textContent = `Score: ${score}`;
@@ -55,10 +57,11 @@
   let coinTimer = 0;
 
   function resetGame() {
-    running = true; score = 0; coins = 0; speed = 4;
+    running = true; paused = false; score = 0; coins = 0; speed = 4;
     obstacles.length = 0; coinItems.length = 0;
     player.y = H - 110; player.vy = 0; player.onGround = true; player.rolling = false;
     overEl.style.display = 'none';
+    if (pauseBtn) pauseBtn.textContent = 'Pause';
     updateHUD();
   }
 
@@ -70,7 +73,7 @@
     if (score > best) { best = score; localStorage.setItem('subway_best', best); }
     updateHUD();
     if (typeof trackGameEvent === 'function') {
-      trackGameEvent('game_over', score);
+      trackGameEvent('game_over', { score, coins });
     }
   }
 
@@ -79,7 +82,7 @@
   }
 
   function update(dt) {
-    if (!running) return;
+    if (!running || paused) return;
 
     speed += 0.0006 * dt;
 
@@ -124,7 +127,7 @@
       const cx = lanes[c.laneIndex] - 6;
       if (intersects(px, player.y, player.w, player.h, cx, c.y - 6, 12, 12)) {
         coins += 1; score += 5; coinItems.splice(i, 1);
-        if (typeof trackGameEvent === 'function') { trackGameEvent('collect_coin', score); }
+        if (typeof trackGameEvent === 'function') { trackGameEvent('collect_coin', { score, coins }); }
       }
     }
 
@@ -167,28 +170,54 @@
     });
   }
 
-  function moveLeft() { player.laneIndex = Math.max(0, player.laneIndex - 1); }
-  function moveRight() { player.laneIndex = Math.min(2, player.laneIndex + 1); }
-  function jump() { if (player.onGround) { player.onGround = false; player.vy = -9; } }
-  function roll() { if (player.onGround) { player.rolling = true; setTimeout(() => player.rolling = false, 500); } }
+  function moveLeft() { if (!paused && running) player.laneIndex = Math.max(0, player.laneIndex - 1); }
+  function moveRight() { if (!paused && running) player.laneIndex = Math.min(2, player.laneIndex + 1); }
+  function jump() { if (!paused && running && player.onGround) { player.onGround = false; player.vy = -9; } }
+  function roll() { if (!paused && running && player.onGround) { player.rolling = true; setTimeout(() => player.rolling = false, 500); } }
 
   window.restartGame = function () { resetGame(); };
 
   window.addEventListener('keydown', (e) => {
     if (!running && e.key.toLowerCase() === 'enter') { resetGame(); return; }
+    if (e.code === 'KeyP') { if (running) { togglePause(); } e.preventDefault(); return; }
+    if (paused) return;
     if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') moveLeft();
     if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') moveRight();
     if (e.key === ' ' || e.key === 'Spacebar') jump();
     if (e.key === 'ArrowDown' || e.key.toLowerCase() === 's') roll();
   });
 
+  // 控制键集合 + 键盘 keyup 屏蔽默认
+  const controlCodes = new Set(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','KeyA','KeyD','KeyW','KeyS','Space','KeyP','Enter']);
+  window.addEventListener('keyup', (e)=>{ if (controlCodes.has(e.code) && e.preventDefault) e.preventDefault(); });
+
   canvas.addEventListener('touchstart', (e) => {
+    if (paused || !running) { if (e.preventDefault) e.preventDefault(); return; }
     const rect = canvas.getBoundingClientRect();
     const x = e.changedTouches[0].clientX - rect.left;
     if (x < W/3) moveLeft(); else if (x > 2*W/3) moveRight(); else jump();
   });
 
-  restartBtn.addEventListener('click', resetGame);
+  restartBtn.addEventListener('click', ()=>{ resetGame(); if (typeof trackGameEvent==='function') trackGameEvent('restart'); });
+  window.restartGame = function () { resetGame(); if (typeof trackGameEvent==='function') trackGameEvent('restart'); };
+
+  function togglePause(){
+    if (!running) return;
+    paused = !paused;
+    if (pauseBtn) pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+    if (typeof trackGameEvent === 'function') { trackGameEvent('pause_toggle', { state: paused ? 'paused' : 'resumed' }); }
+  }
+  if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+
+  function drawPauseOverlay(){
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '24px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Paused - Press P or Pause to resume', W/2, H/2);
+    ctx.textAlign = 'start';
+  }
 
   let last = 0;
   function loop(ts) {
@@ -198,6 +227,7 @@
     drawObstacles();
     drawCoins();
     drawPlayer();
+    if (paused && running) drawPauseOverlay();
     requestAnimationFrame(loop);
   }
 

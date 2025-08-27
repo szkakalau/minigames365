@@ -22,11 +22,14 @@
   let score = 0;
   let best = Number(localStorage.getItem('shark-io_best') || 0);
   let running = true;
+  let paused = false;
 
   function init(){
     shark.x = W/2; shark.y = H/2; shark.vx = shark.vy = 0; shark.hp = 100;
     shark.dashing = false; shark.dashTime = 0; shark.dashCooldown = 0;
     enemies = []; spawnTimer = 0; score = 0; running = true;
+    paused = false;
+    const pb = document.getElementById('pauseBtn'); if (pb) pb.textContent = 'Pause';
     updateHUD();
     track('game_start');
     loop();
@@ -37,7 +40,12 @@
     document.getElementById('health').textContent = 'HP: ' + Math.max(0, Math.round(shark.hp));
   }
 
-  function loop(){ if (!running) return; update(); draw(); requestAnimationFrame(loop); }
+  function loop(){
+    if (!running) return;
+    if (!paused) update();
+    draw();
+    requestAnimationFrame(loop);
+  }
 
   function update(){
     // Movement: WASD/Arrows or mouse steering
@@ -207,6 +215,18 @@
     ctx.fillStyle = '#34d399';
     ctx.fillRect(12, 12, barW * ratio, barH);
     ctx.strokeStyle = 'rgba(0,0,0,0.35)'; ctx.strokeRect(12.5, 12.5, barW-1, barH-1);
+
+    // Pause overlay
+    if (paused){
+      ctx.fillStyle = 'rgba(0,0,0,0.45)';
+      ctx.fillRect(0,0,W,H);
+      ctx.fillStyle = 'white';
+      ctx.font = 'bold 28px system-ui, -apple-system, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Paused', W/2, H/2);
+      ctx.font = '14px system-ui, -apple-system, sans-serif';
+      ctx.fillText('Press P or tap Pause to resume', W/2, H/2 + 26);
+    }
   }
 
   function normalizeAngle(a){
@@ -225,22 +245,103 @@
   }
   function restartGame(){
     document.getElementById('gameOverScreen').style.display = 'none';
+    paused = false; const pb2 = document.getElementById('pauseBtn'); if (pb2) pb2.textContent = 'Pause';
     init();
   }
 
   // Inputs
-  window.addEventListener('keydown', (e)=>{ keys[e.code] = true; });
-  window.addEventListener('keyup', (e)=>{ keys[e.code] = false; });
-  canvas.addEventListener('mousemove', (e)=>{
-    const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  window.addEventListener('keydown', (e)=>{
+    const code = e.code;
+    const key = (e.key || '').toLowerCase();
+    const isArrow = code.startsWith('Arrow');
+    const isWASD = code === 'KeyW' || code === 'KeyA' || code === 'KeyS' || code === 'KeyD';
+    const isSpace = code === 'Space' || key === ' ';
+    const isP = code === 'KeyP' || key === 'p';
+    if (isArrow || isWASD || isSpace || isP) { e.preventDefault(); }
+    if (isP) { if (!running) return; togglePause(); return; }
+    if (paused) return;
+    keys[code] = true;
   });
-  canvas.addEventListener('mousedown', ()=>{ mouse.down = true; });
-  window.addEventListener('mouseup', ()=>{ mouse.down = false; });
+  window.addEventListener('keyup', (e)=>{
+    const code = e.code;
+    const key = (e.key || '').toLowerCase();
+    const isArrow = code.startsWith('Arrow');
+    const isWASD = code === 'KeyW' || code === 'KeyA' || code === 'KeyS' || code === 'KeyD';
+    const isSpace = code === 'Space' || key === ' ';
+    if (isArrow || isWASD || isSpace) { e.preventDefault(); }
+    keys[code] = false;
+  });
+   canvas.addEventListener('mousemove', (e)=>{
+     if (paused) { e.preventDefault(); return; }
+     const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+   });
+   canvas.addEventListener('mousedown', (e)=>{ if (paused) { e.preventDefault(); return; } mouse.down = true; });
+   window.addEventListener('mouseup', ()=>{ mouse.down = false; });
 
-  document.getElementById('restartBtn').addEventListener('click', restartGame);
+  // Pause button wiring
+  const pauseBtn = document.getElementById('pauseBtn');
+  function togglePause(){
+    if (!running) return;
+    paused = !paused;
+    if (!paused){
+      // resume timestamp-sensitive stuff if needed
+    }
+    if (pauseBtn) pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+    // standardized pause tracking with 1/0 state
+    if (typeof window.trackGameEvent === 'function') {
+      window.trackGameEvent('pause_toggle', { state: paused ? 1 : 0 });
+    }
+  }
+  if (pauseBtn){ pauseBtn.addEventListener('click', togglePause); }
+ document.getElementById('restartBtn').addEventListener('click', restartGame);
   window.restartGame = restartGame;
 
-  function track(action, score){ if (typeof window.trackGameEvent === 'function') window.trackGameEvent(action, score); }
+   // Mobile onboarding overlay (only on first visit)
+   function showMobileOnboarding(){
+     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+     if (!isMobile) return;
+     if (localStorage.getItem('shark-io_onboarded') === '1') return;
+     const root = document.getElementById('game-root');
+     if (!root) return;
+     const tip = document.createElement('div');
+     tip.id = 'mobileOnboarding';
+     tip.style = 'position:absolute;inset:0;background:rgba(0,0,0,0.78);color:#fff;display:flex;align-items:center;justify-content:center;z-index:20;border-radius:10px;';
+     tip.innerHTML = `
+       <div style="max-width:420px;padding:16px 18px;background:rgba(17,24,39,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:12px;text-align:left;">
+         <div style="font-weight:800;font-size:18px;margin-bottom:8px;">Tip: Dash & Aim</div>
+         <div style="font-size:14px;opacity:0.9;line-height:1.5;">
+           Use your finger to aim the shark. Tap & hold to DASH and ram enemies with your horn to defeat them.
+         </div>
+         <button id="closeOnboarding" class="search-btn" style="margin-top:12px;width:100%;">Got it</button>
+       </div>`;
+     root.appendChild(tip);
+     document.getElementById('closeOnboarding').addEventListener('click', ()=>{
+       localStorage.setItem('shark-io_onboarded','1');
+       tip.remove();
+     });
+   }
 
-  init();
-})();
+   // Touch controls mapping to mouse steering and dash
+   canvas.addEventListener('touchstart', (e)=>{
+     if (paused) { e.preventDefault(); return; }
+     const t = e.touches[0]; if (!t) return; e.preventDefault();
+     const r = canvas.getBoundingClientRect();
+     mouse.x = t.clientX - r.left; mouse.y = t.clientY - r.top; mouse.down = true;
+   }, {passive:false});
+   canvas.addEventListener('touchmove', (e)=>{
+     if (paused) { e.preventDefault(); return; }
+     const t = e.touches[0]; if (!t) return; e.preventDefault();
+     const r = canvas.getBoundingClientRect();
+     mouse.x = t.clientX - r.left; mouse.y = t.clientY - r.top;
+   }, {passive:false});
+   window.addEventListener('touchend', ()=>{ mouse.down = false; }, {passive:true});
+
+   function track(action, extras){
+     if (typeof window.trackGameEvent !== 'function') return;
+     if (typeof extras === 'number') { window.trackGameEvent(action, { score: extras }); }
+     else { window.trackGameEvent(action, extras || {}); }
+   }
+
+   showMobileOnboarding();
+   init();
+ })();

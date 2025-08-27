@@ -5,6 +5,8 @@
   let paddle, ball, bricks, cols=12, rows=6, brickW, brickH=24, gap=6, offsetTop=60, offsetLeft=30;
   let score=0, level=1, lives=3, best=Number(localStorage.getItem('bb_best')||0);
   let running=true;
+  let paused=false;
+  const pauseBtn = document.getElementById('pauseBtn');
 
   function resetLevel(){
     paddle={x:canvas.width/2-60, y:canvas.height-30, w:120, h:14, speed:10};
@@ -16,6 +18,7 @@
         bricks.push({x:offsetLeft + c*(brickW+gap), y:offsetTop + r*(brickH+gap), w:brickW, h:brickH, alive:true, hp:1});
       }
     }
+    paused=false; if (pauseBtn) pauseBtn.textContent = 'Pause';
     updateHUD();
   }
 
@@ -26,7 +29,7 @@
   }
 
   function update(){
-    if(!running) return;
+    if(!running || paused) return;
     // ball move
     ball.x += ball.vx; ball.y += ball.vy;
 
@@ -94,7 +97,18 @@
     }
   }
 
+  function drawPauseOverlay(){
+    ctx.fillStyle = 'rgba(0,0,0,0.45)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#fff';
+    ctx.font = '20px system-ui, -apple-system, Segoe UI, Roboto, Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Paused - Press P or Pause to resume', canvas.width/2, canvas.height/2);
+  }
+
   function loop(){
+    if (paused) { draw(); drawPauseOverlay(); requestAnimationFrame(loop); return; }
     update(); draw(); requestAnimationFrame(loop);
   }
 
@@ -112,7 +126,7 @@
     document.getElementById('finalScore').innerText=String(score);
     document.getElementById('finalLevel').innerText=String(level);
     document.getElementById('gameOverScreen').style.display='block';
-    track('game_end', score);
+    track('game_over', { score });
   }
 
   // utils
@@ -139,18 +153,53 @@
 
   // input
   canvas.addEventListener('mousemove', (e)=>{
+    if (paused || !running) return;
     const rect=canvas.getBoundingClientRect();
     const x=e.clientX-rect.left; paddle.targetX=x;
   });
   canvas.addEventListener('touchmove', (e)=>{
+    if (paused || !running) return;
     const t=e.touches[0]; const rect=canvas.getBoundingClientRect();
     paddle.targetX=t.clientX-rect.left; e.preventDefault();
   }, {passive:false});
 
-  document.getElementById('pauseBtn').addEventListener('click', ()=>{running=!running;});
-  document.getElementById('restartBtn').addEventListener('click', ()=>{location.reload();});
-  window.restartGame = ()=>{location.reload();};
-  function track(action, score){ if (typeof window.trackGameEvent==='function') window.trackGameEvent(action, score); }
+  document.getElementById('pauseBtn').addEventListener('click', ()=>{
+    if (!running) return;
+    paused = !paused;
+    if (pauseBtn) pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+    track('pause_toggle', { state: paused ? 'paused' : 'resumed' });
+  });
+
+  // 控制键集合 + 键盘输入屏蔽
+  const controlCodes = new Set(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space','KeyW','KeyA','KeyS','KeyD','KeyP']);
+  window.addEventListener('keydown', (e)=>{
+    const code = e.code;
+    if (controlCodes.has(code) && e.preventDefault) e.preventDefault();
+    if (code === 'KeyP'){
+      if (!running) return;
+      paused = !paused;
+      if (pauseBtn) pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+      track('pause_toggle', { state: paused ? 'paused' : 'resumed' });
+      return;
+    }
+    if (paused || !running) return;
+  });
+  window.addEventListener('keyup', (e)=>{
+    if (controlCodes.has(e.code) && e.preventDefault) e.preventDefault();
+  });
+
+  // Restart button and API
+  document.getElementById('restartBtn').addEventListener('click', ()=>{ if (typeof window.restartGame==='function') window.restartGame(); if (typeof window.trackGameEvent==='function') window.trackGameEvent('restart_click'); });
+  function resetGame(){
+    score=0; level=1; lives=3; running=true; paused=false;
+    if (pauseBtn) pauseBtn.textContent='Pause';
+    const over = document.getElementById('gameOverScreen'); if (over) over.style.display='none';
+    resetLevel(); updateHUD();
+  }
+  window.restartGame = ()=>{ resetGame(); if (typeof window.trackGameEvent==='function') window.trackGameEvent('restart'); };
+
+  // 统一追踪助手：改为传对象 extras
+  function track(action, extras = {}){ if (typeof window.trackGameEvent==='function') window.trackGameEvent(action, extras); }
 
   resetLevel(); loop();
 })();

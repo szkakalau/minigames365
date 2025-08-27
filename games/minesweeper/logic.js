@@ -14,6 +14,7 @@
   let grid; // each cell: {mine, revealed, flagged, adjacent}
   let firstClick;
   let running;
++ let paused = false;
   let flagsLeft;
   let startTime; let timerInterval; let elapsed = 0;
 
@@ -55,12 +56,15 @@
     grid = createGrid(rows, cols);
     firstClick = true;
     running = true;
++   paused = false;
     flagsLeft = mineCount;
     elapsed = 0;
     updateHUD();
     stopTimer();
     draw();
     track('game_start');
++   const pb = document.getElementById('pauseBtn');
++   if (pb) pb.textContent = 'Pause';
   }
 
   function resizeCanvas(){
@@ -121,7 +125,9 @@
   }
 
   function startTimer(){
-    startTime = Date.now();
+-    startTime = Date.now();
++    // Continue from existing elapsed when resuming
++    startTime = Date.now() - Math.floor(elapsed * 1000);
     stopTimer();
     timerInterval = setInterval(()=>{
       elapsed = (Date.now() - startTime)/1000;
@@ -245,6 +251,17 @@
         drawCell(x,y);
       }
     }
++
++    // pause overlay on top
++    if (paused && running){
++      ctx.fillStyle = 'rgba(0,0,0,0.5)';
++      ctx.fillRect(0,0,canvas.width,canvas.height);
++      ctx.fillStyle = '#ffffff';
++      ctx.font = 'bold 20px system-ui, -apple-system, sans-serif';
++      ctx.textAlign = 'center';
++      ctx.textBaseline = 'middle';
++      ctx.fillText('Paused - press P or tap Resume', canvas.width/2, canvas.height/2);
++    }
   }
 
   function drawCell(x,y){
@@ -326,14 +343,55 @@
     }
   }
 
-  // Keyboard shortcuts
-  window.addEventListener('keydown', (e)=>{
-    if (!running && (e.code==='Space' || e.key===' ')){
-      e.preventDefault();
-      window.restartGame();
-    }
-  });
-
-  // Init
-  startNewGame();
+-  // Keyboard shortcuts
+-  window.addEventListener('keydown', (e)=>{
+-    if (!running && (e.code==='Space' || e.key===' ')){
+-      e.preventDefault();
+-      window.restartGame();
+-    }
+-  });
++  // Keyboard shortcuts + Pause toggle standardization
++  window.addEventListener('keydown', (e)=>{
++    const code = e.code;
++    const isP = (e.key?.toLowerCase() === 'p');
++    const intercept = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space','KeyW','KeyA','KeyS','KeyD'].includes(code) || isP;
++    if (intercept) e.preventDefault();
++    // quick restart when game over
++    if (!running && (code==='Space' || e.key===' ')){
++      window.restartGame();
++      return;
++    }
++    // pause toggle while running
++    if (isP){
++      if (!running) return;
++      paused = !paused;
++      const pb = document.getElementById('pauseBtn');
++      if (pb) pb.textContent = paused ? 'Resume' : 'Pause';
++      if (paused){
++        stopTimer();
++        draw(); // render overlay once
++      } else {
++        if (!firstClick) startTimer(); // only resume timer after first reveal
++      }
++      track('pause_toggle', paused ? 1 : 0);
++    }
++  });
++
++  // Pause/Resume button
++  (function(){
++    const pb = document.getElementById('pauseBtn');
++    if (!pb) return;
++    pb.addEventListener('click', ()=>{
++      if (!running) return;
++      paused = !paused;
++      pb.textContent = paused ? 'Resume' : 'Pause';
++      if (paused){
++        stopTimer();
++        draw();
++      } else {
++        if (!firstClick) startTimer();
++      }
++      track('pause_toggle', paused ? 1 : 0);
++    });
++  })();
 })();

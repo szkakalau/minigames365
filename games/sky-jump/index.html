@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sky Jump - Endless Up | MiniGames365</title>
+  <meta name="description" content="Jump from platform to platform and go as high as you can! Avoid falling off the screen.">
+  <meta name="keywords" content="sky jump, doodle jump, endless jumping, arcade">
+  <link rel="canonical" href="https://minigames365.com/games/sky-jump">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sky Jump - Endless Up | MiniGames365">
+  <meta property="og:description" content="Jump from platform to platform and go as high as you can! Avoid falling off the screen.">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/sky-jump-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/sky-jump">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sky Jump - Endless Up">
+  <meta name="twitter:description" content="Jump from platform to platform and go as high as you can! Avoid falling off the screen.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/sky-jump-thumb.svg">
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <style>
+    @media (max-width: 768px) {
+      #mobileControls { display: flex !important; }
+    }
+  </style>
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QM2M85ZVEG');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="/"><img src="/assets/images/logo.svg" alt="MiniGames365" class="logo-img"><span class="logo-text">MiniGames365</span></a></div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/index.html#categories">Categories</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Sky Jump</h1>
+          <p class="hero-description">Jump from platform to platform and go as high as you can! Avoid falling off the screen.</p>
+          <div class="game-instructions">
+            <strong>How to Play:</strong> 
+            Move left/right with Arrow Keys or A/D. Bounce on platforms to keep going up. Don't fall!
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad above game canvas -->
+      <div class="ad-banner-top">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6583243933606323" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+
+      <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
+        <div id="game-root" class="game-root" style="position:relative; background:#111827; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06);">
+          <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
+            <div class="scores" style="display:flex; gap:10px;">
+              <div class="score" id="score" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Score: 0</div>
+              <div class="height" id="height" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Height: 0</div>
+            </div>
+            <!-- controls toolbar with Pause added -->
+            <div class="controls" style="display:flex; gap:8px;">
+              <button id="pauseBtn" class="search-btn">Pause</button>
+              <button id="restartBtn" class="search-btn">Restart</button>
+            </div>
+          </div>
+          <canvas id="gameCanvas" width="480" height="680" style="touch-action: none; background:linear-gradient(#1e293b,#0ea5e9); border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <!-- Mobile touch controls (visible on small screens) -->
+          <div id="mobileControls" class="mobile-controls" style="display:none; margin-top:10px; gap:12px; justify-content:center;">
+            <button id="btnLeft" class="search-btn" style="min-width:100px;">◀ Left</button>
+            <button id="btnRight" class="search-btn" style="min-width:100px;">Right ▶</button>
+          </div>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
+            <h3>Game Over</h3>
+            <p>Your Score: <span id="finalScore">0</span></p>
+            <button id="playAgainBtn" class="search-btn">Play Again</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Native recommended games -->
+      <section class="featured-games">
+        <h2 class="section-title">You may also like</h2>
+        <div class="games-grid">
+          <div class="game-card" onclick="window.location.href='/games/flappy-bird/'">
+            <div class="game-thumbnail">
+              <img src="/assets/images/games/flappy-bird-thumb.svg" alt="Flappy Bird" loading="lazy">
+              <div class="play-overlay">
+                <div class="play-button">▶</div>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3 class="game-title">Flappy Bird</h3>
+              <p class="game-description">Tap to fly and avoid pipes.</p>
+              <div class="game-meta">
+                <span class="game-category">Arcade</span>
+              </div>
+            </div>
+          </div>
+          <div class="game-card" onclick="window.location.href='/games/sky-jump/'">
+            <div class="game-thumbnail">
+              <img src="/assets/images/games/sky-jump-thumb.svg" alt="Sky Jump" loading="lazy">
+              <div class="play-overlay">
+                <div class="play-button">▶</div>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3 class="game-title">Sky Jump</h3>
+              <p class="game-description">Endless vertical jumping fun.</p>
+              <div class="game-meta">
+                <span class="game-category">Arcade</span>
+              </div>
+            </div>
+          </div>
+          <div class="game-card" onclick="window.location.href='/games/subway-surfers/'">
+            <div class="game-thumbnail">
+              <img src="/assets/images/games/subway-surfers-thumb.svg" alt="Subway Surfers" loading="lazy">
+              <div class="play-overlay">
+                <div class="play-button">▶</div>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3 class="game-title">Subway Surfers</h3>
+              <p class="game-description">Run, dodge, and collect coins.</p>
+              <div class="game-meta">
+                <span class="game-category">Arcade</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 MiniGames365. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Sky Jump",
+    "description": "Jump from platform to platform and go as high as you can! Avoid falling off the screen.",
+    "applicationCategory": "Game",
+    "genre": ["Arcade"],
+    "operatingSystem": "Web",
+    "url": "https://minigames365.com/games/sky-jump",
+    "image": "https://minigames365.com/assets/images/games/sky-jump-thumb.svg",
+    "author": {
+      "@type": "Organization",
+      "name": "MiniGames365"
+    },
+    "creator": {
+      "@type": "Organization", 
+      "name": "MiniGames365"
+    },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <script src="/games/sky-jump/logic.js"></script>
+  <script>
+    // Initialize ads
+    (adsbygoogle = window.adsbygoogle || []).push({});
+
+    // Google Analytics events
+    function trackGameEvent(action, extras = {}) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', action, {
+          game_slug: 'sky-jump',
+          category: 'arcade',
+          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          ...extras
+        });
+      }
+    }
+  </script>
+</body>
+</html>
+<!-- Remove misplaced block at EOF -->

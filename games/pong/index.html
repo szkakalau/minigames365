@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong - Classic Arcade Game | PlayCentral</title>
+    <meta name="description" content="Play the classic Pong game! Control your paddle and beat the AI in this timeless arcade experience.">
+    <meta name="keywords" content="pong, classic arcade, paddle game, retro game, tennis game">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pong - Classic Arcade Game">
+    <meta property="og:description" content="Play the classic Pong game! Control your paddle and beat the AI in this timeless arcade experience.">
+    <meta property="og:image" content="/assets/images/games/pong-thumb.svg">
+    <meta property="og:url" content="https://minigames365.com/games/pong/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pong - Classic Arcade Game">
+    <meta name="twitter:description" content="Play the classic Pong game! Control your paddle and beat the AI in this timeless tennis-like experience.">
+    <meta name="twitter:image" content="/assets/images/games/pong-thumb.svg">
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="canonical" href="https://minigames365.com/games/pong/">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+
+    <style>
+      /* Mobile controls */
+      .mobile-controls { display:none; margin-top:12px; align-items:center; justify-content:center; }
+      .mobile-controls .pad { display:flex; gap:12px; }
+      .mobile-controls button { 
+        min-width:64px; min-height:64px; border-radius:12px; border:1px solid rgba(255,255,255,0.08);
+        background:#0b1220; color:#fff; font-size:20px; box-shadow:0 2px 6px rgba(0,0,0,0.2);
+      }
+      @media (max-width: 768px){ .mobile-controls { display:flex; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo"><a href="/"><img src="/assets/images/logo.svg" alt="PlayCentral" class="logo-img"><span class="logo-text">PlayCentral</span></a></div>
+            <nav class="nav-menu">
+                <a href="/categories/action.html">Action</a>
+                <a href="/categories/arcade.html">Arcade</a>
+                <a href="/categories/puzzle.html">Puzzle</a>
+                <a href="/categories/strategy.html">Strategy</a>
+                <a href="/categories/sports.html">Sports</a>
+            </nav>
+            <div class="header-actions">
+                <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
+                <button class="search-btn" onclick="toggleSearch()">🔍</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="game-hero">
+        <div class="container">
+            <div class="game-hero-content">
+                <h1 class="game-title">Pong</h1>
+                <p class="game-description">The original arcade classic! Control your paddle and compete against the AI in this timeless tennis-like experience.</p>
+                <div class="game-meta">
+                    <span class="game-category">Arcade</span>
+                    <span class="game-rating">⭐ 4.9</span>
+                    <span class="game-plays">🎮 Played 100K+ times</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="game-container">
+        <div class="container">
+            <div class="game-wrapper">
+                <div class="game-area">
+                    <div class="game-hud">
+                        <div class="hud-item"><span id="score">Player: 0 | AI: 0</span></div>
+                        <div class="hud-item">
+                          <button id="pauseBtn" class="restart-btn" type="button">Pause</button>
+                          <button id="restartBtn" class="restart-btn" type="button">Restart</button>
+                        </div>
+                    </div>
+                    <div class="game-canvas-container">
+                        <canvas id="gameCanvas" width="800" height="400"></canvas>
+                    </div>
+                    <div id="mobileControls" class="mobile-controls">
+                      <div class="pad">
+                        <button id="btnUp" aria-label="Move Up">↑</button>
+                        <button id="btnDown" aria-label="Move Down">↓</button>
+                      </div>
+                    </div>
+                    <div id="gameOverScreen" class="game-over-screen" style="display:none;">
+                        <div class="game-over-content">
+                            <h2>Game Over!</h2>
+                            <p>Final Score: <span id="finalScore">0</span></p>
+                            <button onclick="restartGame()" class="restart-button">Play Again</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="recommended-games">
+        <div class="container">
+            <h2 class="section-title">🎮 More Arcade Games</h2>
+            <div class="games-grid">
+                <div class="game-card" onclick="playGame('tetris')">
+                    <div class="game-thumbnail">
+                        <img src="/assets/images/games/tetris-thumb.svg" alt="Tetris" loading="lazy">
+                        <div class="play-overlay"><div class="play-button">▶</div></div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Tetris</h3>
+                        <p class="game-description">Classic block-stacking puzzle game.</p>
+                        <div class="game-meta">
+                            <span class="game-category">Arcade</span>
+                            <span class="game-rating">⭐ 4.8</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-card" onclick="playGame('snake')">
+                    <div class="game-thumbnail">
+                        <img src="/assets/images/games/snake-thumb.svg" alt="Snake" loading="lazy">
+                        <div class="play-overlay"><div class="play-button">▶</div></div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Snake</h3>
+                        <p class="game-description">Eat food, grow longer, avoid yourself.</p>
+                        <div class="game-meta">
+                            <span class="game-category">Arcade</span>
+                            <span class="game-rating">⭐ 4.6</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-card" onclick="playGame('brick-breaker')">
+                    <div class="game-thumbnail">
+                        <img src="/assets/images/games/brick-breaker-thumb.svg" alt="Brick Breaker" loading="lazy">
+                        <div class="play-overlay"><div class="play-button">▶</div></div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Brick Breaker</h3>
+                        <p class="game-description">Break bricks with your ball and paddle.</p>
+                        <div class="game-meta">
+                            <span class="game-category">Arcade</span>
+                            <span class="game-rating">⭐ 4.8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="/categories/arcade.html">Arcade Games</a></li>
+                        <li><a href="/categories/puzzle.html">Puzzle Games</a></li>
+                        <li><a href="/categories/strategy.html">Strategy Games</a></li>
+                        <li><a href="/categories/action.html">Action Games</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Service</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PlayCentral. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/games/pong/logic.js?v=3"></script>
+    <script src="/assets/js/main.js"></script>
+    
+    <script>
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'game_view', {
+                game_name: 'pong',
+                page_title: 'Pong'
+            });
+        }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Pong",
+        "description": "The original arcade classic! Control your paddle and compete against the AI in this timeless tennis-like experience.",
+        "url": "https://minigames365.com/games/pong/",
+        "genre": "Arcade",
+        "gamePlatform": "Web Browser",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "1000"
+        }
+    }
+    </script>
+</body>
+</html>

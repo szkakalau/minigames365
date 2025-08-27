@@ -139,18 +139,105 @@
                 category: 'Arcade',
                 rating: 4.7,
                 thumbnail: '/assets/images/games/subway-surfers-thumb.svg'
+            },
+            {
+                slug: 'tetris',
+                title: 'Tetris',
+                description: 'Drop, rotate, and clear lines in the classic block-stacking puzzle.',
+                category: 'Arcade',
+                rating: 4.8,
+                thumbnail: '/assets/images/games/tetris-thumb.svg'
+            },
+            {
+                slug: 'pac-man',
+                title: 'Pac-Man',
+                description: 'Navigate the maze, eat dots, and avoid ghosts in this timeless classic.',
+                category: 'Arcade',
+                rating: 4.9,
+                thumbnail: '/assets/images/games/pac-man-thumb.svg'
+            },
+            {
+                slug: 'pong',
+                title: 'Pong',
+                description: 'The original paddle-and-ball arcade classic. Beat the AI to 7 points!',
+                category: 'Arcade',
+                rating: 4.9,
+                thumbnail: '/assets/images/games/pong-thumb.svg'
+            },
+            {
+                slug: 'space-invaders',
+                title: 'Space Invaders',
+                description: 'Defend Earth from waves of alien invaders! Move, shoot, and survive.',
+                category: 'Arcade',
+                rating: 4.8,
+                thumbnail: '/assets/images/games/space-invaders-thumb.svg'
+            },
+            {
+                slug: 'asteroids',
+                title: 'Asteroids',
+                description: 'Pilot your ship and blast asteroids while avoiding debris.',
+                category: 'Arcade',
+                rating: 4.7,
+                thumbnail: '/assets/images/games/asteroids-thumb.svg'
+            },
+            {
+                slug: 'whack-a-mole',
+                title: 'Whack-a-Mole',
+                description: 'Tap the moles as they pop up—be quick before they disappear!',
+                category: 'Arcade',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/whack-a-mole-thumb.svg'
+            },
+            {
+                slug: 'frogger',
+                title: 'Frogger',
+                description: 'Cross busy roads and rivers without getting hit. Time your moves!',
+                category: 'Arcade',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/frogger-thumb.svg'
+            },
+            {
+                slug: 'sky-jump',
+                title: 'Sky Jump',
+                description: 'Leap between platforms and climb as high as you can.',
+                category: 'Arcade',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/sky-jump-thumb.svg'
+            },
+            {
+                slug: 'dodger',
+                title: 'Dodger',
+                description: 'Dodge falling blocks and survive as long as possible.',
+                category: 'Arcade',
+                rating: 4.5,
+                thumbnail: '/assets/images/games/dodger-thumb.svg'
             }
         ];
+
+        // NEW/HOT flags & weights
+        const GAME_FLAGS = {
+            'minefun-io': { badge: 'NEW', weight: 100 },
+            'tetris': { badge: 'NEW', weight: 120 },
+            'pac-man': { badge: 'NEW', weight: 120 },
+            'pong': { badge: 'NEW', weight: 120 }
+        };
 
         function renderArcadeGames() {
             const grid = document.getElementById('arcade-games-grid');
             if (!grid) return;
-            ARCADE_GAMES.forEach(game => {
+            const sorted = ARCADE_GAMES.slice().sort((a,b)=>{
+                const wa = (GAME_FLAGS[a.slug]?.weight)||0;
+                const wb = (GAME_FLAGS[b.slug]?.weight)||0;
+                return wb - wa;
+            });
+            sorted.forEach(game => {
+                const flags = GAME_FLAGS[game.slug] || {};
                 const el = document.createElement('div');
                 el.className = 'game-card';
                 el.onclick = () => playGame(game.slug);
                 el.innerHTML = `
                     <div class="game-thumbnail">
+                        ${flags.badge ? `<span class="badge" style="position:absolute;top:8px;left:8px;background:#ef4444;color:#fff;font-weight:700;font-size:12px;padding:2px 6px;border-radius:6px;">${flags.badge}</span>` : ''}
                         <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
                         <div class="play-overlay"><div class="play-button">▶</div></div>
                     </div>

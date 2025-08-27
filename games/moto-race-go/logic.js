@@ -18,6 +18,7 @@
 
   // Game state
   let running = true;
+  let paused = false;
   let score = 0;
   let best = Number(localStorage.getItem('moto_best') || 0);
   let speed = 4; // base forward speed
@@ -30,6 +31,7 @@
   const finalScoreEl = document.getElementById('finalScore');
   const maxSpeedEl = document.getElementById('maxSpeed');
   const restartBtn = document.getElementById('restartBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
 
   function updateHUD() {
     scoreEl.textContent = `Score: ${score}`;
@@ -75,12 +77,14 @@
 
   function resetGame() {
     running = true;
+    paused = false;
     score = 0;
     speed = 4;
     maxSpeedReached = 0;
     cars.length = 0;
     coins.length = 0;
     overEl.style.display = 'none';
+    if (pauseBtn) pauseBtn.textContent = 'Pause';
     updateHUD();
   }
 
@@ -104,7 +108,7 @@
   }
 
   function update(dt) {
-    if (!running) return;
+    if (!running || paused) return;
 
     // Increase speed gradually
     speed += 0.0008 * dt;
@@ -209,15 +213,32 @@
     }
   }
 
+  function drawPauseOverlay(){
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '24px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Paused - Press P or Pause to resume', W/2, H/2);
+    ctx.textAlign = 'start';
+  }
+
   // Input
   function moveLeft() { player.laneIndex = Math.max(0, player.laneIndex - 1); }
   function moveRight() { player.laneIndex = Math.min(2, player.laneIndex + 1); }
   function nitroBoost() { speed += 2; setTimeout(() => { speed = Math.max(4, speed - 2); }, 800); }
 
+  function togglePause(){
+    paused = !paused;
+    if (pauseBtn) pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+  }
+
   window.restartGame = function () { resetGame(); };
 
   window.addEventListener('keydown', (e) => {
     if (!running && e.key.toLowerCase() === 'enter') { resetGame(); return; }
+    if (e.code === 'KeyP') { if (running) { togglePause(); } e.preventDefault(); return; }
+    if (paused) return;
     if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') moveLeft();
     if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') moveRight();
     if (e.key === 'Shift') nitroBoost();
@@ -226,11 +247,13 @@
 
   // Touch controls
   canvas.addEventListener('touchstart', (e) => {
+    if (paused) return;
     const x = e.changedTouches[0].clientX - canvas.getBoundingClientRect().left;
     if (x < W/2) moveLeft(); else moveRight();
   });
 
   restartBtn.addEventListener('click', resetGame);
+  if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
 
   let last = 0;
   function loop(ts) {
@@ -242,6 +265,7 @@
     drawCars();
     drawCoins();
     drawPlayer();
+    if (paused) drawPauseOverlay();
 
     requestAnimationFrame(loop);
   }

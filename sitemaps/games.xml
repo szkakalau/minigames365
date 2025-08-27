@@ -95,4 +95,49 @@
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
   </url>
+  <url>
+    <loc>https://minigames365.com/games/space-invaders</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/asteroids</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/whack-a-mole</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/frogger</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/sky-jump</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/dodger</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/simon-says</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/sliding-puzzle</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/connect-four</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
 </urlset>

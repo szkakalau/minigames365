@@ -29,17 +29,17 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/assets/css/style.css">
     
-    <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QM2M85ZVEG');
-  </script>
+    <!-- Google Analytics removed for local preview -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+        gtag('config', 'G-QM2M85ZVEG');
+    </script> -->
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+    <!-- Google AdSense removed for local preview -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script> -->
 </head>
 <body>
     <!-- Header -->
@@ -132,77 +132,23 @@
                     </div>
                 </div>
 
-                <!-- Sidebar Ad -->
-                <aside class="game-sidebar">
+                <!-- Sidebar Ad removed for local preview -->
+                <!-- <aside class="game-sidebar">
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-6583243933606323"
                          data-ad-slot="XXXXXXXXXX"
                          data-ad-format="auto"
                          data-full-width-responsive="true"></ins>
-                </aside>
+                </aside> -->
             </div>
         </div>
     </main>
 
-    <!-- Recommended Games -->
-    <section class="recommended-games">
-        <div class="container">
-            <h2 class="section-title">🕹️ More Arcade Games</h2>
-            <div class="games-grid">
-                <div class="game-card" onclick="playGame('snake')">
-                    <div class="game-thumbnail">
-                        <img src="/assets/images/games/snake-thumb.svg" alt="Snake" loading="lazy">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">Snake</h3>
-                        <p class="game-description">Classic snake game!</p>
-                        <div class="game-meta">
-                            <span class="game-category">Arcade</span>
-                            <span class="game-rating">⭐ 4.7</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="game-card" onclick="playGame('flappy-bird')">
-                    <div class="game-thumbnail">
-                        <img src="/assets/images/games/flappy-bird-thumb.svg" alt="Flappy Bird" loading="lazy">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">Flappy Bird</h3>
-                        <p class="game-description">Tap to fly through pipes!</p>
-                        <div class="game-meta">
-                            <span class="game-category">Arcade</span>
-                            <span class="game-rating">⭐ 4.6</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="game-card" onclick="playGame('memory-match')">
-                    <div class="game-thumbnail">
-                        <img src="/assets/images/games/memory-match-thumb.svg" alt="Memory Match" loading="lazy">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">Memory Match</h3>
-                        <p class="game-description">Test your memory skills!</p>
-                        <div class="game-meta">
-                            <span class="game-category">Puzzle</span>
-                            <span class="game-rating">⭐ 4.7</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Recommended Games removed for local preview -->
+    <!--
+    <section class="recommended-games"> ... </section>
+    -->
 
     <!-- Footer -->
     <footer class="footer">
@@ -222,25 +168,20 @@
     </footer>
 
     <!-- Load Game Script -->
-    <script src="/games/brick-breaker/logic.js"></script>
+    <script src="/games/brick-breaker/logic.js?v=3"></script>
     <script src="/assets/js/main.js"></script>
     
     <!-- Game Analytics -->
     <script>
-        // Track game page view
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'game_view', {
-                game_name: 'brick-breaker',
-                game_category: 'arcade'
-            });
+        // Unified tracking helper for local preview
+        function trackGameEvent(action, extras = {}) {
+          try {
+            const payload = { game_slug: 'brick-breaker', ...extras };
+            if (typeof console !== 'undefined' && console.debug) {
+              console.debug('[track]', action, payload);
+            }
+          } catch (e) {}
         }
-        
-        // Game tracking data
-        window.gameData = {
-            game_slug: 'brick-breaker',
-            game_name: 'Brick Breaker',
-            game_category: 'arcade'
-        };
     </script>
 
     <!-- JSON-LD Structured Data -->

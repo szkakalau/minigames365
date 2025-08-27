@@ -29,17 +29,17 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/assets/css/style.css">
     
-    <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QM2M85ZVEG');
-  </script>
+    <!-- Google Analytics removed for local preview -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+        gtag('config', 'G-QM2M85ZVEG');
+    </script> -->
     
-    <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script>
+    <!-- Google AdSense removed for local preview -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323" crossorigin="anonymous"></script> -->
 </head>
 <body>
     <!-- Header -->
@@ -129,15 +129,15 @@
                     </div>
                 </div>
 
-                <!-- Sidebar Ad -->
-                <aside class="game-sidebar">
+                <!-- Sidebar Ad removed for local preview -->
+                <!-- <aside class="game-sidebar">
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-6583243933606323"
                          data-ad-slot="XXXXXXXXXX"
                          data-ad-format="auto"
                          data-full-width-responsive="true"></ins>
-                </aside>
+                </aside> -->
             </div>
         </div>
     </main>
@@ -219,19 +219,27 @@
     </footer>
 
     <!-- Load Game Script -->
-    <script src="/games/t-rex-runner/logic.js"></script>
+    <script src="/games/t-rex-runner/logic.js?v=3"></script>
     <script src="/assets/js/main.js"></script>
     
-    <!-- Game Analytics -->
+    <!-- Game Analytics (local preview) -->
     <script>
-        // Track game page view
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'game_view', {
-                game_name: 't-rex-runner',
-                game_category: 'action'
-            });
+        // Local tracking helper for preview
+        function trackGameEvent(action, extras = {}) {
+          try {
+            const eventData = {
+              game_slug: 't-rex-runner',
+              category: 'Action',
+              device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+              ...extras
+            };
+            if (console && console.debug) console.debug('[track]', action, eventData);
+          } catch (e) {}
         }
-        
+
+        // Track game page view
+        trackGameEvent('game_view', { game_name: 't-rex-runner', game_category: 'action' });
+
         // Game tracking data
         window.gameData = {
             game_slug: 't-rex-runner',

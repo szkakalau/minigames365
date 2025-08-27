@@ -19,20 +19,35 @@
   let bestMs = Number(localStorage.getItem('sprint-league_best_ms') || 0);
   let finished = false;
   let position = 1;
+  let paused = false;
 
   const keys = {};
   function init(){
-    timeMs = 0; finished = false; position = 1;
+    timeMs = 0; finished = false; position = 1; paused = false;
     runner.x = 80; runner.speed = 2.4; runner.stamina = 100; runner.lane = 2;
     rivals[0].x = 60; rivals[1].x = 60;
     document.getElementById('score').textContent = 'Time: 0:00';
     document.getElementById('best').textContent = 'Best: ' + formatTime(bestMs);
     document.getElementById('position').textContent = 'Position: 1st';
+    const pb = document.getElementById('pauseBtn'); if (pb) pb.textContent = 'Pause';
     track('game_start');
     loop();
   }
 
-  function loop(){ if (finished) return; update(); draw(); requestAnimationFrame(loop); }
+  function loop(){
+    if (finished) return;
+    if (paused) { draw(); drawPauseOverlay(); requestAnimationFrame(loop); return; }
+    update(); draw(); requestAnimationFrame(loop);
+  }
+
+  function drawPauseOverlay(){
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = '#fff';
+    ctx.font = '20px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Paused - Press P or Pause', W/2, H/2);
+  }
 
   function update(){
     timeMs += 16;
@@ -163,11 +178,78 @@
     return m + ':' + (s<10?'0':'') + s;
   }
 
-  window.addEventListener('keydown', (e)=>{ keys[e.code] = true; });
+  window.addEventListener('keydown', (e)=>{
+    if (e.code === 'KeyP') { e.preventDefault(); togglePause(); return; }
+    keys[e.code] = true;
+  });
   window.addEventListener('keyup', (e)=>{ keys[e.code] = false; });
   document.getElementById('restartBtn').addEventListener('click', restartGame);
+  const pauseBtn = document.getElementById('pauseBtn');
+  if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+
+  function togglePause(){
+    if (finished) return;
+    paused = !paused;
+    const pb = document.getElementById('pauseBtn'); if (pb) pb.textContent = paused ? 'Resume' : 'Pause';
+  }
+
+  // Mobile onboarding overlay (only on first visit)
+  function showMobileOnboarding(){
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    if (!isMobile) return;
+    if (localStorage.getItem('sprint-league_onboarded') === '1') return;
+    const root = document.getElementById('game-root'); if (!root) return;
+    const tip = document.createElement('div');
+    tip.id = 'mobileOnboarding';
+    tip.style = 'position:absolute;inset:0;background:rgba(0,0,0,0.78);color:#fff;display:flex;align-items:center;justify-content:center;z-index:20;border-radius:10px;';
+    tip.innerHTML = `
+      <div style="max-width:420px;padding:16px 18px;background:rgba(17,24,39,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:12px;text-align:left;">
+        <div style="font-weight:800;font-size:18px;margin-bottom:8px;">提示：配速与节奏</div>
+        <div style="font-size:14px;opacity:0.9;line-height:1.5;">
+          轻触左半屏保持配速，按住右半屏冲刺（更快但消耗体力）。<br/>
+          上/下滑切换跑道。合理把握体力条，冲线更快！
+        </div>
+        <button id="closeOnboarding" class="search-btn" style="margin-top:12px;width:100%;">我知道了</button>
+      </div>`;
+    root.appendChild(tip);
+    document.getElementById('closeOnboarding').addEventListener('click', ()=>{
+      localStorage.setItem('sprint-league_onboarded','1');
+      tip.remove();
+    });
+  }
+
+  // Touch controls: half-screen pacing + swipe up/down to change lane
+  let touchStartX = 0, touchStartY = 0;
+  canvas.addEventListener('touchstart', (e)=>{
+    if (paused) { e.preventDefault(); return; }
+    const t = e.touches[0]; if (!t) return; e.preventDefault();
+    const r = canvas.getBoundingClientRect();
+    const x = t.clientX - r.left; const y = t.clientY - r.top;
+    touchStartX = x; touchStartY = y;
+    const rightHalf = x > r.width/2;
+    keys['ArrowRight'] = !!rightHalf; // sprint
+    keys['ArrowLeft'] = !rightHalf;   // relax pace
+  }, {passive:false});
+  canvas.addEventListener('touchmove', (e)=>{
+    if (paused) { e.preventDefault(); return; }
+    const t = e.touches[0]; if (!t) return; e.preventDefault();
+    const r = canvas.getBoundingClientRect();
+    const x = t.clientX - r.left; const y = t.clientY - r.top;
+    // Update pacing when finger moves across halves
+    const rightHalf = x > r.width/2;
+    keys['ArrowRight'] = !!rightHalf;
+    keys['ArrowLeft'] = !rightHalf;
+    // Swipe detection for lane change
+    const dy = y - touchStartY;
+    if (dy < -40) { runner.lane = 1; }
+    else if (dy > 40) { runner.lane = 3; }
+  }, {passive:false});
+  window.addEventListener('touchend', ()=>{
+    keys['ArrowRight'] = false; keys['ArrowLeft'] = false;
+  }, {passive:true});
 
   function track(action, score){ if (typeof window.trackGameEvent === 'function') window.trackGameEvent(action, score); }
 
+  showMobileOnboarding();
   init();
 })();
