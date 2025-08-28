@@ -89,7 +89,7 @@
                     <!-- Game HUD -->
                     <div class="game-hud">
                         <div class="hud-item">
-                            <span id="score">Score: 0</span>
+                            <span id="score" data-i18n="score">Score: 0</span>
                         </div>
                         <div class="hud-item">
                             <span id="moves">Moves: 0</span>
@@ -98,10 +98,10 @@
                             <span id="pairs">Pairs: 0/8</span>
                         </div>
                         <div class="hud-item">
-                            <span id="best">Best: 0</span>
+                            <span id="best" data-i18n="best">Best: 0</span>
                         </div>
                         <div class="hud-item">
-                            <button id="newGameBtn" class="hud-button">New Game</button>
+                            <button id="newGameBtn" class="hud-button" data-i18n="restart">New Game</button>
                         </div>
                     </div>
 
@@ -119,11 +119,11 @@
                     <!-- Game Over Screen -->
                     <div id="gameOverScreen" class="game-over-screen">
                         <div class="game-over-content">
-                            <h2 id="gameOverTitle">Congratulations!</h2>
+                            <h2 id="gameOverTitle" data-i18n="game-over">Congratulations!</h2>
                             <p>Final Score: <span id="finalScore">0</span></p>
                             <p>Total Moves: <span id="finalMoves">0</span></p>
-                            <button id="restartBtn" class="game-button" onclick="restartGame()">Play Again</button>
-                            <button class="game-button secondary" onclick="window.location.href='/'">More Games</button>
+                            <button id="restartBtn" class="game-button" onclick="restartGame()" data-i18n="play-again">Play Again</button>
+                            <button class="game-button secondary" onclick="window.location.href='/'" data-i18n="home">More Games</button>
                         </div>
                     </div>
                 </div>

@@ -51,7 +51,7 @@
                     <span>MiniGames365</span>
                 </a>
                 <nav class="nav">
-                    <a href="/">Home</a>
+                    <a href="/" data-i18n="home">Home</a>
                     <a href="/categories/puzzle.html">Puzzle</a>
                     <a href="/categories/arcade.html">Arcade</a>
                     <a href="/categories/action.html">Action</a>
@@ -89,7 +89,7 @@
                     <!-- Game HUD -->
                     <div class="game-hud">
                         <div class="hud-item">
-                            <span id="score">Score: 0</span>
+                            <span id="score" data-i18n="score">Score: 0</span>
                         </div>
                         <div class="hud-item">
                             <span id="distance">Distance: 0m</span>
@@ -98,10 +98,10 @@
                             <span id="speed">Speed: 6.0</span>
                         </div>
                         <div class="hud-item">
-                            <span id="best">Best: 0</span>
+                            <span id="best" data-i18n="best">Best: 0</span>
                         </div>
                         <div class="hud-item">
-                            <button id="pauseBtn" class="hud-button">Pause</button>
+                            <button id="pauseBtn" class="hud-button" data-i18n="pause">Pause</button>
                         </div>
                     </div>
 
@@ -120,11 +120,11 @@
                     <!-- Game Over Screen -->
                     <div id="gameOverScreen" class="game-over-screen">
                         <div class="game-over-content">
-                            <h2 id="gameOverTitle">Game Over</h2>
+                            <h2 id="gameOverTitle" data-i18n="game-over">Game Over</h2>
                             <p>Distance: <span id="finalDistance">0m</span></p>
                             <p>Final Score: <span id="finalScore">0</span></p>
-                            <button id="restartBtn" class="game-button" onclick="restartGame()">Try Again</button>
-                            <button class="game-button secondary" onclick="window.location.href='/'">More Games</button>
+                            <button id="restartBtn" class="game-button" onclick="restartGame()" data-i18n="restart">Try Again</button>
+                            <button class="game-button secondary" onclick="window.location.href='/'" data-i18n="home">More Games</button>
                         </div>
                     </div>
                 </div>

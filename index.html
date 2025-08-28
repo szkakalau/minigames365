@@ -56,15 +56,15 @@
                 
                 <nav class="main-nav">
                     <ul class="nav-list">
-                        <li><a href="#featured">Featured</a></li>
-                        <li><a href="#categories">Categories</a></li>
-                        <li><a href="#new-games">New Games</a></li>
+                        <li><a href="#featured" data-i18n="nav-featured">Featured</a></li>
+                        <li><a href="#categories" data-i18n="nav-categories">Categories</a></li>
+                        <li><a href="#new-games" data-i18n="nav-new-games">New Games</a></li>
                     </ul>
                 </nav>
 
                 <div class="header-actions">
                     <div class="search-container">
-                        <input type="text" id="searchInput" placeholder="Search games..." class="search-input">
+                        <input type="text" id="searchInput" placeholder="Search games..." class="search-input" data-i18n="search-placeholder">
                         <button type="button" class="search-btn" onclick="searchGames()">🔍</button>
                     </div>
                     
@@ -98,19 +98,19 @@
             <!-- Hero Section -->
             <section class="hero">
                 <div class="hero-content">
-                    <h1 class="hero-title">Play the Best Free Online Games</h1>
-                    <p class="hero-description">Discover thousands of games across all categories. No downloads, no registration required. Play instantly on any device!</p>
+                    <h1 class="hero-title" data-i18n="hero-title">Play the Best Free Online Games</h1>
+                    <p class="hero-description" data-i18n="hero-description">Discover thousands of games across all categories. No downloads, no registration required. Play instantly on any device!</p>
                     <div class="hero-stats">
-                        <span class="stat">🎮 1000+ Games</span>
-                        <span class="stat">📱 Mobile & Desktop</span>
-                        <span class="stat">🆓 Always Free</span>
+                        <span class="stat" data-i18n="hero-stat-games">🎮 1000+ Games</span>
+                        <span class="stat" data-i18n="hero-stat-platforms">📱 Mobile & Desktop</span>
+                        <span class="stat" data-i18n="hero-stat-free">🆓 Always Free</span>
                     </div>
                 </div>
             </section>
 
             <!-- Featured Games -->
             <section id="featured" class="featured-games">
-                <h2 class="section-title">🔥 Featured Games</h2>
+                <h2 class="section-title" data-i18n="featured-title">🔥 Featured Games</h2>
                 <div class="games-grid">
                     <div class="game-card" onclick="playGame('rumble-rush')">
                         <div class="game-thumbnail">

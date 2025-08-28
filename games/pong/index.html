@@ -72,10 +72,10 @@
             <div class="game-wrapper">
                 <div class="game-area">
                     <div class="game-hud">
-                        <div class="hud-item"><span id="score">Player: 0 | AI: 0</span></div>
+                        <div class="hud-item"><span id="score" data-i18n="score">Player: 0 | AI: 0</span></div>
                         <div class="hud-item">
-                          <button id="pauseBtn" class="restart-btn" type="button">Pause</button>
-                          <button id="restartBtn" class="restart-btn" type="button">Restart</button>
+                          <button id="pauseBtn" class="restart-btn" type="button" data-i18n="pause">Pause</button>
+                          <button id="restartBtn" class="restart-btn" type="button" data-i18n="restart">Restart</button>
                         </div>
                     </div>
                     <div class="game-canvas-container">
@@ -89,9 +89,9 @@
                     </div>
                     <div id="gameOverScreen" class="game-over-screen" style="display:none;">
                         <div class="game-over-content">
-                            <h2>Game Over!</h2>
+                            <h2 data-i18n="game-over">Game Over!</h2>
                             <p>Final Score: <span id="finalScore">0</span></p>
-                            <button onclick="restartGame()" class="restart-button">Play Again</button>
+                            <button onclick="restartGame()" class="restart-button" data-i18n="play-again">Play Again</button>
                         </div>
                     </div>
                 </div>

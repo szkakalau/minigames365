@@ -89,16 +89,16 @@
                     <!-- Game HUD -->
                     <div class="game-hud">
                         <div class="hud-item">
-                            <span id="score">Điểm: 0</span>
+                            <span id="score" data-i18n="score">Điểm: 0</span>
                         </div>
                         <div class="hud-item">
                             <span id="wins">Thắng: 0</span>
                         </div>
                         <div class="hud-item">
-                            <span id="best">Tốt Nhất: 0</span>
+                            <span id="best" data-i18n="best">Tốt Nhất: 0</span>
                         </div>
                         <div class="hud-item">
-                            <button id="newGameBtn" class="hud-button">Ván Mới</button>
+                            <button id="newGameBtn" class="hud-button" data-i18n="restart">Ván Mới</button>
                         </div>
                     </div>
 
@@ -116,10 +116,10 @@
                     <!-- Game Over Screen -->
                     <div id="gameOverScreen" class="game-over-screen">
                         <div class="game-over-content">
-                            <h2 id="gameOverTitle">Kết Thúc!</h2>
+                            <h2 id="gameOverTitle" data-i18n="game-over">Kết Thúc!</h2>
                             <p>Điểm Số: <span id="finalScore">0</span></p>
-                            <button id="restartBtn" class="game-button" onclick="restartGame()">Chơi Lại</button>
-                            <button class="game-button secondary" onclick="window.location.href='/'">Thêm Game</button>
+                            <button id="restartBtn" class="game-button" onclick="restartGame()" data-i18n="play-again">Chơi Lại</button>
+                            <button class="game-button secondary" onclick="window.location.href='/'" data-i18n="home">Thêm Game</button>
                         </div>
                     </div>
                 </div>
