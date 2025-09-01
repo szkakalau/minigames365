@@ -22,7 +22,15 @@ const translations = {
     'score': 'Score',
     'best': 'Best',
     'play-again': 'Play Again',
-    'home': 'Home'
+    'home': 'Home',
+    // New keys for Crypto Collectibles page and header consistency
+    'categories': 'Categories',
+    'controls': 'Controls',
+    'controls-detail': 'Desktop: ← → or A/D to move. Mobile: tap/drag to move.',
+    'more-games': 'You may also like',
+    'final-score': 'Final Score',
+    'crypto-title': 'Crypto Collectibles',
+    'crypto-desc': 'Catch rare crypto tokens and avoid scams. Simple, fast, and fun on any device!'
   },
   es: {
     'site-title': 'PlayCentral - Juegos Online Gratis',
@@ -46,7 +54,15 @@ const translations = {
     'score': 'Puntuación',
     'best': 'Mejor',
     'play-again': 'Jugar Otra Vez',
-    'home': 'Inicio'
+    'home': 'Inicio',
+    // Nuevas claves
+    'categories': 'Categorías',
+    'controls': 'Controles',
+    'controls-detail': 'Escritorio: ← → o A/D para moverse. Móvil: toca/arrastra para moverte.',
+    'more-games': 'También te puede gustar',
+    'final-score': 'Puntuación Final',
+    'crypto-title': 'Crypto Collectibles',
+    'crypto-desc': 'Atrapa tokens cripto raros y evita estafas. ¡Simple, rápido y divertido en cualquier dispositivo!'
   },
   pt: {
     'site-title': 'PlayCentral - Jogos Online Grátis',
@@ -70,7 +86,15 @@ const translations = {
     'score': 'Pontuação',
     'best': 'Melhor',
     'play-again': 'Jogar Novamente',
-    'home': 'Início'
+    'home': 'Início',
+    // Novas chaves
+    'categories': 'Categorias',
+    'controls': 'Controles',
+    'controls-detail': 'Desktop: ← → ou A/D para mover. Mobile: toque/arraste para mover.',
+    'more-games': 'Você também pode gostar',
+    'final-score': 'Pontuação Final',
+    'crypto-title': 'Crypto Collectibles',
+    'crypto-desc': 'Capture tokens cripto raros e evite golpes. Simples, rápido e divertido em qualquer dispositivo!'
   },
   tr: {
     'site-title': 'PlayCentral - Ücretsiz Online Oyunlar',
@@ -94,7 +118,15 @@ const translations = {
     'score': 'Puan',
     'best': 'En İyi',
     'play-again': 'Tekrar Oyna',
-    'home': 'Ana Sayfa'
+    'home': 'Ana Sayfa',
+    // Yeni anahtarlar
+    'categories': 'Kategoriler',
+    'controls': 'Kontroller',
+    'controls-detail': 'Masaüstü: ← → veya A/D ile hareket. Mobil: dokun/sürükle.',
+    'more-games': 'Bunları da beğenebilirsin',
+    'final-score': 'Final Skoru',
+    'crypto-title': 'Crypto Collectibles',
+    'crypto-desc': 'Nadir kripto tokenlarını yakala ve dolandırıcılardan kaçın. Her cihazda basit, hızlı ve eğlenceli!'
   },
   vi: {
     'site-title': 'PlayCentral - Game Online Miễn Phí',
@@ -118,7 +150,15 @@ const translations = {
     'score': 'Điểm Số',
     'best': 'Tốt Nhất',
     'play-again': 'Chơi Lại',
-    'home': 'Trang Chủ'
+    'home': 'Trang Chủ',
+    // Khóa mới
+    'categories': 'Thể Loại',
+    'controls': 'Điều Khiển',
+    'controls-detail': 'Máy tính: ← → hoặc A/D để di chuyển. Di động: chạm/kéo để di chuyển.',
+    'more-games': 'Có thể bạn cũng thích',
+    'final-score': 'Điểm Cuối Cùng',
+    'crypto-title': 'Crypto Collectibles',
+    'crypto-desc': 'Bắt các token tiền mã hóa hiếm và tránh vật phẩm lừa đảo. Đơn giản, nhanh và vui trên mọi thiết bị!'
   },
   hi: {
     'site-title': 'PlayCentral - मुफ्त ऑनलाइन गेम्स',
@@ -172,6 +212,11 @@ function initializeLanguage() {
   if (langButton) {
     const langCodes = { en: 'EN', es: 'ES', pt: 'PT', tr: 'TR', vi: 'VI', hi: 'HI' };
     langButton.textContent = langCodes[currentLanguage] || 'EN';
+    // Bind click once
+    if (!langButton.dataset.bound) {
+      langButton.addEventListener('click', toggleLanguage);
+      langButton.dataset.bound = '1';
+    }
   }
 }
 
