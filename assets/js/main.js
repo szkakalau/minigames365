@@ -30,7 +30,10 @@ const translations = {
     'more-games': 'You may also like',
     'final-score': 'Final Score',
     'crypto-title': 'Crypto Collectibles',
-    'crypto-desc': 'Catch rare crypto tokens and avoid scams. Simple, fast, and fun on any device!'
+    'crypto-desc': 'Catch rare crypto tokens and avoid scams. Simple, fast, and fun on any device!',
+    // New keys for Video game monetization
+    'vgm-title': 'Video game monetization',
+    'vgm-desc': 'Balance ads and user happiness. Collect revenue while avoiding churn. Optimized for mobile & desktop.'
   },
   es: {
     'site-title': 'PlayCentral - Juegos Online Gratis',
@@ -74,7 +77,7 @@ const translations = {
     'hero-title': 'Jogue os Melhores Jogos Online Grátis',
     'hero-description': 'Descubra milhares de jogos em todas as categorias. Sem downloads, sem registro necessário. Jogue instantaneamente em qualquer dispositivo!',
     'hero-stat-games': '🎮 1000+ Jogos',
-    'hero-stat-platforms': '📱 Móvel e Desktop',
+    'hero-stat-platforms': '📱 Móvil e Desktop',
     'hero-stat-free': '🆓 Sempre Grátis',
     'featured-title': '🔥 Jogos em Destaque',
     'categories-title': '📂 Categorias de Jogos',
@@ -158,7 +161,10 @@ const translations = {
     'more-games': 'Có thể bạn cũng thích',
     'final-score': 'Điểm Cuối Cùng',
     'crypto-title': 'Crypto Collectibles',
-    'crypto-desc': 'Bắt các token tiền mã hóa hiếm và tránh vật phẩm lừa đảo. Đơn giản, nhanh và vui trên mọi thiết bị!'
+    'crypto-desc': 'Bắt các token tiền mã hóa hiếm và tránh vật phẩm lừa đảo. Đơn giản, nhanh và vui trên mọi thiết bị!',
+    // Khóa mới cho Video game monetization
+    'vgm-title': 'Kiếm tiền từ trò chơi điện tử',
+    'vgm-desc': 'Cân bằng quảng cáo và sự hài lòng của người chơi. Thu doanh thu, tránh rời bỏ. Tối ưu cho di động & máy tính.'
   },
   hi: {
     'site-title': 'PlayCentral - मुफ्त ऑनलाइन गेम्स',
@@ -255,18 +261,23 @@ function applyTranslations(lang) {
 function updateDocumentMeta(lang) {
   const langData = translations[lang] || translations.en;
   
-  // Update title
-  if (langData['site-title']) {
-    document.title = langData['site-title'];
+  // Only override meta on homepage; keep per-page SEO on subpages
+  const isHome = !!document.querySelector('.main-content');
+
+  if (isHome) {
+    // Update title
+    if (langData['site-title']) {
+      document.title = langData['site-title'];
+    }
+    
+    // Update meta description
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && langData['site-description']) {
+      metaDesc.content = langData['site-description'];
+    }
   }
   
-  // Update meta description
-  const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc && langData['site-description']) {
-    metaDesc.content = langData['site-description'];
-  }
-  
-  // Update html lang attribute
+  // Always update html lang
   document.documentElement.lang = lang;
 }
 

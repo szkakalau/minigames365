@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video game monetization - Idle Strategy Game | MiniGames365</title>
+  <meta name="description" content="Design the perfect video game monetization strategy: collect revenue, avoid user churn. Mobile-friendly idle/strategy mini game." />
+  <link rel="canonical" href="https://minigames365.com/games/video-game-monetization/" />
+  <meta name="keywords" content="video game monetization, idle strategy, ad revenue, free online game, mobile game" />
+  <meta name="author" content="MiniGames365" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Video game monetization - Idle Strategy Game" />
+  <meta property="og:description" content="Balance ads and user happiness. Collect revenue while avoiding churn. Play on mobile or desktop." />
+  <meta property="og:url" content="https://minigames365.com/games/video-game-monetization/" />
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/video-game-monetization-thumb.svg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Video game monetization - Idle Strategy Game" />
+  <meta name="twitter:description" content="Balance ads and user happiness. Collect revenue while avoiding churn." />
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/video-game-monetization-thumb.svg" />
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.ico" />
+
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-QM2M85ZVEG');
+  </script>
+</head>
+<body>
+  <header class="subpage-header">
+    <div class="container">
+      <div class="sub-header-content">
+        <a href="/" class="back-link" data-i18n="home">Home</a>
+        <div class="spacer"></div>
+        <button class="lang-toggle" aria-label="Toggle Language">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="game-page">
+    <div class="container">
+      <section class="game-hero">
+        <div class="game-hero-thumb">
+          <img src="/assets/images/games/video-game-monetization-thumb.svg" alt="Video game monetization" width="160" height="120" />
+        </div>
+        <div class="game-hero-info">
+          <h1 class="game-title" data-i18n="vgm-title">Video game monetization</h1>
+          <p class="game-description" data-i18n="vgm-desc">Balance ads and user happiness. Collect revenue while avoiding churn. Optimized for mobile & desktop.</p>
+          <div class="game-meta">
+              <span class="game-category" data-i18n="categories">Strategy</span>
+              <span class="game-rating">⭐ 4.7</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="game-canvas-wrap">
+        <div class="hud">
+          <div class="hud-left">
+            <span data-i18n="score">Score</span>: <span id="score">0</span>
+          </div>
+          <div class="hud-right">
+            <span data-i18n="best">Best</span>: <span id="best">0</span>
+          </div>
+        </div>
+        <canvas id="gameCanvas" width="360" height="540" class="game-canvas" aria-label="Game canvas"></canvas>
+
+        <div id="gameOver" class="game-over hidden">
+          <h2 data-i18n="game-over">Game Over</h2>
+          <p><span data-i18n="final-score">Final Score</span>: <span id="finalScore">0</span></p>
+          <button id="restartBtn" class="btn primary" data-i18n="restart">Restart</button>
+        </div>
+      </section>
+
+      <section class="game-controls">
+        <h3 data-i18n="controls">Controls</h3>
+        <p data-i18n="controls-detail">Desktop: Move with A/D or ←/→. Mobile: Drag or tap to move. Avoid red, catch blue, grab green for boosts.</p>
+      </section>
+
+      <section class="more-games">
+        <h3 data-i18n="more-games">You may also like</h3>
+        <div class="games-grid small">
+          <div class="game-card" onclick="playGame('crypto-collectibles')">
+            <div class="game-thumbnail">
+              <img src="/assets/images/games/crypto-collectibles-thumb.svg" alt="Crypto Collectibles" loading="lazy" />
+              <div class="play-overlay"><div class="play-button">▶</div></div>
+            </div>
+            <div class="game-info">
+              <h4 class="game-title" data-i18n="crypto-title">Crypto Collectibles</h4>
+              <p class="game-description" data-i18n="crypto-desc">Catch rare crypto tokens and avoid scams. Simple, fast, and fun on any device!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="subpage-footer">
+    <div class="container">
+      <p>© 2024 MiniGames365</p>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  <script src="./logic.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Game",
+    "name": "Video game monetization",
+    "genre": "Strategy",
+    "url": "https://minigames365.com/games/video-game-monetization/",
+    "description": "Balance ads and user happiness. Collect revenue while avoiding churn. Optimized for mobile & desktop.",
+    "operatingSystem": "All",
+    "applicationCategory": "Game",
+    "inLanguage": "en"
+  }
+  </script>
+</body>
+</html>

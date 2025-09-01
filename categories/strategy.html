@@ -145,6 +145,18 @@
                 category: 'Strategy',
                 rating: 4.7,
                 thumbnail: '/assets/images/games/connect-four-thumb.svg'
+            },
+            {
+                slug: 'video-game-monetization',
+                // Use i18n keys so the list localizes with language toggle
+                i18nTitleKey: 'vgm-title',
+                i18nDescKey: 'vgm-desc',
+                // Fallbacks (English) if translations missing
+                title: 'Video game monetization',
+                description: 'Balance ads and user happiness. Collect revenue while avoiding churn. Optimized for mobile & desktop.',
+                category: 'Strategy',
+                rating: 4.7,
+                thumbnail: '/assets/images/games/video-game-monetization-thumb.svg'
             }
         ];
     
@@ -155,18 +167,25 @@
         function renderStrategyGames() {
             const grid = document.getElementById('strategy-games-grid');
             if (!grid) return;
+
+            const currentLang = (localStorage.getItem('siteLanguage') || 'en');
+            const dict = (typeof translations !== 'undefined' && translations[currentLang]) ? translations[currentLang] : null;
+
             STRATEGY_GAMES.forEach(game => {
+                const localizedTitle = game.i18nTitleKey && dict && dict[game.i18nTitleKey] ? dict[game.i18nTitleKey] : game.title;
+                const localizedDesc = game.i18nDescKey && dict && dict[game.i18nDescKey] ? dict[game.i18nDescKey] : game.description;
+
                 const el = document.createElement('div');
                 el.className = 'game-card';
                 el.onclick = () => playGame(game.slug);
                 el.innerHTML = `
                     <div class="game-thumbnail">
-                        <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
+                        <img src="${game.thumbnail}" alt="${localizedTitle}" loading="lazy">
                         <div class="play-overlay"><div class="play-button">▶</div></div>
                     </div>
                     <div class="game-info">
-                        <h3 class="game-title">${game.title}</h3>
-                        <p class="game-description">${game.description}</p>
+                        <h3 class="game-title" ${game.i18nTitleKey ? `data-i18n="${game.i18nTitleKey}"` : ''}>${localizedTitle}</h3>
+                        <p class="game-description" ${game.i18nDescKey ? `data-i18n="${game.i18nDescKey}"` : ''}>${localizedDesc}</p>
                         <div class="game-meta">
                             <span class="game-category">${game.category}</span>
                             <span class="game-rating">⭐ ${game.rating}</span>
