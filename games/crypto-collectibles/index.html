@@ -47,11 +47,11 @@
     <div class="container">
       <section class="hero">
         <div class="hero-content">
-          <h1 class="hero-title">Crypto Collectibles</h1>
-          <p class="hero-description">Catch rare crypto tokens and avoid scam items. Tap or drag to move. Gets faster over time!</p>
+          <h1 class="hero-title" data-i18n="crypto-title">Crypto Collectibles</h1>
+          <p class="hero-description" data-i18n="crypto-desc">Catch rare crypto tokens and avoid scam items. Tap or drag to move. Gets faster over time!</p>
           <div class="game-instructions">
             <strong data-i18n="controls">Controls:</strong>
-            <span>Desktop: ← → or A/D to move. Mobile: tap/drag to move.</span>
+            <span data-i18n="controls-detail">Desktop: ← → or A/D to move. Mobile: tap/drag to move.</span>
           </div>
         </div>
       </section>
@@ -81,7 +81,7 @@
           </div>
           <div id="gameOverScreen" class="game-over-overlay" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.85); color:white; padding:20px; border-radius:12px; text-align:center; width:min(90%, 360px);">
             <h3 data-i18n="game-over">Game Over!</h3>
-            <p>Final Score: <span id="finalScore">0</span></p>
+            <p><span data-i18n="final-score">Final Score</span>: <span id="finalScore">0</span></p>
             <div style="display:flex; gap:8px; flex-wrap: wrap; justify-content:center;">
               <button onclick="restartGame()" class="search-btn" data-i18n="play-again" style="min-width:140px;">Play Again</button>
               <a href="/" class="search-btn" data-i18n="home" style="min-width:140px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">Home</a>
