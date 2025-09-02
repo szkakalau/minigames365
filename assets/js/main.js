@@ -290,6 +290,77 @@ const translations = {
   }
 })();
 
+// Safe AdSense initialization (stub on localhost, real load on production)
+(function() {
+  try {
+    var host = (location && location.hostname || '').toLowerCase();
+    var isLocal = host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local');
+    
+    // Provide a lightweight stub so pages can access adsbygoogle array safely
+    if (typeof window.adsbygoogle === 'undefined') {
+      window.adsbygoogle = window.adsbygoogle || [];
+    }
+    
+    // Only schedule AdSense network script in production to avoid localhost ERR_ABORTED noise
+    if (!isLocal) {
+      // idempotent loader
+      var __adsenseLoaded = false;
+      function loadAdSenseOnce() {
+        if (__adsenseLoaded) return;
+        __adsenseLoaded = true;
+        if (!document.getElementById('adsense-loader')) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6583243933606323';
+          s.id = 'adsense-loader';
+          s.crossOrigin = 'anonymous';
+          document.head.appendChild(s);
+        }
+        // cleanup listeners
+        detachAds();
+      }
+
+      function onFirstInteractionAds() {
+        loadAdSenseOnce();
+      }
+
+      function detachAds() {
+        try {
+          window.removeEventListener('click', onFirstInteractionAds, { passive: true });
+          window.removeEventListener('scroll', onFirstInteractionAds, { passive: true });
+          window.removeEventListener('keydown', onFirstInteractionAds, { passive: true });
+          window.removeEventListener('touchstart', onFirstInteractionAds, { passive: true });
+        } catch (e) {}
+      }
+
+      try {
+        window.addEventListener('click', onFirstInteractionAds, { passive: true, once: true });
+        window.addEventListener('scroll', onFirstInteractionAds, { passive: true, once: true });
+        window.addEventListener('keydown', onFirstInteractionAds, { passive: true, once: true });
+        window.addEventListener('touchstart', onFirstInteractionAds, { passive: true, once: true });
+      } catch (e) {}
+
+      // Fallbacks: idle or timeout (slightly later than GA to avoid overloading)
+      if ('requestIdleCallback' in window) {
+        try { requestIdleCallback(function() { setTimeout(loadAdSenseOnce, 0); }, { timeout: 4000 }); } catch (e) { setTimeout(loadAdSenseOnce, 3500); }
+      } else {
+        setTimeout(loadAdSenseOnce, 3500);
+      }
+    } else {
+      // In local environment, provide console feedback when adsbygoogle.push is called
+      var originalPush = window.adsbygoogle.push;
+      window.adsbygoogle.push = function() {
+        if (typeof console !== 'undefined' && console.debug) {
+          console.debug('[adsbygoogle stub]', Array.prototype.slice.call(arguments));
+        }
+        return originalPush ? originalPush.apply(this, arguments) : arguments.length;
+      };
+    }
+  } catch (e) {
+    // swallow errors to keep pages resilient
+  }
+})();
+
 // Current language state
 let currentLanguage = localStorage.getItem('language') || 'en';
 
