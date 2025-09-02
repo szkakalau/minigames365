@@ -237,18 +237,53 @@ const translations = {
       };
     }
 
-    // Only load GA network script in production to avoid localhost ERR_ABORTED noise
+    // Only schedule GA network script in production to avoid localhost ERR_ABORTED noise
     if (!isLocal) {
-      if (!document.getElementById('ga-gtag-loader')) {
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG';
-        s.id = 'ga-gtag-loader';
-        document.head.appendChild(s);
+      // idempotent loader
+      var __gaLoaded = false;
+      function loadGAOnce() {
+        if (__gaLoaded) return;
+        __gaLoaded = true;
+        if (!document.getElementById('ga-gtag-loader')) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG';
+          s.id = 'ga-gtag-loader';
+          document.head.appendChild(s);
+        }
+        // Perform baseline GA config right after scheduling the loader; real gtag will process the queue
+        window.gtag('js', new Date());
+        window.gtag('config', 'G-QM2M85ZVEG');
+        // cleanup listeners
+        detach();
       }
-      // Perform baseline GA config
-      window.gtag('js', new Date());
-      window.gtag('config', 'G-QM2M85ZVEG');
+
+      function onFirstInteraction() {
+        loadGAOnce();
+      }
+
+      function detach() {
+        try {
+          window.removeEventListener('click', onFirstInteraction, { passive: true });
+          window.removeEventListener('scroll', onFirstInteraction, { passive: true });
+          window.removeEventListener('keydown', onFirstInteraction, { passive: true });
+          window.removeEventListener('touchstart', onFirstInteraction, { passive: true });
+        } catch (e) {}
+      }
+
+      try {
+        window.addEventListener('click', onFirstInteraction, { passive: true, once: true });
+        window.addEventListener('scroll', onFirstInteraction, { passive: true, once: true });
+        window.addEventListener('keydown', onFirstInteraction, { passive: true, once: true });
+        window.addEventListener('touchstart', onFirstInteraction, { passive: true, once: true });
+      } catch (e) {}
+
+      // Fallbacks: idle or timeout so we still collect page_view if no interaction
+      if ('requestIdleCallback' in window) {
+        try { requestIdleCallback(function() { setTimeout(loadGAOnce, 0); }, { timeout: 3000 }); } catch (e) { setTimeout(loadGAOnce, 2500); }
+      } else {
+        setTimeout(loadGAOnce, 2500);
+      }
     }
   } catch (e) {
     // swallow errors to keep pages resilient
