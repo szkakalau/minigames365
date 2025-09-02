@@ -216,6 +216,45 @@ const translations = {
   }
 };
 
+// Safe Google Analytics initialization (stub on localhost, real load on production)
+(function() {
+  try {
+    var host = (location && location.hostname || '').toLowerCase();
+    var isLocal = host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local');
+    // Ensure dataLayer exists
+    window.dataLayer = window.dataLayer || [];
+    // Provide a lightweight stub so pages can call gtag('event', ...) safely even before real script loads
+    if (typeof window.gtag !== 'function') {
+      window.gtag = function() {
+        try {
+          window.dataLayer.push(arguments);
+          if (isLocal && typeof console !== 'undefined' && console.debug) {
+            console.debug('[gtag stub]', Array.prototype.slice.call(arguments));
+          }
+        } catch (e) {
+          // no-op
+        }
+      };
+    }
+
+    // Only load GA network script in production to avoid localhost ERR_ABORTED noise
+    if (!isLocal) {
+      if (!document.getElementById('ga-gtag-loader')) {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-QM2M85ZVEG';
+        s.id = 'ga-gtag-loader';
+        document.head.appendChild(s);
+      }
+      // Perform baseline GA config
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-QM2M85ZVEG');
+    }
+  } catch (e) {
+    // swallow errors to keep pages resilient
+  }
+})();
+
 // Current language state
 let currentLanguage = localStorage.getItem('language') || 'en';
 
