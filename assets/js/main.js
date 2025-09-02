@@ -359,14 +359,52 @@ function initAdsSafely() {
   try {
     const slots = document.querySelectorAll('ins.adsbygoogle');
     if (!slots.length) return;
-    slots.forEach(slot => {
+
+    const setupForSlot = (slot) => {
+      let pushed = false;
       const pushAd = () => {
+        if (pushed) return;
+        pushed = true;
         try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { /* noop */ }
       };
-      if (slot.offsetWidth > 0) {
-        pushAd();
+
+      const widthReady = () => slot.offsetWidth > 0;
+
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting && widthReady()) {
+              pushAd();
+              io.unobserve(slot);
+              ro && ro.unobserve && ro.unobserve(slot);
+            }
+          }
+        }, { root: null, rootMargin: '0px', threshold: 0 });
+        io.observe(slot);
+
+        // Combine with ResizeObserver to catch width changes
+        let ro = null;
+        if ('ResizeObserver' in window) {
+          ro = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+              if (widthReady() && entry.target === slot) {
+                // Only push when also intersecting; IO will handle the final trigger
+                // But if IO is not available for some reason, fallback here
+                // (kept for robustness)
+              }
+            }
+          });
+          ro.observe(slot);
+        }
+
+        // Fallback in case neither event fires but slot is already visible & sized
+        if (widthReady() && slot.getBoundingClientRect().top < window.innerHeight && slot.getBoundingClientRect().bottom > 0) {
+          pushAd();
+          io.unobserve(slot);
+          ro && ro.unobserve && ro.unobserve(slot);
+        }
       } else if ('ResizeObserver' in window) {
-        const ro = new ResizeObserver(entries => {
+        const ro = new ResizeObserver((entries) => {
           for (const entry of entries) {
             if (entry.target.offsetWidth > 0) {
               pushAd();
@@ -375,11 +413,15 @@ function initAdsSafely() {
           }
         });
         ro.observe(slot);
+        // Fallback attempt after load
+        if (widthReady()) pushAd(); else window.addEventListener('load', pushAd, { once: true });
       } else {
-        // Fallback: attempt after load
-        window.addEventListener('load', pushAd, { once: true });
+        // Basic immediate or onload fallback
+        if (widthReady()) pushAd(); else window.addEventListener('load', pushAd, { once: true });
       }
-    });
+    };
+
+    slots.forEach(setupForSlot);
   } catch (e) { /* noop */ }
 }
 
