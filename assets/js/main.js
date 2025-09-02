@@ -575,3 +575,16 @@ if ('requestIdleCallback' in window) {
 } else {
   setTimeout(initAdsSafely, 800);
 }
+
+// Global analytics helpers
+if (typeof window.trackEvent !== 'function') {
+  window.trackEvent = function(action, params) {
+    try {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', action, params || {});
+      }
+    } catch (e) {
+      // no-op
+    }
+  };
+}
