@@ -140,4 +140,9 @@
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
   </url>
+  <url>
+    <loc>https://minigames365.com/games/hbm4</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
 </urlset>

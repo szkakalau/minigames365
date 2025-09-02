@@ -318,3 +318,19 @@ a { color: inherit; text-decoration: none; }
   .game-card:active { transform: translateY(-1px); }
   .play-overlay { opacity: 1; }
 }
+
+/* Safe area support for iOS notch */
+.header { padding-top: constant(safe-area-inset-top); padding-top: env(safe-area-inset-top); }
+
+/* Fullscreen overlay height fix on mobile browsers */
+.game-over-screen { height: 100dvh; }
+
+/* Prevent game content from being hidden on small screens */
+.game-over-content { max-height: 80dvh; overflow: auto; }
+
+/* Improve touch handling within canvas */
+@media (max-width: 767px) {
+  .game-area { overscroll-behavior: contain; }
+  .game-canvas-container canvas { touch-action: none; }
+  body, .game-button, .hud-button, .lang-toggle { -webkit-tap-highlight-color: transparent; }
+}

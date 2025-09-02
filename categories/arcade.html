@@ -26,8 +26,9 @@
                     <span class="logo-text">MiniGames365</span>
                 </a>
                 <div class="nav-search">
-                    <input type="text" placeholder="Search games..." id="searchInput" onkeyup="searchGames()">
+                    <input type="text" placeholder="Search games..." id="searchInput" onkeyup="searchGames()" data-i18n="search-placeholder">
                     <button class="search-btn">🔍</button>
+                    <button class="lang-toggle" aria-label="Toggle language">EN</button>
                 </div>
             </nav>
         </div>
@@ -211,6 +212,14 @@
                 category: 'Arcade',
                 rating: 4.5,
                 thumbnail: '/assets/images/games/dodger-thumb.svg'
+            },
+            {
+                slug: 'hbm4',
+                title: 'Hbm4',
+                description: 'Dodge incoming blocks, collect power-ups, survive as long as possible. High-speed arcade action.',
+                category: 'Arcade',
+                rating: 4.8,
+                thumbnail: '/assets/images/games/hbm4-thumb.svg'
             }
         ];
 
@@ -219,7 +228,8 @@
             'minefun-io': { badge: 'NEW', weight: 100 },
             'tetris': { badge: 'NEW', weight: 120 },
             'pac-man': { badge: 'NEW', weight: 120 },
-            'pong': { badge: 'NEW', weight: 120 }
+            'pong': { badge: 'NEW', weight: 120 },
+            'hbm4': { badge: 'NEW', weight: 150 }
         };
 
         function renderArcadeGames() {
@@ -242,8 +252,8 @@
                         <div class="play-overlay"><div class="play-button">▶</div></div>
                     </div>
                     <div class="game-info">
-                        <h3 class="game-title">${game.title}</h3>
-                        <p class="game-description">${game.description}</p>
+                        <h3 class="game-title" data-i18n="${game.slug}-title">${game.title}</h3>
+                        <p class="game-description" data-i18n="${game.slug}-desc">${game.description}</p>
                         <div class="game-meta">
                             <span class="game-category">${game.category}</span>
                             <span class="game-rating">⭐ ${game.rating}</span>
@@ -251,6 +261,10 @@
                     </div>`;
                 grid.appendChild(el);
             });
+            // Apply translations for dynamically inserted elements
+            if (typeof applyTranslations === 'function' && typeof currentLanguage !== 'undefined') {
+                applyTranslations(currentLanguage);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', renderArcadeGames);

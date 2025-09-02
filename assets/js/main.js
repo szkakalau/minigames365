@@ -33,7 +33,10 @@ const translations = {
     'crypto-desc': 'Catch rare crypto tokens and avoid scams. Simple, fast, and fun on any device!',
     // New keys for Video game monetization
     'vgm-title': 'Video game monetization',
-    'vgm-desc': 'Balance ads and user happiness. Collect revenue while avoiding churn. Optimized for mobile & desktop.'
+    'vgm-desc': 'Balance ads and user happiness. Collect revenue while avoiding churn. Optimized for mobile & desktop.',
+    // New keys for Hbm4
+    'hbm4-title': 'Hbm4',
+    'hbm4-desc': 'Dodge incoming blocks, collect power-ups, survive as long as possible. High-speed arcade action optimized for mobile & desktop.'
   },
   es: {
     'site-title': 'PlayCentral - Juegos Online Gratis',
@@ -65,7 +68,12 @@ const translations = {
     'more-games': 'También te puede gustar',
     'final-score': 'Puntuación Final',
     'crypto-title': 'Crypto Collectibles',
-    'crypto-desc': 'Atrapa tokens cripto raros y evita estafas. ¡Simple, rápido y divertido en cualquier dispositivo!'
+    'crypto-desc': 'Atrapa tokens cripto raros y evita estafas. ¡Simple, rápido y divertido en cualquier dispositivo!',
+    'vgm-title': 'Monetización de videojuegos',
+    'vgm-desc': 'Equilibra anuncios y felicidad del jugador. Cobra ingresos evitando el abandono. Optimizado para móvil y desktop.',
+    // Hbm4
+    'hbm4-title': 'Hbm4',
+    'hbm4-desc': 'Esquiva bloques, recoge potenciadores y sobrevive lo máximo posible. Acción arcade rápida optimizada para móvil y escritorio.'
   },
   pt: {
     'site-title': 'PlayCentral - Jogos Online Grátis',
@@ -77,7 +85,7 @@ const translations = {
     'hero-title': 'Jogue os Melhores Jogos Online Grátis',
     'hero-description': 'Descubra milhares de jogos em todas as categorias. Sem downloads, sem registro necessário. Jogue instantaneamente em qualquer dispositivo!',
     'hero-stat-games': '🎮 1000+ Jogos',
-    'hero-stat-platforms': '📱 Móvil e Desktop',
+    'hero-stat-platforms': '📱 Móvel e Desktop',
     'hero-stat-free': '🆓 Sempre Grátis',
     'featured-title': '🔥 Jogos em Destaque',
     'categories-title': '📂 Categorias de Jogos',
@@ -97,7 +105,12 @@ const translations = {
     'more-games': 'Você também pode gostar',
     'final-score': 'Pontuação Final',
     'crypto-title': 'Crypto Collectibles',
-    'crypto-desc': 'Capture tokens cripto raros e evite golpes. Simples, rápido e divertido em qualquer dispositivo!'
+    'crypto-desc': 'Capture tokens cripto raros e evite golpes. Simples, rápido e divertido em qualquer dispositivo!',
+    'vgm-title': 'Monetização de jogos',
+    'vgm-desc': 'Equilibre anúncios e a felicidade do jogador. Colete receita evitando churn. Otimizado para móvel e desktop.',
+    // Hbm4
+    'hbm4-title': 'Hbm4',
+    'hbm4-desc': 'Desvie dos blocos, colete power-ups e sobreviva o máximo possível. Ação arcade em alta velocidade otimizada para móvel e desktop.'
   },
   tr: {
     'site-title': 'PlayCentral - Ücretsiz Online Oyunlar',
@@ -129,7 +142,10 @@ const translations = {
     'more-games': 'Bunları da beğenebilirsin',
     'final-score': 'Final Skoru',
     'crypto-title': 'Crypto Collectibles',
-    'crypto-desc': 'Nadir kripto tokenlarını yakala ve dolandırıcılardan kaçın. Her cihazda basit, hızlı ve eğlenceli!'
+    'crypto-desc': 'Nadir kripto tokenlarını yakala ve dolandırıcılardan kaçın. Her cihazda basit, hızlı ve eğlenceli!',
+    // Hbm4
+    'hbm4-title': 'Hbm4',
+    'hbm4-desc': 'Gelen bloklardan kaç, güçlendirmeleri topla ve mümkün olduğunca uzun hayatta kal. Mobil ve masaüstü için optimize edilmiş yüksek hızlı arcade aksiyonu.'
   },
   vi: {
     'site-title': 'PlayCentral - Game Online Miễn Phí',
@@ -164,7 +180,10 @@ const translations = {
     'crypto-desc': 'Bắt các token tiền mã hóa hiếm và tránh vật phẩm lừa đảo. Đơn giản, nhanh và vui trên mọi thiết bị!',
     // Khóa mới cho Video game monetization
     'vgm-title': 'Kiếm tiền từ trò chơi điện tử',
-    'vgm-desc': 'Cân bằng quảng cáo và sự hài lòng của người chơi. Thu doanh thu, tránh rời bỏ. Tối ưu cho di động & máy tính.'
+    'vgm-desc': 'Cân bằng quảng cáo và sự hài lòng của người chơi. Thu doanh thu, tránh rời bỏ. Tối ưu cho di động & máy tính.',
+    // Hbm4
+    'hbm4-title': 'Hbm4',
+    'hbm4-desc': 'Tránh các khối lao tới, nhặt power-up và sống sót lâu nhất có thể. Hành động arcade tốc độ cao tối ưu cho di động & máy tính.'
   },
   hi: {
     'site-title': 'PlayCentral - मुफ्त ऑनलाइन गेम्स',
@@ -188,7 +207,12 @@ const translations = {
     'score': 'स्कोर',
     'best': 'सर्वश्रेष्ठ',
     'play-again': 'फिर से खेलें',
-    'home': 'होम'
+    'home': 'होम',
+    'vgm-title': 'वीडियो गेम मोनेटाइजेशन',
+    'vgm-desc': 'विज्ञापनों और खिलाड़ी की खुशी में संतुलन रखें। राजस्व एकत्र करें, छोड़ने से बचें। मोबाइल और डेस्कटॉप के लिए अनुकूलित.',
+    // Hbm4
+    'hbm4-title': 'Hbm4',
+    'hbm4-desc': 'आने वाले ब्लॉक्स से बचें, पावर-अप्स इकट्ठा करें और जितना संभव हो उतना लंबे समय तक जीवित रहें। मोबाइल और डेस्कटॉप के लिए अनुकूलित हाई-स्पीड आर्केड एक्शन.'
   }
 };
 
@@ -331,8 +355,36 @@ function playGame(slug) {
 }
 
 // Lighthouse small enhancement: defer ads init until idle
+function initAdsSafely() {
+  try {
+    const slots = document.querySelectorAll('ins.adsbygoogle');
+    if (!slots.length) return;
+    slots.forEach(slot => {
+      const pushAd = () => {
+        try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { /* noop */ }
+      };
+      if (slot.offsetWidth > 0) {
+        pushAd();
+      } else if ('ResizeObserver' in window) {
+        const ro = new ResizeObserver(entries => {
+          for (const entry of entries) {
+            if (entry.target.offsetWidth > 0) {
+              pushAd();
+              ro.unobserve(entry.target);
+            }
+          }
+        });
+        ro.observe(slot);
+      } else {
+        // Fallback: attempt after load
+        window.addEventListener('load', pushAd, { once: true });
+      }
+    });
+  } catch (e) { /* noop */ }
+}
+
 if ('requestIdleCallback' in window) {
-  requestIdleCallback(() => (window.adsbygoogle = window.adsbygoogle || []).push({}));
+  requestIdleCallback(initAdsSafely);
 } else {
-  setTimeout(() => (window.adsbygoogle = window.adsbygoogle || []).push({}), 1000);
+  setTimeout(initAdsSafely, 800);
 }
