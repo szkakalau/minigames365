@@ -176,19 +176,22 @@
   </script>
 
   <script src="/games/futebol-frenzy/logic.js?v=2"></script>
+  <script src="/assets/js/main.js"></script>
   <script>
     // Initialize ads
     
-    // Google Analytics events
+    // Unified events
     function trackGameEvent(action, score = null) {
-      if (typeof gtag !== 'undefined') {
-        const eventData = {
-          game_slug: 'futebol-frenzy',
-          category: 'sports',
-          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
-        };
-        if (score !== null) eventData.score = score;
-        gtag('event', action, eventData);
+      const eventData = {
+        game_slug: 'futebol-frenzy',
+        category: 'sports',
+        device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+      };
+      if (score !== null) eventData.score = score;
+      if (typeof trackEvent === 'function') {
+        trackEvent(action, eventData);
+      } else {
+        console.debug('trackEvent unavailable', action, eventData);
       }
     }
   </script>

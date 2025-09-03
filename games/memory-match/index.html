@@ -214,12 +214,10 @@
     <!-- Game Analytics -->
     <script>
         // Track game page view
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'game_view', {
-                game_name: 'memory-match',
-                game_category: 'puzzle'
-            });
-        }
+        trackEvent('game_view', {
+            game_name: 'memory-match',
+            game_category: 'puzzle'
+        });
         
         // Game tracking data
         window.gameData = {

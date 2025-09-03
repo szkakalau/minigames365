@@ -222,12 +222,10 @@
     <!-- Game Analytics -->
     <script>
         // Track game page view
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'game_view', {
-                game_name: 'tro-choi-dan-gian',
-                game_category: 'strategy'
-            });
-        }
+        trackEvent('game_view', {
+            game_name: 'tro-choi-dan-gian',
+            game_category: 'strategy'
+        });
         
         // Game tracking data
         window.gameData = {
@@ -248,14 +246,12 @@
         }
         
         function trackGameEvent(action, score) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'game_action', {
-                    game_name: window.gameData.game_slug,
-                    game_category: window.gameData.game_category,
-                    action: action,
-                    score: score || 0
-                });
-            }
+            trackEvent('game_action', {
+                game_name: window.gameData.game_slug,
+                game_category: window.gameData.game_category,
+                action: action,
+                score: score || 0
+            });
         }
     </script>
 

@@ -181,29 +181,18 @@
 
   <script src="/games/fifa-mobile/logic.js?v=3"></script>
   <script>
---    function trackGameEvent(action, extras = {}) {
--      if (typeof gtag !== 'undefined') {
--        const eventData = {
--          game_slug: 'fifa-mobile',
--          category: 'Sports',
--          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
--          ...extras
--        };
--        gtag('event', action, eventData);
--      }
--    }
-+    // Local tracking helper for preview
-+    function trackGameEvent(action, extras = {}) {
-+      try {
-+        const eventData = {
-+          game_slug: 'fifa-mobile',
-+          category: 'Sports',
-+          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-+          ...extras
-+        };
-+        if (console && console.debug) console.debug('[track]', action, eventData);
-+      } catch (e) {}
-+    }
+    // Unified tracking helper using global trackEvent from main.js
+    function trackGameEvent(action, extras = {}) {
+      if (typeof window.trackEvent === 'function') {
+        trackEvent(action, {
+          game_slug: 'fifa-mobile',
+          category: 'Sports',
+          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          ...extras
+        });
+      }
+    }
   </script>
+  <script src="/assets/js/main.js"></script>
 </body>
 </html>

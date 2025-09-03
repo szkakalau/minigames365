@@ -172,19 +172,18 @@
   </script>
 
   <script src="/games/sliding-puzzle/logic.js"></script>
+  <script src="/assets/js/main.js"></script>
   <script>
     // Initialize ads
 
-    // Google Analytics events
+    // Analytics events via global helper
     function trackGameEvent(action, extras = {}) {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', action, {
-          game_slug: 'sliding-puzzle',
-          category: 'puzzle',
-          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-          ...extras
-        });
-      }
+      trackEvent(action, {
+        game_slug: 'sliding-puzzle',
+        category: 'puzzle',
+        device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+        ...extras
+      });
     }
   </script>
 </body>

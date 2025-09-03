@@ -169,8 +169,8 @@
 
     // Google Analytics events
     function trackGameEvent(action, extras = {}) {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', action, {
+      if (typeof window.trackEvent === 'function') {
+        trackEvent(action, {
           game_slug: 'simon-says',
           category: 'puzzle',
           device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
@@ -179,5 +179,6 @@
       }
     }
   </script>
+  <script src="/assets/js/main.js"></script>
 </body>
 </html>

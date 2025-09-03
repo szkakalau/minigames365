@@ -185,17 +185,18 @@
   <script src="/games/rumble-rush/logic.js"></script>
   <script>
     function trackGameEvent(action, score = null) {
-      if (typeof gtag !== 'undefined') {
+      if (typeof window.trackEvent === 'function') {
         const eventData = {
           game_slug: 'rumble-rush',
           category: 'Action',
           device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
         };
         if (score !== null) eventData.score = score;
-        gtag('event', action, eventData);
+        trackEvent(action, eventData);
       }
     }
   </script>
+  <script src="/assets/js/main.js"></script>
 </body>
 </html>
 <style>

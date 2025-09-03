@@ -171,16 +171,19 @@
   </script>
 
   <script src="/games/sprint-league/logic.js"></script>
+  <script src="/assets/js/main.js"></script>
   <script>
     function trackGameEvent(action, score = null) {
-      if (typeof gtag !== 'undefined') {
-        const eventData = {
-          game_slug: 'sprint-league',
-          category: 'Sports',
-          device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
-        };
-        if (score !== null) eventData.score = score;
-        gtag('event', action, eventData);
+      const eventData = {
+        game_slug: 'sprint-league',
+        category: 'Sports',
+        device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+      };
+      if (score !== null) eventData.score = score;
+      if (typeof trackEvent === 'function') {
+        trackEvent(action, eventData);
+      } else {
+        console.debug('trackEvent unavailable', action, eventData);
       }
     }
   </script>

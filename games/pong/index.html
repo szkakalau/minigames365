@@ -181,12 +181,10 @@
     <script src="/assets/js/main.js"></script>
     
     <script>
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'game_view', {
-                game_name: 'pong',
-                page_title: 'Pong'
-            });
-        }
+        trackEvent('game_view', {
+            game_name: 'pong',
+            page_title: 'Pong'
+        });
     </script>
 
     <script type="application/ld+json">
