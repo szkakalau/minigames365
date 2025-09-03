@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover" />
+  <title>Ultra Crypto - Play Free Online | MiniGames365</title>
+  <meta name="description" content="Collect coins and dodge rug pulls in this fast arcade crypto mini-game. Mobile friendly, instant play.">
+  <meta name="keywords" content="ultra-crypto, crypto game, arcade, mobile game, web game">
+  <link rel="canonical" href="https://minigames365.com/games/ultra-crypto">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Ultra Crypto - Play Free Online | MiniGames365">
+  <meta property="og:description" content="Collect coins and dodge rug pulls. Fast arcade fun on mobile & desktop.">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/ultra-crypto-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/ultra-crypto">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ultra Crypto - Play Free Online">
+  <meta name="twitter:description" content="Collect coins and dodge rug pulls. Fast arcade fun on mobile & desktop.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/ultra-crypto-thumb.svg">
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="logo">
+          <img src="/assets/images/logo.svg" alt="MiniGames365" width="40" height="40">
+          <span class="logo-text">MiniGames365</span>
+        </a>
+        <div class="nav-search">
+          <input type="text" placeholder="Search games..." id="searchInput" onkeyup="searchGames()" data-i18n="search-placeholder">
+          <button class="search-btn">🔍</button>
+          <button class="lang-toggle" aria-label="Toggle language">EN</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title" data-i18n="ultra-crypto-title">Ultra Crypto</h1>
+          <p class="hero-description" data-i18n="ultra-crypto-desc">Collect coins and dodge rug pulls. Fast arcade fun on mobile & desktop.</p>
+          <div class="game-instructions">
+            <strong data-i18n="controls">Controls</strong>:
+            <span data-i18n="controls-detail">Desktop: ← → or A/D to move. Mobile: tap/drag to move.</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="ad-banner-top">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6583243933606323" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+
+      <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
+        <div id="game-root" class="game-root" style="position:relative; background:#111827; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06); max-width:420px; width:100%;">
+          <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
+            <div class="scores" style="display:flex; gap:10px;">
+              <div class="score" id="score" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);" data-i18n="score">Score: 0</div>
+              <div class="best" id="best" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);" data-i18n="best">Best: 0</div>
+            </div>
+            <div class="controls" style="display:flex; gap:8px;">
+              <button id="restartBtn" class="search-btn" data-i18n="restart">Restart</button>
+            </div>
+          </div>
+          <canvas id="gameCanvas" width="360" height="560" style="touch-action:none; background:#0f172a; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.88); color:white; padding:20px; border-radius:10px; text-align:center;">
+            <h3 data-i18n="game-over">Game Over</h3>
+            <p><span data-i18n="final-score">Final Score</span>: <span id="finalScore">0</span></p>
+            <button onclick="restartGame()" class="search-btn" data-i18n="play-again">Play Again</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="featured-games">
+        <h2 class="section-title" data-i18n="more-games">You may also like</h2>
+        <div class="games-grid" id="recommended-grid"></div>
+      </section>
+      <script>
+        window.RECOMMENDED_GAMES = [
+          { href: '/games/crypto-collectibles/', img: '/assets/images/games/crypto-collectibles-thumb.svg', title: 'Crypto Collectibles', desc: 'Catch rare crypto tokens and avoid scams.', category: 'Arcade' },
+          { href: '/games/pong/', img: '/assets/images/games/pong-thumb.svg', title: 'Pong', desc: 'Beat the AI to 7 points!', category: 'Arcade' },
+          { href: '/games/flappy-bird/', img: '/assets/images/games/flappy-bird-thumb.svg', title: 'Flappy Bird', desc: 'Tap to fly and avoid pipes.', category: 'Arcade' },
+          { href: '/games/minesweeper/', img: '/assets/images/games/minesweeper-thumb.svg', title: 'Minesweeper', desc: 'Flag all mines!', category: 'Puzzle' }
+        ];
+      </script>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 MiniGames365. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Ultra Crypto",
+    "description": "Collect coins and dodge rug pulls. Fast arcade fun on mobile & desktop.",
+    "applicationCategory": "Game",
+    "genre": ["Arcade"],
+    "operatingSystem": "Web",
+    "url": "https://minigames365.com/games/ultra-crypto",
+    "image": "https://minigames365.com/assets/images/games/ultra-crypto-thumb.svg",
+    "author": {"@type": "Organization", "name": "MiniGames365"},
+    "creator": {"@type": "Organization", "name": "MiniGames365"},
+    "inLanguage": "en"
+  }
+  </script>
+
+  <script src="/games/ultra-crypto/logic.js?v=1"></script>
+  <script src="/assets/js/main.js"></script>
+  <script>
+    function trackGameEvent(action, score = null) {
+      const eventData = {
+        game_slug: 'ultra-crypto',
+        category: 'arcade',
+        device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+      };
+      if (score !== null) eventData.score = score;
+      trackEvent(action, eventData);
+    }
+  </script>
+</body>
+</html>

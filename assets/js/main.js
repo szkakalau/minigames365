@@ -36,7 +36,9 @@ const translations = {
     'vgm-desc': 'Balance ads and user happiness. Collect revenue while avoiding churn. Optimized for mobile & desktop.',
     // New keys for Hbm4
     'hbm4-title': 'Hbm4',
-    'hbm4-desc': 'Dodge incoming blocks, collect power-ups, survive as long as possible. High-speed arcade action optimized for mobile & desktop.'
+    'hbm4-desc': 'Dodge incoming blocks, collect power-ups, survive as long as possible. High-speed arcade action optimized for mobile & desktop.',
+    'ultra-crypto-title': 'Ultra Crypto',
+    'ultra-crypto-desc': 'Collect coins and dodge rug pulls. Fast arcade fun on mobile & desktop.'
   },
   es: {
     'site-title': 'PlayCentral - Juegos Online Gratis',
