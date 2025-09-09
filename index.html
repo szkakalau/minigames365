@@ -44,30 +44,55 @@
                     </a>
                 </div>
                 
-                <nav class="main-nav">
+                <nav class="main-nav" id="mainNav">
                     <ul class="nav-list">
-                        <li><a href="#featured" data-i18n="nav-featured">Featured</a></li>
-                        <li><a href="#categories" data-i18n="nav-categories">Categories</a></li>
-                        <li><a href="#new-games" data-i18n="nav-new-games">New Games</a></li>
+                        <li><a href="#featured" data-i18n="nav-featured" class="nav-link">Featured</a></li>
+                        <li><a href="#categories" data-i18n="nav-categories" class="nav-link">Categories</a></li>
+                        <li><a href="#new-games" data-i18n="nav-new-games" class="nav-link">New Games</a></li>
+                        <li><a href="#trending" class="nav-link">Trending</a></li>
                     </ul>
                 </nav>
 
                 <div class="header-actions">
                     <div class="search-container">
                         <input type="text" id="searchInput" placeholder="Search games..." class="search-input" data-i18n="search-placeholder">
-                        <button type="button" class="search-btn" onclick="searchGames()">🔍</button>
+                        <button type="button" class="search-btn" onclick="searchGames()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Category Filter -->
+                    <div class="filter-container">
+                        <select id="categoryFilter" class="category-filter" onchange="filterGames()">
+                            <option value="all" data-i18n="filter-all">All Categories</option>
+                            <option value="action" data-i18n="filter-action">Action</option>
+                            <option value="puzzle" data-i18n="filter-puzzle">Puzzle</option>
+                            <option value="arcade" data-i18n="filter-arcade">Arcade</option>
+                            <option value="sports" data-i18n="filter-sports">Sports</option>
+                            <option value="strategy" data-i18n="filter-strategy">Strategy</option>
+                            <option value="racing" data-i18n="filter-racing">Racing</option>
+                        </select>
                     </div>
                     
                     <div class="language-selector">
                         <select id="languageSelect" onchange="changeLanguage(this.value)">
-                            <option value="en">English</option>
-                            <option value="es">Español</option>
-                            <option value="pt">Português</option>
-                            <option value="tr">Türkçe</option>
-                            <option value="vi">Tiếng Việt</option>
-                            <option value="hi">हिंदी</option>
+                            <option value="en">🇺🇸 EN</option>
+                            <option value="es">🇪🇸 ES</option>
+                            <option value="pt">🇧🇷 PT</option>
+                            <option value="tr">🇹🇷 TR</option>
+                            <option value="vi">🇻🇳 VI</option>
+                            <option value="hi">🇮🇳 HI</option>
                         </select>
                     </div>
+                    
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </div>
             </div>
         </div>

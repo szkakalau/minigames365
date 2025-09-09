@@ -50,7 +50,14 @@ const translations = {
     'word-master-title': 'Word Master',
     'word-master-desc': 'Test your vocabulary skills in this challenging word game!',
     'ninja-runner-title': 'Ninja Runner',
-    'ninja-runner-desc': 'Run, jump, and slide as a ninja through challenging obstacles!'
+    'ninja-runner-desc': 'Run, jump, and slide as a ninja through challenging obstacles!',
+    'filter-all': 'All Categories',
+    'filter-action': 'Action',
+    'filter-puzzle': 'Puzzle',
+    'filter-arcade': 'Arcade',
+    'filter-sports': 'Sports',
+    'filter-strategy': 'Strategy',
+    'filter-racing': 'Racing'
   },
   es: {
     'site-title': 'PlayCentral - Juegos Online Gratis',
@@ -91,7 +98,14 @@ const translations = {
     'highway-dash-title': 'Highway Dash',
     'highway-dash-desc': 'Atraviesa el tráfico, esquiva autos y recoge monedas en un corredor de 3 carriles.',
     'pixel-puzzler-title': 'Pixel Puzzler',
-    'pixel-puzzler-desc': 'Rompecabezas 15 clásico. Desliza fichas numeradas para resolver con menos movimientos.'
+    'pixel-puzzler-desc': 'Rompecabezas 15 clásico. Desliza fichas numeradas para resolver con menos movimientos.',
+    'filter-all': 'Todas las Categorías',
+    'filter-action': 'Acción',
+    'filter-puzzle': 'Puzzle',
+    'filter-arcade': 'Arcade',
+    'filter-sports': 'Deportes',
+    'filter-strategy': 'Estrategia',
+    'filter-racing': 'Carreras'
   },
   pt: {
     'site-title': 'PlayCentral - Jogos Online Grátis',
@@ -132,7 +146,14 @@ const translations = {
     'highway-dash-title': 'Highway Dash',
     'highway-dash-desc': 'Corra pelo trânsito, desvie de carros e colete moedas em um corredor de 3 pistas.',
     'pixel-puzzler-title': 'Pixel Puzzler',
-    'pixel-puzzler-desc': 'Quebra-cabeça 15 clássico. Deslize peças numeradas para resolver com menos movimentos.'
+    'pixel-puzzler-desc': 'Quebra-cabeça 15 clássico. Deslize peças numeradas para resolver com menos movimentos.',
+    'filter-all': 'Todas as Categorias',
+    'filter-action': 'Ação',
+    'filter-puzzle': 'Puzzle',
+    'filter-arcade': 'Arcade',
+    'filter-sports': 'Esportes',
+    'filter-strategy': 'Estratégia',
+    'filter-racing': 'Corrida'
   },
   tr: {
     'site-title': 'PlayCentral - Ücretsiz Online Oyunlar',
@@ -397,6 +418,7 @@ let currentLanguage = localStorage.getItem('language') || 'en';
 // Initialize language on page load
 document.addEventListener('DOMContentLoaded', function() {
   initializeLanguage();
+  initializeSearch();
 });
 
 function initializeLanguage() {
@@ -504,21 +526,95 @@ function toggleLanguage() {
   console.log('Language toggled to:', nextLang);
 }
 
+// Enhanced search and filter functionality
 function searchGames() {
-  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  filterGames();
+}
+
+function filterGames() {
+  const searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+  const selectedCategory = document.getElementById('categoryFilter').value;
   const cards = document.querySelectorAll('.game-card');
+  let visibleCount = 0;
+  
   cards.forEach(card => {
     const title = card.querySelector('.game-title')?.innerText.toLowerCase() || '';
-    card.style.display = title.includes(q) || card.classList.contains('coming-soon') ? '' : 'none';
+    const description = card.querySelector('.game-description')?.innerText.toLowerCase() || '';
+    const category = card.querySelector('.game-category')?.innerText.toLowerCase() || '';
+    
+    // Check if game matches search query
+    const matchesSearch = !searchQuery || 
+      title.includes(searchQuery) || 
+      description.includes(searchQuery) ||
+      category.includes(searchQuery);
+    
+    // Check if game matches category filter
+    const matchesCategory = selectedCategory === 'all' || 
+      category === selectedCategory.toLowerCase();
+    
+    // Show card if it matches both search and category
+    const shouldShow = matchesSearch && matchesCategory;
+    card.style.display = shouldShow ? '' : 'none';
+    
+    if (shouldShow) visibleCount++;
   });
+  
+  // Show/hide "no results" message
+  updateNoResultsMessage(visibleCount);
+}
+
+function updateNoResultsMessage(visibleCount) {
+  let noResultsMsg = document.getElementById('noResultsMessage');
+  
+  if (visibleCount === 0) {
+    if (!noResultsMsg) {
+      noResultsMsg = document.createElement('div');
+      noResultsMsg.id = 'noResultsMessage';
+      noResultsMsg.className = 'no-results-message';
+      noResultsMsg.innerHTML = `
+        <div class="no-results-content">
+          <div class="no-results-icon">🔍</div>
+          <h3>No games found</h3>
+          <p>Try adjusting your search or filter criteria</p>
+        </div>
+      `;
+      
+      // Insert after the first games grid
+      const firstGrid = document.querySelector('.games-grid');
+      if (firstGrid) {
+        firstGrid.parentNode.insertBefore(noResultsMsg, firstGrid.nextSibling);
+      }
+    }
+    noResultsMsg.style.display = 'block';
+  } else if (noResultsMsg) {
+    noResultsMsg.style.display = 'none';
+  }
+}
+
+// Real-time search as user types
+function initializeSearch() {
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', debounce(filterGames, 300));
+  }
+}
+
+// Debounce function to limit search frequency
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
 }
 
 function filterByCategory(cat) {
-  const cards = document.querySelectorAll('.game-card');
-  cards.forEach(card => {
-    const category = card.querySelector('.game-category')?.innerText.toLowerCase() || '';
-    card.style.display = category.includes(cat) || card.classList.contains('coming-soon') ? '' : 'none';
-  });
+  document.getElementById('categoryFilter').value = cat;
+  filterGames();
 }
 
 function showPage(page) {
