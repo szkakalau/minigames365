@@ -1,7 +1,7 @@
 // Internationalization (i18n) Support
 const translations = {
   en: {
-    'site-title': 'PlayCentral - Free Online Games',
+    'site-title': 'minigames365 - Free Online Games',
     'site-description': 'Play the best free online games! No downloads required. Enjoy action, puzzle, arcade games and more on desktop and mobile.',
     'nav-featured': 'Featured',
     'nav-categories': 'Categories', 
@@ -60,7 +60,7 @@ const translations = {
     'filter-racing': 'Racing'
   },
   es: {
-    'site-title': 'PlayCentral - Juegos Online Gratis',
+    'site-title': 'minigames365 - Juegos Online Gratis',
     'site-description': '¡Juega los mejores juegos online gratis! No requiere descargas. Disfruta de juegos de acción, puzzle, arcade y más en desktop y móvil.',
     'nav-featured': 'Destacados',
     'nav-categories': 'Categorías',
@@ -108,7 +108,7 @@ const translations = {
     'filter-racing': 'Carreras'
   },
   pt: {
-    'site-title': 'PlayCentral - Jogos Online Grátis',
+    'site-title': 'minigames365 - Jogos Online Grátis',
     'site-description': 'Jogue os melhores jogos online grátis! Sem downloads necessários. Desfrute de jogos de ação, puzzle, arcade e mais no desktop e móvel.',
     'nav-featured': 'Destaques',
     'nav-categories': 'Categorias',
@@ -156,7 +156,7 @@ const translations = {
     'filter-racing': 'Corrida'
   },
   tr: {
-    'site-title': 'PlayCentral - Ücretsiz Online Oyunlar',
+    'site-title': 'minigames365 - Ücretsiz Online Oyunlar',
     'site-description': 'En iyi ücretsiz online oyunları oyna! İndirme gerekmez. Masaüstü ve mobilde aksiyon, bulmaca, arcade oyunları ve daha fazlasının keyfini çıkar.',
     'nav-featured': 'Öne Çıkanlar',
     'nav-categories': 'Kategoriler',
@@ -191,7 +191,7 @@ const translations = {
     'hbm4-desc': 'Gelen bloklardan kaç, güçlendirmeleri topla ve mümkün olduğunca uzun hayatta kal. Mobil ve masaüstü için optimize edilmiş yüksek hızlı arcade aksiyonu.'
   },
   vi: {
-    'site-title': 'PlayCentral - Game Online Miễn Phí',
+    'site-title': 'minigames365 - Game Online Miễn Phí',
     'site-description': 'Chơi những game online miễn phí tốt nhất! Không cần tải về. Thưởng thức game hành động, giải đố, arcade và nhiều hơn nữa trên desktop và mobile.',
     'nav-featured': 'Nổi Bật',
     'nav-categories': 'Thể Loại',
@@ -233,7 +233,7 @@ const translations = {
     'pixel-puzzler-desc': 'Trò chơi 15 miếng cổ điển. Trượt các ô số để giải với ít bước nhất.'
   },
   hi: {
-    'site-title': 'PlayCentral - मुफ्त ऑनलाइन गेम्स',
+    'site-title': 'minigames365 - मुफ्त ऑनलाइन गेम्स',
     'site-description': 'सबसे अच्छे मुफ्त ऑनलाइन गेम्स खेलें! डाउनलोड की जरूरत नहीं। डेस्कटॉप और मोबाइल पर एक्शन, पज़ल, आर्केड गेम्स और बहुत कुछ का आनंद लें।',
     'nav-featured': 'फीचर्ड',
     'nav-categories': 'श्रेणियां',
