@@ -103,6 +103,11 @@
 
     <script src="/assets/js/main.js"></script>
     <script>
+        // NEW/HOT flags & weights
+        const GAME_FLAGS = {
+            'highway-dash': { badge: 'NEW', weight: 100 }
+        };
+        
         const RACING_GAMES = [
             {
                 slug: 'moto-race-go',
@@ -111,6 +116,14 @@
                 category: 'Racing',
                 rating: 4.7,
                 thumbnail: '/assets/images/games/moto-race-go-thumb.svg'
+            },
+            {
+                slug: 'highway-dash',
+                title: 'Highway Dash',
+                description: 'Dash through traffic, dodge cars, and collect coins in a fast 3-lane racer.',
+                category: 'Racing',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/highway-dash-thumb.svg'
             }
         ];
 
@@ -132,14 +145,27 @@
                 return;
             }
 
-            RACING_GAMES.forEach(game => {
+            // Sort games by weight if they have flags
+            const sortedGames = [...RACING_GAMES].sort((a, b) => {
+                const aWeight = GAME_FLAGS[a.slug]?.weight || 0;
+                const bWeight = GAME_FLAGS[b.slug]?.weight || 0;
+                return bWeight - aWeight;
+            });
+
+            sortedGames.forEach(game => {
                 const el = document.createElement('div');
                 el.className = 'game-card';
                 el.onclick = () => playGame(game.slug);
+                
+                // Check if game has a badge
+                const badge = GAME_FLAGS[game.slug]?.badge;
+                const badgeHtml = badge ? `<div class="game-badge ${badge.toLowerCase()}">${badge}</div>` : '';
+                
                 el.innerHTML = `
                     <div class="game-thumbnail">
                         <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
                         <div class="play-overlay"><div class="play-button">▶</div></div>
+                        ${badgeHtml}
                     </div>
                     <div class="game-info">
                         <h3 class="game-title">${game.title}</h3>

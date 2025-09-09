@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#g)"/>
+  <!-- Road -->
+  <rect x="160" y="0" width="192" height="512" fill="#0b1220"/>
+  <!-- Lane dashes -->
+  <g stroke="#ffffff" stroke-opacity="0.6" stroke-width="8" stroke-linecap="round">
+    <line x1="256" y1="24" x2="256" y2="72"/>
+    <line x1="256" y1="120" x2="256" y2="168"/>
+    <line x1="256" y1="216" x2="256" y2="264"/>
+    <line x1="256" y1="312" x2="256" y2="360"/>
+    <line x1="256" y1="408" x2="256" y2="456"/>
+  </g>
+  <!-- Player car -->
+  <rect x="238" y="360" width="36" height="80" rx="6" fill="#22d3ee"/>
+  <!-- Obstacles -->
+  <rect x="182" y="120" width="36" height="60" rx="5" fill="#ef4444"/>
+  <rect x="294" y="210" width="36" height="60" rx="5" fill="#ef4444"/>
+  <!-- Coins -->
+  <circle cx="318" cy="120" r="14" fill="#fbbf24"/>
+  <circle cx="194" cy="260" r="14" fill="#fbbf24"/>
+  <text x="256" y="496" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="28" fill="#ffffff" fill-opacity="0.9">Highway Dash</text>
+</svg>

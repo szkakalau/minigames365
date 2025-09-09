@@ -112,6 +112,22 @@
         // Puzzle Games Data
         const PUZZLE_GAMES = [
             {
+                slug: 'bubble-pop-frenzy',
+                title: 'Bubble Pop Frenzy',
+                description: 'Match and pop colorful bubbles in this addictive puzzle game!',
+                category: 'Puzzle',
+                rating: 4.7,
+                thumbnail: '/assets/images/games/bubble-pop-frenzy-thumb.svg'
+            },
+            {
+                slug: 'pixel-puzzler',
+                title: 'Pixel Puzzler',
+                description: 'Slide tiles to solve the picture puzzle! Challenge your spatial reasoning skills.',
+                category: 'Puzzle',
+                rating: 4.7,
+                thumbnail: '/assets/images/games/pixel-puzzler-thumb.svg'
+            },
+            {
                 slug: 'minesweeper',
                 title: 'Minesweeper',
                 description: 'Clear the minefield without hitting a bomb! Classic logic puzzle with multiple difficulty levels.',
@@ -160,16 +176,32 @@
                 thumbnail: '/assets/images/games/simon-says-thumb.svg'
             }
         ];
+        
+        // NEW/HOT flags & weights
+        const GAME_FLAGS = {
+            'bubble-pop-frenzy': { badge: 'NEW', weight: 100 }
+        };
 
         // Render puzzle games
         function renderPuzzleGames() {
             const grid = document.getElementById('puzzle-games-grid');
             if (!grid) return;
 
-            PUZZLE_GAMES.forEach(game => {
+            // Sort games by weight if they have flags
+            const sortedGames = [...PUZZLE_GAMES].sort((a, b) => {
+                const aWeight = GAME_FLAGS[a.slug]?.weight || 0;
+                const bWeight = GAME_FLAGS[b.slug]?.weight || 0;
+                return bWeight - aWeight;
+            });
+
+            sortedGames.forEach(game => {
                 const gameCard = document.createElement('div');
                 gameCard.className = 'game-card';
                 gameCard.onclick = () => playGame(game.slug);
+                
+                // Check if game has a badge
+                const badge = GAME_FLAGS[game.slug]?.badge;
+                const badgeHtml = badge ? `<div class="game-badge ${badge.toLowerCase()}">${badge}</div>` : '';
                 
                 gameCard.innerHTML = `
                     <div class="game-thumbnail">
@@ -177,6 +209,7 @@
                         <div class="play-overlay">
                             <div class="play-button">▶</div>
                         </div>
+                        ${badgeHtml}
                     </div>
                     <div class="game-info">
                         <h3 class="game-title">${game.title}</h3>

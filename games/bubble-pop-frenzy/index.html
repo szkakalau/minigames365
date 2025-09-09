@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bubble Pop Frenzy - Play Free Online | PlayCentral</title>
+  <meta name="description" content="Pop colorful bubbles in this addictive puzzle game. Match colors to clear the board. Works on desktop and mobile.">
+  <meta name="keywords" content="bubble-pop-frenzy, free online game, puzzle, mobile game, bubble pop, match 3">
+  <link rel="canonical" href="https://minigames365.com/games/bubble-pop-frenzy">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Bubble Pop Frenzy - Play Free Online | PlayCentral">
+  <meta property="og:description" content="Pop colorful bubbles in this addictive puzzle game. Match colors to clear the board.">
+  <meta property="og:image" content="https://minigames365.com/assets/images/games/bubble-pop-frenzy-thumb.svg">
+  <meta property="og:url" content="https://minigames365.com/games/bubble-pop-frenzy">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bubble Pop Frenzy - Play Free Online">
+  <meta name="twitter:description" content="Pop colorful bubbles in this addictive puzzle game. Match colors to clear the board.">
+  <meta name="twitter:image" content="https://minigames365.com/assets/images/games/bubble-pop-frenzy-thumb.svg">
+
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="/"><img src="/assets/images/logo.svg" alt="PlayCentral" class="logo-img"><span class="logo-text">PlayCentral</span></a></div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/index.html#categories">Categories</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Bubble Pop Frenzy</h1>
+          <p class="hero-description">Pop colorful bubbles in this addictive puzzle game. Match colors to clear the board.</p>
+          <div class="game-instructions">
+            <strong>Controls:</strong> Click or tap on bubbles to pop them. Match 3 or more of the same color to score points.
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad above game canvas -->
+      <div class="ad-banner-top">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6583243933606323" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+
+      <section class="game-container" style="display:grid; place-items:center; padding: 12px 0;">
+        <div id="game-root" class="game-root" style="position:relative; background:#111827; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,0.06);">
+          <div class="game-hud" style="display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:8px;">
+            <div class="scores" style="display:flex; gap:10px;">
+              <div class="score" id="score" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Score: 0</div>
+              <div class="best" id="best" style="background:#0b1220; color:white; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">Best: 0</div>
+            </div>
+            <div class="controls" style="display:flex; gap:8px;">
+              <button id="restartBtn" class="search-btn">Restart</button>
+            </div>
+          </div>
+          <canvas id="gameCanvas" width="400" height="600" style="touch-action: none; background:#0f172a; border-radius:8px; border:1px solid rgba(255,255,255,0.06); display:block; max-width:100%;"></canvas>
+          <div id="gameOverScreen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:10px; text-align:center;">
+            <h3>Game Over!</h3>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <button onclick="restartGame()" class="search-btn">Play Again</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Native recommended games -->
+      <section class="featured-games">
+        <h2 class="section-title">You may also like</h2>
+        <div class="games-grid" id="recommended-grid"></div>
+      </section>
+      <script>
+        // Configurable recommendations for template pages
+        window.RECOMMENDED_GAMES = window.RECOMMENDED_GAMES || [
+          { href: '/games/2048/', img: '/assets/images/games/2048-thumb.svg', title: '2048', desc: 'Combine tiles to reach 2048!', category: 'Puzzle' },
+          { href: '/games/flappy-bird/', img: '/assets/images/games/flappy-bird-thumb.svg', title: 'Flappy Bird', desc: 'Tap to fly and avoid pipes.', category: 'Arcade' },
+          { href: '/games/snake/', img: '/assets/images/games/snake-thumb.svg', title: 'Snake', desc: 'Eat food, grow longer, avoid yourself.', category: 'Arcade' },
+          { href: '/games/minesweeper/', img: '/assets/images/games/minesweeper-thumb.svg', title: 'Minesweeper', desc: 'Classic logic puzzle. Flag all mines!', category: 'Puzzle' }
+        ];
+        (function () {
+          const grid = document.getElementById('recommended-grid');
+          if (!grid) return;
+          const items = Array.isArray(window.RECOMMENDED_GAMES) ? window.RECOMMENDED_GAMES : [];
+          items.forEach((item) => {
+            if (item && item.placeholder) {
+              const card = document.createElement('div');
+              card.className = 'game-card coming-soon';
+              card.innerHTML = `
+                <div class="game-thumbnail">
+                  <div class="placeholder">More games coming</div>
+                </div>
+                <div class="game-info">
+                  <h3 class="game-title">${item.title || 'Coming Soon'}</h3>
+                  <p class="game-description">${item.desc || ''}</p>
+                </div>`;
+              grid.appendChild(card);
+              return;
+            }
+            if (!item || !item.href) return;
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.addEventListener('click', () => { window.location.href = item.href; });
+            card.innerHTML = `
+              <div class="game-thumbnail">
+                <img src="${item.img || ''}" alt="${item.title || ''}" loading="lazy">
+                <div class="play-overlay">
+                  <div class="play-button">▶</div>
+                </div>
+              </div>
+              <div class="game-info">
+                <h3 class="game-title">${item.title || ''}</h3>
+                <p class="game-description">${item.desc || ''}</p>
+                <div class="game-meta">
+                  <span class="game-category">${item.category || ''}</span>
+                </div>
+              </div>`;
+            grid.appendChild(card);
+          });
+        })();
+      </script>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 PlayCentral. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "GAME_TITLE",
+    "description": "GAME_DESCRIPTION",
+    "applicationCategory": "Game",
+    "genre": ["Arcade"],
+    "operatingSystem": "Web",
+    "url": "https://minigames365.com/games/GAME_SLUG",
+    "image": "https://minigames365.com/assets/images/games/GAME_SLUG-thumb.svg",
+    "author": {
+      "@type": "Organization",
+      "name": "PlayCentral"
+    },
+    "creator": {
+      "@type": "Organization", 
+      "name": "PlayCentral"
+    },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <script>
+    // Local analytics helper for development/local preview
+    function trackGameEvent(action, data){
+      console.log('[track]', action, data || {});
+    }
+  </script>
+  <script src="logic.js?v=3"></script>
+</body>
+</html>

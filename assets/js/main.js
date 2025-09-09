@@ -38,7 +38,19 @@ const translations = {
     'hbm4-title': 'Hbm4',
     'hbm4-desc': 'Dodge incoming blocks, collect power-ups, survive as long as possible. High-speed arcade action optimized for mobile & desktop.',
     'ultra-crypto-title': 'Ultra Crypto',
-    'ultra-crypto-desc': 'Collect coins and dodge rug pulls. Fast arcade fun on mobile & desktop.'
+    'ultra-crypto-desc': 'Collect coins and dodge rug pulls. Fast arcade fun on mobile & desktop.',
+    'highway-dash-title': 'Highway Dash',
+    'highway-dash-desc': 'Dash through traffic, dodge cars, and collect coins in a fast 3-lane racer.',
+    'pixel-puzzler-title': 'Pixel Puzzler',
+    'pixel-puzzler-desc': 'Classic 15-puzzle. Slide numbered tiles to solve in the fewest moves.',
+    'bubble-pop-frenzy-title': 'Bubble Pop Frenzy',
+    'bubble-pop-frenzy-desc': 'Pop colorful bubbles in this addictive puzzle game! Match colors to clear the board.',
+    'space-defender-title': 'Space Defender',
+    'space-defender-desc': 'Defend Earth from alien invaders in this action-packed space shooter!',
+    'word-master-title': 'Word Master',
+    'word-master-desc': 'Test your vocabulary skills in this challenging word game!',
+    'ninja-runner-title': 'Ninja Runner',
+    'ninja-runner-desc': 'Run, jump, and slide as a ninja through challenging obstacles!'
   },
   es: {
     'site-title': 'PlayCentral - Juegos Online Gratis',
@@ -75,7 +87,11 @@ const translations = {
     'vgm-desc': 'Equilibra anuncios y felicidad del jugador. Cobra ingresos evitando el abandono. Optimizado para móvil y desktop.',
     // Hbm4
     'hbm4-title': 'Hbm4',
-    'hbm4-desc': 'Esquiva bloques, recoge potenciadores y sobrevive lo máximo posible. Acción arcade rápida optimizada para móvil y escritorio.'
+    'hbm4-desc': 'Esquiva bloques, recoge potenciadores y sobrevive lo máximo posible. Acción arcade rápida optimizada para móvil y escritorio.',
+    'highway-dash-title': 'Highway Dash',
+    'highway-dash-desc': 'Atraviesa el tráfico, esquiva autos y recoge monedas en un corredor de 3 carriles.',
+    'pixel-puzzler-title': 'Pixel Puzzler',
+    'pixel-puzzler-desc': 'Rompecabezas 15 clásico. Desliza fichas numeradas para resolver con menos movimientos.'
   },
   pt: {
     'site-title': 'PlayCentral - Jogos Online Grátis',
@@ -112,7 +128,11 @@ const translations = {
     'vgm-desc': 'Equilibre anúncios e a felicidade do jogador. Colete receita evitando churn. Otimizado para móvel e desktop.',
     // Hbm4
     'hbm4-title': 'Hbm4',
-    'hbm4-desc': 'Desvie dos blocos, colete power-ups e sobreviva o máximo possível. Ação arcade em alta velocidade otimizada para móvel e desktop.'
+    'hbm4-desc': 'Desvie dos blocos, colete power-ups e sobreviva o máximo possível. Ação arcade em alta velocidade otimizada para móvel e desktop.',
+    'highway-dash-title': 'Highway Dash',
+    'highway-dash-desc': 'Corra pelo trânsito, desvie de carros e colete moedas em um corredor de 3 pistas.',
+    'pixel-puzzler-title': 'Pixel Puzzler',
+    'pixel-puzzler-desc': 'Quebra-cabeça 15 clássico. Deslize peças numeradas para resolver com menos movimentos.'
   },
   tr: {
     'site-title': 'PlayCentral - Ücretsiz Online Oyunlar',
@@ -185,7 +205,11 @@ const translations = {
     'vgm-desc': 'Cân bằng quảng cáo và sự hài lòng của người chơi. Thu doanh thu, tránh rời bỏ. Tối ưu cho di động & máy tính.',
     // Hbm4
     'hbm4-title': 'Hbm4',
-    'hbm4-desc': 'Tránh các khối lao tới, nhặt power-up và sống sót lâu nhất có thể. Hành động arcade tốc độ cao tối ưu cho di động & máy tính.'
+    'hbm4-desc': 'Tránh các khối lao tới, nhặt power-up và sống sót lâu nhất có thể. Hành động arcade tốc độ cao tối ưu cho di động & máy tính.',
+    'highway-dash-title': 'Highway Dash',
+    'highway-dash-desc': 'Lướt qua đường cao tốc, né xe và nhặt xu trong game đua 3 làn.',
+    'pixel-puzzler-title': 'Pixel Puzzler',
+    'pixel-puzzler-desc': 'Trò chơi 15 miếng cổ điển. Trượt các ô số để giải với ít bước nhất.'
   },
   hi: {
     'site-title': 'PlayCentral - मुफ्त ऑनलाइन गेम्स',
@@ -214,7 +238,11 @@ const translations = {
     'vgm-desc': 'विज्ञापनों और खिलाड़ी की खुशी में संतुलन रखें। राजस्व एकत्र करें, छोड़ने से बचें। मोबाइल और डेस्कटॉप के लिए अनुकूलित.',
     // Hbm4
     'hbm4-title': 'Hbm4',
-    'hbm4-desc': 'आने वाले ब्लॉक्स से बचें, पावर-अप्स इकट्ठा करें और जितना संभव हो उतना लंबे समय तक जीवित रहें। मोबाइल और डेस्कटॉप के लिए अनुकूलित हाई-स्पीड आर्केड एक्शन.'
+    'hbm4-desc': 'आने वाले ब्लॉक्स से बचें, पावर-अप्स इकट्ठा करें और जितना संभव हो उतना लंबे समय तक जीवित रहें। मोबाइल और डेस्कटॉप के लिए अनुकूलित हाई-स्पीड आर्केड एक्शन.',
+    'highway-dash-title': 'Highway Dash',
+    'highway-dash-desc': 'यातायात में दौड़ें, कारों से बचें और 3-लेन रेसर में सिक्के इकट्ठा करें।',
+    'pixel-puzzler-title': 'Pixel Puzzler',
+    'pixel-puzzler-desc': 'क्लासिक 15-पज़ल। नंबर वाली टाइलों को स्लाइड करके कम चालों में हल करें.'
   }
 };
 

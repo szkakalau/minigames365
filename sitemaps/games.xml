@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://minigames365.com/games/bubble-pop-frenzy</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/space-defender</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/word-master</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/ninja-runner</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://minigames365.com/games/2048</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -147,6 +167,16 @@
   </url>
   <url>
     <loc>https://minigames365.com/games/ultra-crypto</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/highway-dash</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://minigames365.com/games/pixel-puzzler</loc>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>

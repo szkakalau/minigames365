@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Puzzler - Classic Slide Puzzle Game | MiniGames</title>
+    <meta name="description" content="Play Pixel Puzzler - a classic slide puzzle game with pixel art. Arrange numbered tiles to solve the puzzle. Free online puzzle game!">
+    <meta name="keywords" content="pixel puzzler, slide puzzle, puzzle game, online games, classic games, tile puzzle">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Pixel Puzzler - Classic Slide Puzzle Game | MiniGames">
+    <meta property="og:description" content="Play Pixel Puzzler - a classic slide puzzle game with pixel art. Arrange numbered tiles to solve the puzzle. Free online puzzle game!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames.com/games/pixel-puzzler/">
+    <meta property="og:image" content="https://minigames.com/assets/images/games/pixel-puzzler-thumb.svg">
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pixel Puzzler - Classic Slide Puzzle Game">
+    <meta name="twitter:description" content="Play Pixel Puzzler - a classic slide puzzle game with pixel art. Arrange numbered tiles to solve the puzzle. Free online puzzle game!">
+    <meta name="twitter:image" content="https://minigames.com/assets/images/games/pixel-puzzler-thumb.svg">
+    
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://minigames.com/games/pixel-puzzler/">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../index.html">🎮 MiniGames</a>
+            </div>
+            <div class="nav-links">
+                <a href="../../index.html">Home</a>
+                <a href="../../puzzle.html">Puzzle</a>
+                <a href="../../racing.html">Racing</a>
+                <a href="../../action.html">Action</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="game-container">
+        <section class="game-content">
+            <div class="game-header">
+                <h1 id="gameTitle">Pixel Puzzler</h1>
+                <p id="gameDescription">Slide the numbered tiles to arrange them in order. Complete the pixel art puzzle!</p>
+            </div>
+
+            <div class="game-controls">
+                <p id="gameControls">
+                    <strong>How to play:</strong> Click on tiles adjacent to the empty space to slide them. Arrange all tiles in numerical order from 1-15.
+                </p>
+            </div>
+
+            <div class="game-area">
+                <div class="ad-space" style="width:100%; height:90px; background:#f5f5f5; border:1px solid #ddd; display:flex; align-items:center; justify-content:center; color:#999; margin-bottom:20px;">
+                    Advertisement Space
+                </div>
+
+                <div class="game-stats">
+                    <div class="stat-item">
+                        <span id="moves">Moves: 0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span id="best">Best: --</span>
+                    </div>
+                </div>
+
+                <canvas id="gameCanvas" width="480" height="480"></canvas>
+
+                <div class="game-buttons">
+                    <button onclick="shuffleGame()" class="btn btn-primary">New Game</button>
+                    <button onclick="solveGame()" class="btn btn-secondary">Solve</button>
+                </div>
+            </div>
+
+            <div id="gameOverScreen" class="game-over" style="display:none;">
+                <div class="game-over-content">
+                    <h2>Puzzle Solved! 🎉</h2>
+                    <p>Moves: <span id="finalMoves">0</span></p>
+                    <button onclick="restartGame()" class="btn btn-primary">Play Again</button>
+                </div>
+            </div>
+
+            <div class="recommended-games">
+                <h3>More Puzzle Games</h3>
+                <div class="games-grid">
+                    <a href="../2048/" class="game-card">
+                        <img src="../../assets/images/games/2048-thumb.jpg" alt="2048" loading="lazy">
+                        <h4>2048</h4>
+                    </a>
+                    <a href="../sliding-puzzle/" class="game-card">
+                        <img src="../../assets/images/games/sliding-puzzle-thumb.svg" alt="Sliding Puzzle" loading="lazy">
+                        <h4>Sliding Puzzle</h4>
+                    </a>
+                    <a href="../memory-match/" class="game-card">
+                        <img src="../../assets/images/games/memory-match-thumb.svg" alt="Memory Match" loading="lazy">
+                        <h4>Memory Match</h4>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 MiniGames. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../../privacy.html">Privacy Policy</a>
+                <a href="../../terms.html">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Pixel Puzzler",
+        "description": "Play Pixel Puzzler - a classic slide puzzle game with pixel art. Arrange numbered tiles to solve the puzzle. Free online puzzle game!",
+        "url": "https://minigames.com/games/pixel-puzzler/",
+        "image": "https://minigames.com/assets/images/games/pixel-puzzler-thumb.svg",
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiniGames"
+        },
+        "gameItem": {
+            "@type": "Thing",
+            "name": "Pixel Puzzler"
+        },
+        "numberOfPlayers": "1",
+        "gamePlatform": "Web Browser"
+    }
+    </script>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="logic.js"></script>
+
+    <script>
+        // Track game events
+        function trackGameEvent(action, value) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', action, {
+                    'game_name': 'pixel_puzzler',
+                    'value': value
+                });
+            }
+        }
+    </script>
+</body>
+</html>

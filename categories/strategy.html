@@ -105,6 +105,14 @@
     <script>
         const STRATEGY_GAMES = [
             {
+                slug: 'word-master',
+                title: 'Word Master',
+                description: 'Test your vocabulary skills in this challenging word game!',
+                category: 'Strategy',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/word-master-thumb.svg'
+            },
+            {
                 slug: 'tic-tac-toe',
                 title: 'Tic Tac Toe',
                 description: 'Classic 3x3 duel with simple strategy.',
@@ -149,6 +157,11 @@
                 thumbnail: '/assets/images/games/video-game-monetization-thumb.svg'
             }
         ];
+        
+        // NEW/HOT flags & weights
+        const GAME_FLAGS = {
+            'word-master': { badge: 'NEW', weight: 100 }
+        };
     
         function playGame(slug) {
             window.location.href = `/games/${slug}/`;
@@ -161,17 +174,29 @@
             const currentLang = (localStorage.getItem('siteLanguage') || 'en');
             const dict = (typeof translations !== 'undefined' && translations[currentLang]) ? translations[currentLang] : null;
 
-            STRATEGY_GAMES.forEach(game => {
+            // Sort games by weight if they have flags
+            const sortedGames = [...STRATEGY_GAMES].sort((a, b) => {
+                const aWeight = GAME_FLAGS[a.slug]?.weight || 0;
+                const bWeight = GAME_FLAGS[b.slug]?.weight || 0;
+                return bWeight - aWeight;
+            });
+
+            sortedGames.forEach(game => {
                 const localizedTitle = game.i18nTitleKey && dict && dict[game.i18nTitleKey] ? dict[game.i18nTitleKey] : game.title;
                 const localizedDesc = game.i18nDescKey && dict && dict[game.i18nDescKey] ? dict[game.i18nDescKey] : game.description;
 
                 const el = document.createElement('div');
                 el.className = 'game-card';
                 el.onclick = () => playGame(game.slug);
+                // Check if game has a badge
+                const badge = GAME_FLAGS[game.slug]?.badge;
+                const badgeHtml = badge ? `<div class="game-badge ${badge.toLowerCase()}">${badge}</div>` : '';
+                
                 el.innerHTML = `
                     <div class="game-thumbnail">
                         <img src="${game.thumbnail}" alt="${localizedTitle}" loading="lazy">
                         <div class="play-overlay"><div class="play-button">▶</div></div>
+                        ${badgeHtml}
                     </div>
                     <div class="game-info">
                         <h3 class="game-title" ${game.i18nTitleKey ? `data-i18n="${game.i18nTitleKey}"` : ''}>${localizedTitle}</h3>
