@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Games - Latest Online Games | MiniGames365</title>
+    <meta name="description" content="Discover the newest and latest online games on MiniGames365. Play the most recent additions to our game collection instantly in your browser.">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="canonical" href="https://minigames365.com/categories/new-games.html">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logo.svg" alt="MiniGames365" width="40" height="40">
+                    <span class="logo-text">MiniGames365</span>
+                </a>
+                <div class="nav-search">
+                    <input type="text" placeholder="Search games..." id="searchInput" onkeyup="searchGames()">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero-section">
+                <h1>🆕 New Games</h1>
+                <p class="hero-description">
+                    Discover the latest and newest games added to our collection! 
+                    Stay up-to-date with fresh gaming experiences and be the first to play our newest additions.
+                </p>
+            </section>
+
+            <section id="new-games" class="featured-games">
+                <h2 class="section-title">Latest Game Additions</h2>
+                <div class="games-grid" id="new-games-grid">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Banner Ad -->
+            <div class="ad-container mobile-only">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-6583243933606323"
+                     data-ad-slot="XXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+            <!-- Other Categories -->
+            <section class="featured-games">
+                <h2 class="section-title">🎮 Explore Other Categories</h2>
+                <div class="categories-grid">
+                    <a href="/categories/puzzle.html" class="category-card">
+                        <div class="category-icon">🧩</div>
+                        <h3>Puzzle Games</h3>
+                        <p>Test your brain power</p>
+                    </a>
+                    <a href="/categories/action.html" class="category-card">
+                        <div class="category-icon">⚡</div>
+                        <h3>Action Games</h3>
+                        <p>Fast-paced adventures</p>
+                    </a>
+                    <a href="/categories/arcade.html" class="category-card">
+                        <div class="category-icon">🕹️</div>
+                        <h3>Arcade Games</h3>
+                        <p>Classic retro fun</p>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiniGames365</h4>
+                    <p>The best destination for free online games. Play instantly without downloads on any device.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="/categories/puzzle.html">Puzzle Games</a></li>
+                        <li><a href="/categories/action.html">Action Games</a></li>
+                        <li><a href="/categories/arcade.html">Arcade Games</a></li>
+                        <li><a href="/categories/strategy.html">Strategy Games</a></li>
+                        <li><a href="/categories/new-games.html">New Games</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Service</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MiniGames365. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load shared scripts -->
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // New Games Data - Latest 20 games
+        const NEW_GAMES = [
+            {
+                slug: 'number-slide-puzzle',
+                title: 'Number Slide Puzzle',
+                description: 'Classic number puzzle game! Slide number tiles to arrange them in order and complete the challenge.',
+                category: 'Puzzle',
+                rating: 4.8,
+                thumbnail: '/assets/images/games/number-slide-puzzle-thumb.svg'
+            },
+            {
+                slug: 'color-bubble-match',
+                title: 'Color Bubble Match',
+                description: 'Shoot colorful bubbles to eliminate groups of the same color! Strategic bubble elimination game.',
+                category: 'Puzzle',
+                rating: 4.7,
+                thumbnail: '/assets/images/games/color-bubble-match-thumb.svg'
+            },
+            {
+                slug: 'ultra-crypto',
+                title: 'Ultra Crypto',
+                description: 'Dive into the world of cryptocurrency trading and blockchain technology.',
+                category: 'Strategy',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/ultra-crypto-thumb.svg'
+            },
+            {
+                slug: 'highway-dash',
+                title: 'Highway Dash',
+                description: 'Race through traffic at high speeds in this thrilling endless runner.',
+                category: 'Racing',
+                rating: 4.5,
+                thumbnail: '/assets/images/games/highway-dash-thumb.svg'
+            },
+            {
+                slug: 'pixel-puzzler',
+                title: 'Pixel Puzzler',
+                description: 'Classic 15-puzzle with slick pixel tiles. Slide to solve in least moves!',
+                category: 'Puzzle',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/pixel-puzzler-thumb.svg'
+            },
+            {
+                slug: 'hbm4',
+                title: 'HBM4',
+                description: 'High-speed memory challenge game with cutting-edge graphics.',
+                category: 'Action',
+                rating: 4.4,
+                thumbnail: '/assets/images/games/hbm4-thumb.svg'
+            },
+            {
+                slug: 'space-defender',
+                title: 'Space Defender',
+                description: 'Defend Earth from alien invasion in this epic space shooter!',
+                category: 'Action',
+                rating: 4.8,
+                thumbnail: '/assets/images/games/space-defender-thumb.svg'
+            },
+            {
+                slug: 'ninja-runner',
+                title: 'Ninja Runner',
+                description: 'Run, jump, and slice through obstacles as a stealthy ninja warrior.',
+                category: 'Action',
+                rating: 4.7,
+                thumbnail: '/assets/images/games/ninja-runner-thumb.svg'
+            },
+            {
+                slug: 'bubble-pop-frenzy',
+                title: 'Bubble Pop Frenzy',
+                description: 'Match and pop colorful bubbles in this addictive puzzle game!',
+                category: 'Puzzle',
+                rating: 4.7,
+                thumbnail: '/assets/images/games/bubble-pop-frenzy-thumb.svg'
+            },
+            {
+                slug: 'tro-choi-dan-gian',
+                title: 'Tro Choi Dan Gian',
+                description: 'Experience traditional Vietnamese folk games in digital form.',
+                category: 'Arcade',
+                rating: 4.5,
+                thumbnail: '/assets/images/games/tro-choi-dan-gian-thumb.svg'
+            },
+            {
+                slug: 't-rex-runner',
+                title: 'T-Rex Runner',
+                description: 'Help the T-Rex jump over obstacles in this endless desert adventure.',
+                category: 'Arcade',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/t-rex-runner-thumb.svg'
+            },
+            {
+                slug: 'snake',
+                title: 'Snake',
+                description: 'Classic snake game - eat food, grow longer, avoid hitting yourself!',
+                category: 'Arcade',
+                rating: 4.5,
+                thumbnail: '/assets/images/games/snake-thumb.svg'
+            },
+            {
+                slug: 'ludo-king',
+                title: 'Ludo King',
+                description: 'Play the classic board game Ludo with friends and family online.',
+                category: 'Strategy',
+                rating: 4.4,
+                thumbnail: '/assets/images/games/ludo-king-thumb.svg'
+            },
+            {
+                slug: 'flappy-bird',
+                title: 'Flappy Bird',
+                description: 'Navigate the bird through pipes in this challenging arcade game.',
+                category: 'Arcade',
+                rating: 4.3,
+                thumbnail: '/assets/images/games/flappy-bird-thumb.svg'
+            },
+            {
+                slug: '2048',
+                title: '2048',
+                description: 'Combine numbered tiles to reach the 2048 tile in this addictive puzzle.',
+                category: 'Puzzle',
+                rating: 4.6,
+                thumbnail: '/assets/images/games/2048-thumb.svg'
+            },
+            {
+                slug: 'sprint-league',
+                title: 'Sprint League',
+                description: 'Compete in fast-paced sprint races against other players.',
+                category: 'Sports',
+                rating: 4.4,
+                thumbnail: '/assets/images/games/sprint-league-thumb.svg'
+            },
+            {
+                slug: 'crypto-collectibles',
+                title: 'Crypto Collectibles',
+                description: 'Collect and trade digital assets in this blockchain-based game.',
+                category: 'Strategy',
+                rating: 4.3,
+                thumbnail: '/assets/images/games/crypto-collectibles-thumb.svg'
+            },
+            {
+                slug: 'sky-jump',
+                title: 'Sky Jump',
+                description: 'Jump from platform to platform high in the sky!',
+                category: 'Action',
+                rating: 4.2,
+                thumbnail: '/assets/images/games/sky-jump-thumb.svg'
+            },
+            {
+                slug: 'neon-runner',
+                title: 'Neon Runner',
+                description: 'Run through neon-lit cyberpunk landscapes at breakneck speed.',
+                category: 'Action',
+                rating: 4.3,
+                thumbnail: '/assets/images/games/neon-runner-thumb.svg'
+            },
+            {
+                slug: 'rumble-rush',
+                title: 'Rumble Rush',
+                description: 'Fast-paced combat racing with explosive action.',
+                category: 'Racing',
+                rating: 4.2,
+                thumbnail: '/assets/images/games/rumble-rush-thumb.svg'
+            }
+        ];
+        
+        // NEW/HOT flags & weights
+        const GAME_FLAGS = {
+            'number-slide-puzzle': { badge: 'NEW', weight: 100 },
+            'color-bubble-match': { badge: 'NEW', weight: 99 },
+            'ultra-crypto': { badge: 'HOT', weight: 95 },
+            'highway-dash': { badge: 'HOT', weight: 94 },
+            'pixel-puzzler': { badge: 'HOT', weight: 93 },
+            'space-defender': { badge: 'HOT', weight: 92 },
+            'ninja-runner': { badge: 'HOT', weight: 91 },
+            'bubble-pop-frenzy': { badge: 'HOT', weight: 90 }
+        };
+
+        // Render new games
+        function renderNewGames() {
+            const gamesGrid = document.getElementById('new-games-grid');
+            if (!gamesGrid) return;
+
+            // Sort games by weight (newest first)
+            const sortedGames = NEW_GAMES.sort((a, b) => {
+                const weightA = GAME_FLAGS[a.slug]?.weight || 0;
+                const weightB = GAME_FLAGS[b.slug]?.weight || 0;
+                return weightB - weightA;
+            });
+
+            gamesGrid.innerHTML = sortedGames.map(game => {
+                const flag = GAME_FLAGS[game.slug];
+                const badgeHtml = flag ? `<div class="game-badge ${flag.badge.toLowerCase()}">${flag.badge}</div>` : '';
+                
+                return `
+                    <div class="game-card" onclick="playGame('${game.slug}')">
+                        <div class="game-thumbnail">
+                            <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
+                            <div class="play-overlay">
+                                <div class="play-button">▶</div>
+                            </div>
+                            ${badgeHtml}
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">${game.title}</h3>
+                            <p class="game-description">${game.description}</p>
+                            <div class="game-meta">
+                                <span class="game-category">${game.category}</span>
+                                <span class="game-rating">⭐ ${game.rating}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', renderNewGames);
+    </script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "New Games - Latest Online Games",
+        "description": "Discover the newest and latest online games on MiniGames365. Play the most recent additions to our game collection.",
+        "url": "https://minigames365.com/categories/new-games.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "New Games Collection",
+            "itemListElement": [
+                {
+                    "@type": "VideoGame",
+                    "position": 1,
+                    "name": "Number Slide Puzzle",
+                    "url": "https://minigames365.com/games/number-slide-puzzle"
+                },
+                {
+                    "@type": "VideoGame", 
+                    "position": 2,
+                    "name": "Color Bubble Match",
+                    "url": "https://minigames365.com/games/color-bubble-match"
+                }
+            ]
+        }
+    }
+    </script>
+</body>
+</html>
