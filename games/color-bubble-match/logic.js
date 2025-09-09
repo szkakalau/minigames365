@@ -465,7 +465,7 @@ class ColorBubbleMatch {
         this.updateUI();
         
         // Show level complete message
-        this.showOverlay('关卡完成！', `恭喜完成第 ${this.level - 1} 关！`, '继续游戏', () => {
+        this.showOverlay('Level Complete!', `Congratulations on completing level ${this.level - 1}!`, 'Continue Game', () => {
             this.hideOverlay();
         });
         
@@ -479,7 +479,7 @@ class ColorBubbleMatch {
     
     gameOver() {
         this.gameState = 'gameOver';
-        this.showOverlay('游戏结束', `最终得分: ${this.score}\n到达关卡: ${this.level}`, '重新开始', () => {
+        this.showOverlay('Game Over', `Final Score: ${this.score}\nLevel Reached: ${this.level}`, 'Restart', () => {
             this.restartGame();
         });
         
@@ -507,7 +507,7 @@ class ColorBubbleMatch {
     togglePause() {
         if (this.gameState === 'playing') {
             this.gameState = 'paused';
-            this.showOverlay('游戏暂停', '点击继续按钮恢复游戏', '继续游戏', () => {
+            this.showOverlay('Game Paused', 'Click continue button to resume game', 'Continue Game', () => {
                 this.gameState = 'playing';
                 this.hideOverlay();
             });
@@ -522,7 +522,7 @@ class ColorBubbleMatch {
         this.isShooting = false;
         
         this.initializeGame();
-        this.showOverlay('彩色泡泡消除', '点击开始按钮开始游戏', '开始游戏', () => {
+        this.showOverlay('Color Bubble Match', 'Click start button to begin the game', 'Start Game', () => {
             this.startGame();
         });
     }

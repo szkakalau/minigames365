@@ -204,12 +204,12 @@
     tip.style = 'position:absolute;inset:0;background:rgba(0,0,0,0.78);color:#fff;display:flex;align-items:center;justify-content:center;z-index:20;border-radius:10px;';
     tip.innerHTML = `
       <div style="max-width:420px;padding:16px 18px;background:rgba(17,24,39,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:12px;text-align:left;">
-        <div style="font-weight:800;font-size:18px;margin-bottom:8px;">提示：配速与节奏</div>
+        <div style="font-weight:800;font-size:18px;margin-bottom:8px;">Tips: Pacing & Rhythm</div>
         <div style="font-size:14px;opacity:0.9;line-height:1.5;">
-          轻触左半屏保持配速，按住右半屏冲刺（更快但消耗体力）。<br/>
-          上/下滑切换跑道。合理把握体力条，冲线更快！
+          Tap left half of screen to maintain pace, hold right half to sprint (faster but consumes stamina).<br/>
+          Swipe up/down to switch lanes. Manage your stamina bar wisely to finish faster!
         </div>
-        <button id="closeOnboarding" class="search-btn" style="margin-top:12px;width:100%;">我知道了</button>
+        <button id="closeOnboarding" class="search-btn" style="margin-top:12px;width:100%;">Got it</button>
       </div>`;
     root.appendChild(tip);
     document.getElementById('closeOnboarding').addEventListener('click', ()=>{

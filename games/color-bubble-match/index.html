@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>彩色泡泡消除 - 经典消除类小游戏 | 免费在线游戏</title>
+    <title>Color Bubble Match - Classic Bubble Shooter Game | Free Online Games</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="彩色泡泡消除是一款经典的消除类小游戏，通过射击彩色泡泡来消除相同颜色的泡泡群。支持手机和电脑，免费在线游戏，无需下载。">
-    <meta name="keywords" content="泡泡消除,消除游戏,彩色泡泡,射击游戏,在线游戏,免费游戏,手机游戏,休闲游戏">
+    <meta name="description" content="Color Bubble Match is a classic bubble shooter game where you shoot colorful bubbles to eliminate groups of the same color. Play on mobile and desktop, free online game, no download required.">
+    <meta name="keywords" content="bubble shooter,bubble match,color bubbles,shooting game,online game,free game,mobile game,casual game">
     <meta name="author" content="Mini Games">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="彩色泡泡消除 - 经典消除类小游戏">
-    <meta property="og:description" content="射击彩色泡泡，消除相同颜色的泡泡群。经典消除类游戏，支持手机和电脑。">
+    <meta property="og:title" content="Color Bubble Match - Classic Bubble Shooter Game">
+    <meta property="og:description" content="Shoot colorful bubbles to eliminate groups of the same color. Classic bubble shooter game, supports mobile and desktop.">
     <meta property="og:type" content="game">
     <meta property="og:url" content="https://minigames.example.com/games/color-bubble-match/">
     <meta property="og:image" content="https://minigames.example.com/games/color-bubble-match/thumbnail.jpg">
@@ -21,8 +21,8 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="彩色泡泡消除 - 经典消除类小游戏">
-    <meta name="twitter:description" content="射击彩色泡泡，消除相同颜色的泡泡群。经典消除类游戏，支持手机和电脑。">
+    <meta name="twitter:title" content="Color Bubble Match - Classic Bubble Shooter Game">
+    <meta name="twitter:description" content="Shoot colorful bubbles to eliminate groups of the same color. Classic bubble shooter game, supports mobile and desktop.">
     <meta name="twitter:image" content="https://minigames.example.com/games/color-bubble-match/thumbnail.jpg">
     
     <!-- Canonical URL -->
@@ -41,11 +41,11 @@
     {
         "@context": "https://schema.org",
         "@type": "Game",
-        "name": "彩色泡泡消除",
-        "description": "彩色泡泡消除是一款经典的消除类小游戏，通过射击彩色泡泡来消除相同颜色的泡泡群。支持手机和电脑，免费在线游戏，无需下载。",
+        "name": "Color Bubble Match",
+        "description": "Color Bubble Match is a classic bubble shooter game where you shoot colorful bubbles to eliminate groups of the same color. Play on mobile and desktop, free online game, no download required.",
         "url": "https://minigames.example.com/games/color-bubble-match/",
         "image": "https://minigames.example.com/games/color-bubble-match/thumbnail.jpg",
-        "genre": ["消除游戏", "射击游戏", "休闲游戏"],
+        "genre": ["Bubble Shooter", "Puzzle Game", "Casual Game"],
         "gamePlatform": ["Web Browser", "Mobile", "Desktop"],
         "operatingSystem": ["Any"],
         "applicationCategory": "Game",
@@ -80,10 +80,10 @@
                 <span class="logo-text">Mini Games</span>
             </a>
             <div class="nav-menu">
-                <a href="../../index.html" class="nav-link">首页</a>
-                <a href="../../categories/puzzle.html" class="nav-link">益智游戏</a>
-                <a href="../../categories/action.html" class="nav-link">动作游戏</a>
-                <a href="../../categories/casual.html" class="nav-link">休闲游戏</a>
+                <a href="../../index.html" class="nav-link">Home</a>
+            <a href="../../categories/puzzle.html" class="nav-link">Puzzle Games</a>
+            <a href="../../categories/action.html" class="nav-link">Action Games</a>
+            <a href="../../categories/casual.html" class="nav-link">Casual Games</a>
             </div>
         </div>
     </nav>
@@ -92,24 +92,24 @@
     <main class="game-container">
         <!-- Game Header -->
         <header class="game-header">
-            <h1 class="game-title">彩色泡泡消除</h1>
-            <p class="game-description">
-                射击彩色泡泡，消除相同颜色的泡泡群！瞄准目标，策略性地射击，创造连锁反应获得高分。
-            </p>
+            <h1 class="game-title">Color Bubble Match</h1>
+        <p class="game-description">
+            Shoot colorful bubbles to eliminate groups of the same color! Aim at targets, shoot strategically, and create chain reactions to get high scores.
+        </p>
         </header>
 
         <!-- Game Stats -->
         <div class="game-stats">
             <div class="stat-item">
-                <div class="stat-label">得分</div>
+                <div class="stat-label">Score</div>
                 <div class="stat-value" id="score">0</div>
             </div>
             <div class="stat-item">
-                <div class="stat-label">等级</div>
+                <div class="stat-label">Level</div>
                 <div class="stat-value" id="level">1</div>
             </div>
             <div class="stat-item">
-                <div class="stat-label">剩余泡泡</div>
+                <div class="stat-label">Bubbles Left</div>
                 <div class="stat-value" id="bubbles-left">5</div>
             </div>
         </div>
@@ -119,31 +119,31 @@
             <canvas id="gameCanvas" width="400" height="600"></canvas>
             <div class="game-overlay" id="gameOverlay">
                 <div class="overlay-content">
-                    <h2 id="overlayTitle">游戏开始</h2>
-                    <p id="overlayMessage">点击开始按钮开始游戏</p>
-                    <button id="startButton" class="btn btn-primary">开始游戏</button>
+                    <h2 id="overlayTitle">Game Start</h2>
+        <p id="overlayMessage">Click the start button to begin the game</p>
+        <button id="startButton" class="btn btn-primary">Start Game</button>
                 </div>
             </div>
         </div>
 
         <!-- Game Controls -->
         <div class="game-controls">
-            <button id="pauseButton" class="btn btn-secondary">暂停</button>
-            <button id="restartButton" class="btn btn-primary">重新开始</button>
-            <button id="helpButton" class="btn btn-info">帮助</button>
+            <button id="pauseButton" class="btn btn-secondary">Pause</button>
+        <button id="restartButton" class="btn btn-primary">Restart</button>
+        <button id="helpButton" class="btn btn-info">Help</button>
         </div>
 
         <!-- Game Instructions -->
         <div class="game-instructions" id="gameInstructions">
-            <h3 class="instructions-title">游戏说明</h3>
-            <ul class="instructions-list">
-                <li>移动鼠标或手指瞄准目标位置</li>
-                <li>点击或触摸屏幕射击泡泡</li>
-                <li>射击相同颜色的泡泡群（3个或以上）来消除它们</li>
-                <li>消除更多泡泡获得更高分数</li>
-                <li>当泡泡到达底部时游戏结束</li>
-                <li>完成每一行可以进入下一关</li>
-            </ul>
+            <h3 class="instructions-title">Game Instructions</h3>
+        <ul class="instructions-list">
+            <li>Move your mouse or finger to aim at the target position</li>
+            <li>Click or touch the screen to shoot bubbles</li>
+            <li>Shoot groups of the same color bubbles (3 or more) to eliminate them</li>
+            <li>Eliminate more bubbles to get higher scores</li>
+            <li>Game ends when bubbles reach the bottom</li>
+            <li>Complete each row to advance to the next level</li>
+        </ul>
         </div>
 
         <!-- Ad Banner Top -->
@@ -170,22 +170,22 @@
                 <a href="../number-slide-puzzle/" class="related-game">
                     <div class="related-game-icon">🧩</div>
                     <div class="related-game-info">
-                        <div class="related-game-title">数字华容道</div>
-                        <div class="related-game-desc">经典数字拼图</div>
+                        <div class="related-game-title">Number Slide Puzzle</div>
+            <div class="related-game-desc">Classic number puzzle</div>
                     </div>
                 </a>
                 <a href="../2048/" class="related-game">
                     <div class="related-game-icon">🔢</div>
                     <div class="related-game-info">
                         <div class="related-game-title">2048</div>
-                        <div class="related-game-desc">数字合并游戏</div>
+                        <div class="related-game-desc">Number merge game</div>
                     </div>
                 </a>
                 <a href="../tetris/" class="related-game">
                     <div class="related-game-icon">🧱</div>
                     <div class="related-game-info">
-                        <div class="related-game-title">俄罗斯方块</div>
-                        <div class="related-game-desc">经典方块游戏</div>
+                        <div class="related-game-title">Tetris</div>
+            <div class="related-game-desc">Classic block game</div>
                     </div>
                 </a>
             </div>
@@ -212,23 +212,23 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Mini Games</h4>
-                <p>最好玩的在线小游戏平台</p>
+                <p>The best online mini games platform</p>
             </div>
             <div class="footer-section">
-                <h4>游戏分类</h4>
-                <ul>
-                    <li><a href="../../categories/puzzle.html">益智游戏</a></li>
-                    <li><a href="../../categories/action.html">动作游戏</a></li>
-                    <li><a href="../../categories/casual.html">休闲游戏</a></li>
-                </ul>
+                <h4>Game Categories</h4>
+            <ul>
+                <li><a href="../../categories/puzzle.html">Puzzle Games</a></li>
+                <li><a href="../../categories/action.html">Action Games</a></li>
+                <li><a href="../../categories/casual.html">Casual Games</a></li>
+            </ul>
             </div>
             <div class="footer-section">
-                <h4>关于我们</h4>
-                <ul>
-                    <li><a href="../../privacy.html">隐私政策</a></li>
-                    <li><a href="../../terms.html">使用条款</a></li>
-                    <li><a href="../../contact.html">联系我们</a></li>
-                </ul>
+                <h4>About Us</h4>
+            <ul>
+                <li><a href="../../privacy.html">Privacy Policy</a></li>
+                <li><a href="../../terms.html">Terms of Service</a></li>
+                <li><a href="../../contact.html">Contact Us</a></li>
+            </ul>
             </div>
         </div>
         <div class="footer-bottom">
