@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>彩色泡泡消除 - 经典消除类小游戏 | 免费在线游戏</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="彩色泡泡消除是一款经典的消除类小游戏，通过射击彩色泡泡来消除相同颜色的泡泡群。支持手机和电脑，免费在线游戏，无需下载。">
+    <meta name="keywords" content="泡泡消除,消除游戏,彩色泡泡,射击游戏,在线游戏,免费游戏,手机游戏,休闲游戏">
+    <meta name="author" content="Mini Games">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="彩色泡泡消除 - 经典消除类小游戏">
+    <meta property="og:description" content="射击彩色泡泡，消除相同颜色的泡泡群。经典消除类游戏，支持手机和电脑。">
+    <meta property="og:type" content="game">
+    <meta property="og:url" content="https://minigames.example.com/games/color-bubble-match/">
+    <meta property="og:image" content="https://minigames.example.com/games/color-bubble-match/thumbnail.jpg">
+    <meta property="og:site_name" content="Mini Games">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="彩色泡泡消除 - 经典消除类小游戏">
+    <meta name="twitter:description" content="射击彩色泡泡，消除相同颜色的泡泡群。经典消除类游戏，支持手机和电脑。">
+    <meta name="twitter:image" content="https://minigames.example.com/games/color-bubble-match/thumbnail.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://minigames.example.com/games/color-bubble-match/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "彩色泡泡消除",
+        "description": "彩色泡泡消除是一款经典的消除类小游戏，通过射击彩色泡泡来消除相同颜色的泡泡群。支持手机和电脑，免费在线游戏，无需下载。",
+        "url": "https://minigames.example.com/games/color-bubble-match/",
+        "image": "https://minigames.example.com/games/color-bubble-match/thumbnail.jpg",
+        "genre": ["消除游戏", "射击游戏", "休闲游戏"],
+        "gamePlatform": ["Web Browser", "Mobile", "Desktop"],
+        "operatingSystem": ["Any"],
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "ratingCount": "1250"
+        }
+    }
+    </script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">
+                <span class="logo-icon">🎮</span>
+                <span class="logo-text">Mini Games</span>
+            </a>
+            <div class="nav-menu">
+                <a href="../../index.html" class="nav-link">首页</a>
+                <a href="../../categories/puzzle.html" class="nav-link">益智游戏</a>
+                <a href="../../categories/action.html" class="nav-link">动作游戏</a>
+                <a href="../../categories/casual.html" class="nav-link">休闲游戏</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Container -->
+    <main class="game-container">
+        <!-- Game Header -->
+        <header class="game-header">
+            <h1 class="game-title">彩色泡泡消除</h1>
+            <p class="game-description">
+                射击彩色泡泡，消除相同颜色的泡泡群！瞄准目标，策略性地射击，创造连锁反应获得高分。
+            </p>
+        </header>
+
+        <!-- Game Stats -->
+        <div class="game-stats">
+            <div class="stat-item">
+                <div class="stat-label">得分</div>
+                <div class="stat-value" id="score">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">等级</div>
+                <div class="stat-value" id="level">1</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">剩余泡泡</div>
+                <div class="stat-value" id="bubbles-left">5</div>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-board-container">
+            <canvas id="gameCanvas" width="400" height="600"></canvas>
+            <div class="game-overlay" id="gameOverlay">
+                <div class="overlay-content">
+                    <h2 id="overlayTitle">游戏开始</h2>
+                    <p id="overlayMessage">点击开始按钮开始游戏</p>
+                    <button id="startButton" class="btn btn-primary">开始游戏</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <button id="pauseButton" class="btn btn-secondary">暂停</button>
+            <button id="restartButton" class="btn btn-primary">重新开始</button>
+            <button id="helpButton" class="btn btn-info">帮助</button>
+        </div>
+
+        <!-- Game Instructions -->
+        <div class="game-instructions" id="gameInstructions">
+            <h3 class="instructions-title">游戏说明</h3>
+            <ul class="instructions-list">
+                <li>移动鼠标或手指瞄准目标位置</li>
+                <li>点击或触摸屏幕射击泡泡</li>
+                <li>射击相同颜色的泡泡群（3个或以上）来消除它们</li>
+                <li>消除更多泡泡获得更高分数</li>
+                <li>当泡泡到达底部时游戏结束</li>
+                <li>完成每一行可以进入下一关</li>
+            </ul>
+        </div>
+
+        <!-- Ad Banner Top -->
+        <div class="ad-banner-top">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX"
+                    crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXX"
+                 data-ad-slot="XXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </main>
+
+    <!-- Sidebar for Desktop -->
+    <aside class="sidebar">
+        <div class="sidebar-content">
+            <h3>相关游戏</h3>
+            <div class="related-games">
+                <a href="../number-slide-puzzle/" class="related-game">
+                    <div class="related-game-icon">🧩</div>
+                    <div class="related-game-info">
+                        <div class="related-game-title">数字华容道</div>
+                        <div class="related-game-desc">经典数字拼图</div>
+                    </div>
+                </a>
+                <a href="../2048/" class="related-game">
+                    <div class="related-game-icon">🔢</div>
+                    <div class="related-game-info">
+                        <div class="related-game-title">2048</div>
+                        <div class="related-game-desc">数字合并游戏</div>
+                    </div>
+                </a>
+                <a href="../tetris/" class="related-game">
+                    <div class="related-game-icon">🧱</div>
+                    <div class="related-game-info">
+                        <div class="related-game-title">俄罗斯方块</div>
+                        <div class="related-game-desc">经典方块游戏</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Sidebar Ad -->
+            <div class="sidebar-ad">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX"
+                        crossorigin="anonymous"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXXX"
+                     data-ad-slot="XXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Mini Games</h4>
+                <p>最好玩的在线小游戏平台</p>
+            </div>
+            <div class="footer-section">
+                <h4>游戏分类</h4>
+                <ul>
+                    <li><a href="../../categories/puzzle.html">益智游戏</a></li>
+                    <li><a href="../../categories/action.html">动作游戏</a></li>
+                    <li><a href="../../categories/casual.html">休闲游戏</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>关于我们</h4>
+                <ul>
+                    <li><a href="../../privacy.html">隐私政策</a></li>
+                    <li><a href="../../terms.html">使用条款</a></li>
+                    <li><a href="../../contact.html">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Mini Games. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="logic.js"></script>
+    
+    <!-- Lazy load AdSense -->
+    <script>
+        // Lazy load ads after page interaction
+        let adsLoaded = false;
+        function loadAds() {
+            if (!adsLoaded) {
+                adsLoaded = true;
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX';
+                script.crossOrigin = 'anonymous';
+                document.head.appendChild(script);
+            }
+        }
+        
+        // Load ads on first user interaction
+        ['mousedown', 'touchstart', 'keydown', 'scroll'].forEach(event => {
+            document.addEventListener(event, loadAds, { once: true, passive: true });
+        });
+        
+        // Fallback: load ads after 3 seconds
+        setTimeout(loadAds, 3000);
+    </script>
+</body>
+</html>

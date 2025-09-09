@@ -112,6 +112,22 @@
         // Puzzle Games Data
         const PUZZLE_GAMES = [
             {
+                slug: 'number-slide-puzzle',
+                title: '数字华容道',
+                description: '经典数字拼图游戏！滑动数字方块，按顺序排列完成挑战。',
+                category: 'Puzzle',
+                rating: 4.8,
+                thumbnail: '/assets/images/games/number-slide-puzzle-thumb.svg'
+            },
+            {
+                slug: 'color-bubble-match',
+                title: '彩色泡泡消除',
+                description: '射击彩色泡泡，消除相同颜色的泡泡群！策略性消除游戏。',
+                category: 'Puzzle',
+                rating: 4.7,
+                thumbnail: '/assets/images/games/color-bubble-match-thumb.svg'
+            },
+            {
                 slug: 'bubble-pop-frenzy',
                 title: 'Bubble Pop Frenzy',
                 description: 'Match and pop colorful bubbles in this addictive puzzle game!',
@@ -179,7 +195,9 @@
         
         // NEW/HOT flags & weights
         const GAME_FLAGS = {
-            'bubble-pop-frenzy': { badge: 'NEW', weight: 100 }
+            'number-slide-puzzle': { badge: 'NEW', weight: 100 },
+            'color-bubble-match': { badge: 'NEW', weight: 99 },
+            'bubble-pop-frenzy': { badge: 'HOT', weight: 90 }
         };
 
         // Render puzzle games

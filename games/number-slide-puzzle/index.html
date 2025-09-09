@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Slide Puzzle - Free Online Puzzle Game | MiniGames365</title>
+    <meta name="description" content="Play Number Slide Puzzle online for free! Challenge your mind with this classic sliding puzzle game. Arrange numbers 1-15 in order. Mobile-friendly and no download required.">
+    <meta name="keywords" content="number slide puzzle, sliding puzzle, 15 puzzle, brain game, puzzle game, free online game, mobile game">
+    <meta name="author" content="MiniGames365">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/number-slide-puzzle">
+    <meta property="og:title" content="Number Slide Puzzle - Free Online Puzzle Game">
+    <meta property="og:description" content="Challenge your mind with this classic sliding puzzle game. Arrange numbers 1-15 in order.">
+    <meta property="og:image" content="https://minigames365.com/assets/images/games/number-slide-puzzle.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://minigames365.com/games/number-slide-puzzle">
+    <meta property="twitter:title" content="Number Slide Puzzle - Free Online Puzzle Game">
+    <meta property="twitter:description" content="Challenge your mind with this classic sliding puzzle game. Arrange numbers 1-15 in order.">
+    <meta property="twitter:image" content="https://minigames365.com/assets/images/games/number-slide-puzzle.jpg">
+    
+    <link rel="canonical" href="https://minigames365.com/games/number-slide-puzzle">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Number Slide Puzzle",
+        "description": "Challenge your mind with this classic sliding puzzle game. Arrange numbers 1-15 in order.",
+        "url": "https://minigames365.com/games/number-slide-puzzle",
+        "image": "https://minigames365.com/assets/images/games/number-slide-puzzle.jpg",
+        "genre": "Puzzle",
+        "gamePlatform": "Web Browser",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        .game-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            background: var(--primary-color);
+            padding: 8px;
+            border-radius: 12px;
+            margin: 1rem auto;
+            width: 320px;
+            height: 320px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tile {
+            background: var(--card-bg);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+        
+        .tile:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: scale(0.95);
+        }
+        
+        .tile.empty {
+            background: transparent;
+            cursor: default;
+        }
+        
+        .tile.empty:hover {
+            background: transparent;
+            transform: none;
+        }
+        
+        .game-controls {
+            margin: 1rem 0;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .win-message {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 480px) {
+            .game-board {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .tile {
+                font-size: 1.2rem;
+            }
+            
+            .game-container {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="../../index.html" class="nav-logo">
+                    <img src="../../assets/images/logo.svg" alt="MiniGames365 Logo" class="logo-img">
+                    <span data-translate="site-title">MiniGames365</span>
+                </a>
+                <div class="nav-menu">
+                    <a href="../../index.html" class="nav-link" data-translate="nav-home">Home</a>
+                    <a href="../../categories/puzzle.html" class="nav-link" data-translate="nav-puzzle">Puzzle</a>
+                    <a href="../../categories/action.html" class="nav-link" data-translate="nav-action">Action</a>
+                    <a href="../../categories/arcade.html" class="nav-link" data-translate="nav-arcade">Arcade</a>
+                    <a href="../../about.html" class="nav-link" data-translate="nav-about">About</a>
+                </div>
+                <div class="nav-controls">
+                    <select id="languageSelect" class="language-select">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="pt">Português</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="game-container">
+            <h1 data-translate="number-slide-puzzle-title">Number Slide Puzzle</h1>
+            <p data-translate="number-slide-puzzle-desc">Arrange the numbers 1-15 in order by sliding tiles into the empty space. Challenge your logical thinking!</p>
+            
+            <div class="game-stats">
+                <div class="stat">
+                    <div class="stat-value" id="moves">0</div>
+                    <div class="stat-label" data-translate="moves">Moves</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="time">00:00</div>
+                    <div class="stat-label" data-translate="time">Time</div>
+                </div>
+            </div>
+            
+            <div class="game-board" id="gameBoard"></div>
+            
+            <div class="win-message" id="winMessage">
+                <h3 data-translate="congratulations">Congratulations!</h3>
+                <p data-translate="puzzle-solved">You solved the puzzle!</p>
+            </div>
+            
+            <div class="game-controls">
+                <button class="btn" onclick="newGame()" data-translate="new-game">New Game</button>
+                <button class="btn" onclick="shufflePuzzle()" data-translate="shuffle">Shuffle</button>
+            </div>
+        </div>
+        
+        <!-- Ad Banner -->
+        <div class="ad-banner-top">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR-ADSENSE-ID"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-translate="quick-links">Quick Links</h3>
+                <ul>
+                    <li><a href="../../index.html" data-translate="nav-home">Home</a></li>
+                    <li><a href="../../categories/puzzle.html" data-translate="nav-puzzle">Puzzle Games</a></li>
+                    <li><a href="../../about.html" data-translate="nav-about">About</a></li>
+                    <li><a href="../../contact.html" data-translate="nav-contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-translate="legal">Legal</h3>
+                <ul>
+                    <li><a href="../../privacy.html" data-translate="privacy-policy">Privacy Policy</a></li>
+                    <li><a href="../../terms.html" data-translate="terms-service">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MiniGames365. <span data-translate="all-rights-reserved">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="logic.js"></script>
+</body>
+</html>
