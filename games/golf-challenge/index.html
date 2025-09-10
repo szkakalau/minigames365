@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高尔夫挑战 - Golf Challenge | MiniGames365</title>
+    <meta name="description" content="体验精准的高尔夫挑战游戏！调整角度和力度，将球打入洞中。包含多个关卡，逐渐增加难度，考验你的技巧和策略。">
+    <meta name="keywords" content="高尔夫游戏,体育游戏,技巧游戏,在线游戏,免费游戏,MiniGames365">
+    <meta name="author" content="MiniGames365">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="高尔夫挑战 - Golf Challenge | MiniGames365">
+    <meta property="og:description" content="体验精准的高尔夫挑战游戏！调整角度和力度，将球打入洞中。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/golf-challenge/">
+    <meta property="og:image" content="https://minigames365.com/games/golf-challenge/preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="高尔夫挑战 - Golf Challenge | MiniGames365">
+    <meta name="twitter:description" content="体验精准的高尔夫挑战游戏！调整角度和力度，将球打入洞中。">
+    <meta name="twitter:image" content="https://minigames365.com/games/golf-challenge/preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://minigames365.com/games/golf-challenge/">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        
+        .nav {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 0.5rem;
+            text-align: center;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+        
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .game-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .score-info {
+            display: flex;
+            gap: 2rem;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .score-item {
+            text-align: center;
+        }
+        
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.25rem;
+        }
+        
+        .score-value {
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+        
+        .btn.tertiary {
+            background: linear-gradient(45deg, #feca57, #ff9ff3);
+        }
+        
+        .game-canvas {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 1rem 0;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .power-meter {
+            width: 100%;
+            max-width: 800px;
+            margin: 1rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .power-label {
+            color: white;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .power-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .power-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #44a08d, #feca57, #ff6b6b);
+            width: 0%;
+            transition: width 0.1s;
+            border-radius: 10px;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            max-width: 800px;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 0.5rem;
+            color: #feca57;
+        }
+        
+        .instructions p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer h3 {
+            margin-bottom: 1rem;
+            color: #feca57;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #feca57;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .score-info {
+                gap: 1rem;
+            }
+            
+            .game-controls {
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .nav a {
+                margin: 0 0.5rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .footer-links {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 1rem 0.5rem;
+            }
+            
+            .score-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .game-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🏌️ 高尔夫挑战</h1>
+        <p>精准控制，挑战完美一杆进洞！</p>
+    </header>
+    
+    <nav class="nav">
+        <a href="/">🏠 首页</a>
+        <a href="/games/">🎮 所有游戏</a>
+        <a href="/sports/">⚽ 体育游戏</a>
+        <a href="/about/">ℹ️ 关于我们</a>
+    </nav>
+    
+    <main class="game-container">
+        <div class="game-info">
+            <div class="score-info">
+                <div class="score-item">
+                    <div class="score-label">杆数</div>
+                    <div class="score-value" id="strokes">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">关卡</div>
+                    <div class="score-value" id="level">1</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">最佳记录</div>
+                    <div class="score-value" id="bestScore">0</div>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button class="btn" id="startBtn">开始游戏</button>
+                <button class="btn secondary" id="pauseBtn">暂停</button>
+                <button class="btn tertiary" id="restartBtn">重新开始</button>
+            </div>
+        </div>
+        
+        <canvas id="gameCanvas" class="game-canvas" width="800" height="600"></canvas>
+        
+        <div class="power-meter">
+            <div class="power-label">击球力度</div>
+            <div class="power-bar">
+                <div class="power-fill" id="powerFill"></div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>🎯 游戏说明</h3>
+            <p>🖱️ <strong>鼠标/触摸：</strong>拖拽调整击球角度和力度</p>
+            <p>🎯 <strong>目标：</strong>用最少的杆数将球打入洞中</p>
+            <p>⛳ <strong>挑战：</strong>每个关卡都有不同的地形和障碍</p>
+            <p>🏆 <strong>技巧：</strong>观察风向和地形，选择最佳路线</p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>MiniGames365</h3>
+            <div class="footer-links">
+                <a href="/">首页</a>
+                <a href="/games/">游戏大全</a>
+                <a href="/categories/">游戏分类</a>
+                <a href="/new/">最新游戏</a>
+                <a href="/popular/">热门游戏</a>
+                <a href="/about/">关于我们</a>
+                <a href="/contact/">联系我们</a>
+                <a href="/privacy/">隐私政策</a>
+            </div>
+            <p>&copy; 2024 MiniGames365. 让每一天都充满游戏的乐趣！</p>
+        </div>
+    </footer>
+    
+    <script src="logic.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "高尔夫挑战 - Golf Challenge",
+        "description": "体验精准的高尔夫挑战游戏！调整角度和力度，将球打入洞中。包含多个关卡，逐渐增加难度，考验你的技巧和策略。",
+        "url": "https://minigames365.com/games/golf-challenge/",
+        "image": "https://minigames365.com/games/golf-challenge/preview.jpg",
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiniGames365",
+            "url": "https://minigames365.com"
+        },
+        "genre": ["体育游戏", "技巧游戏", "策略游戏"],
+        "playMode": "SinglePlayer",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires HTML5 support",
+        "accessibilityFeature": [
+            "keyboard navigation",
+            "mouse navigation",
+            "touch navigation"
+        ],
+        "gameItem": {
+            "@type": "Thing",
+            "name": "高尔夫球"
+        },
+        "numberOfPlayers": {
+            "@type": "QuantitativeValue",
+            "value": 1
+        },
+        "gamePlatform": ["Web Browser", "Mobile", "Desktop"]
+    }
+    </script>
+</body>
+</html>

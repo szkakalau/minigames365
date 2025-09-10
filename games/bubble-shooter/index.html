@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Shooter - Free Online Bubble Popping Game | minigames365</title>
+    <meta name="description" content="Play Bubble Shooter, the classic bubble popping game. Aim and shoot bubbles to match colors and clear the board. Free to play online!">
+    <meta name="keywords" content="bubble shooter, bubble pop, match colors, arcade game, bubble game, free online game">
+    <meta name="author" content="minigames365">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/bubble-shooter/">
+    <meta property="og:title" content="Bubble Shooter - Free Online Bubble Popping Game">
+    <meta property="og:description" content="Play Bubble Shooter, the classic bubble popping game. Aim and shoot bubbles to match colors.">
+    <meta property="og:image" content="https://minigames365.com/assets/images/games/bubble-shooter.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://minigames365.com/games/bubble-shooter/">
+    <meta property="twitter:title" content="Bubble Shooter - Free Online Bubble Popping Game">
+    <meta property="twitter:description" content="Play Bubble Shooter, the classic bubble popping game. Aim and shoot bubbles to match colors.">
+    <meta property="twitter:image" content="https://minigames365.com/assets/images/games/bubble-shooter.jpg">
+    
+    <link rel="canonical" href="https://minigames365.com/games/bubble-shooter/">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .game-canvas {
+            border: 3px solid #2c3e50;
+            border-radius: 15px;
+            background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #87CEEB 100%);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            margin: 20px auto;
+            display: block;
+            cursor: crosshair;
+        }
+        
+        .game-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .info-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .info-label {
+            display: block;
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            color: #2c3e50;
+            font-size: 20px;
+        }
+        
+        .game-controls {
+            margin: 20px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+        }
+        
+        .btn.danger {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+        
+        .shooter-area {
+            position: relative;
+            margin: 20px auto;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .current-bubble {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid #2c3e50;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .next-bubble {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #2c3e50;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .aim-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 200px;
+            background: rgba(231, 76, 60, 0.7);
+            transform-origin: top center;
+            transform: translate(-50%, -100%) rotate(0deg);
+            display: none;
+            z-index: 10;
+        }
+        
+        .power-meter {
+            width: 200px;
+            height: 20px;
+            background: #ecf0f1;
+            border: 2px solid #2c3e50;
+            border-radius: 10px;
+            margin: 10px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .power-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2ecc71, #f1c40f, #e74c3c);
+            width: 0%;
+            transition: width 0.1s ease;
+            border-radius: 8px;
+        }
+        
+        .game-over {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            display: none;
+        }
+        
+        .game-complete {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            display: none;
+        }
+        
+        .level-info {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .bubble-colors {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .color-indicator {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid #2c3e50;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .game-canvas {
+                width: 350px;
+                height: 500px;
+            }
+            
+            .game-info {
+                grid-template-columns: repeat(2, 1fr);
+                font-size: 14px;
+            }
+            
+            .info-value {
+                font-size: 18px;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .shooter-area {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .current-bubble {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .next-bubble {
+                width: 25px;
+                height: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-canvas {
+                width: 300px;
+                height: 450px;
+            }
+            
+            .power-meter {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="../../" class="nav-logo">
+                    <img src="../../assets/images/logo.svg" alt="minigames365" class="logo-img">
+                    <span class="logo-text">minigames365</span>
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="../../" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="../../categories/puzzle.html" class="nav-link">Puzzle</a></li>
+                    <li class="nav-item"><a href="../../categories/action.html" class="nav-link">Action</a></li>
+                    <li class="nav-item"><a href="../../categories/sports.html" class="nav-link">Sports</a></li>
+                    <li class="nav-item"><a href="../../about.html" class="nav-link">About</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="game-container">
+            <h1>Bubble Shooter</h1>
+            <p>Aim and shoot bubbles to match colors and clear the board!</p>
+            
+            <div class="level-info">
+                Level <span id="level">1</span> - Clear all bubbles to advance!
+            </div>
+            
+            <div class="game-info">
+                <div class="info-item">
+                    <span class="info-label">Score</span>
+                    <div class="info-value" id="score">0</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Bubbles</span>
+                    <div class="info-value" id="bubblesLeft">0</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Shots</span>
+                    <div class="info-value" id="shots">0</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Combo</span>
+                    <div class="info-value" id="combo">0</div>
+                </div>
+            </div>
+            
+            <div class="bubble-colors">
+                <div class="color-indicator" style="background: #e74c3c;"></div>
+                <div class="color-indicator" style="background: #3498db;"></div>
+                <div class="color-indicator" style="background: #2ecc71;"></div>
+                <div class="color-indicator" style="background: #f1c40f;"></div>
+                <div class="color-indicator" style="background: #9b59b6;"></div>
+                <div class="color-indicator" style="background: #e67e22;"></div>
+            </div>
+            
+            <canvas id="gameCanvas" class="game-canvas" width="400" height="600"></canvas>
+            
+            <div class="shooter-area">
+                <div class="current-bubble" id="currentBubble"></div>
+                <div class="next-bubble" id="nextBubble"></div>
+                <div class="aim-line" id="aimLine"></div>
+            </div>
+            
+            <div class="power-meter">
+                <div class="power-fill" id="powerFill"></div>
+            </div>
+            
+            <div class="game-controls">
+                <button class="btn" onclick="newGame()">New Game</button>
+                <button class="btn secondary" onclick="pauseGame()">Pause</button>
+                <button class="btn secondary" onclick="toggleSound()">Sound: ON</button>
+                <button class="btn danger" onclick="resetGame()">Reset</button>
+            </div>
+            
+            <div class="instructions">
+                <strong>How to Play:</strong><br>
+                • Click or tap to aim and shoot bubbles<br>
+                • Match 3 or more bubbles of the same color to pop them<br>
+                • Clear all bubbles to advance to the next level<br>
+                • Use walls to bounce bubbles for tricky shots
+            </div>
+            
+            <div class="game-over" id="gameOver">
+                <h2>Game Over!</h2>
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <p>Level Reached: <span id="finalLevel">1</span></p>
+                <button class="btn" onclick="newGame()">Play Again</button>
+            </div>
+            
+            <div class="game-complete" id="gameComplete">
+                <h2>🎉 Level Complete!</h2>
+                <p>Score: <span id="levelScore">0</span></p>
+                <p>Bonus: <span id="levelBonus">0</span></p>
+                <button class="btn" onclick="nextLevel()">Next Level</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>minigames365</h3>
+                <p>Your ultimate destination for free online games. Play anytime, anywhere!</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../../categories/puzzle.html">Puzzle Games</a></li>
+                    <li><a href="../../categories/action.html">Action Games</a></li>
+                    <li><a href="../../about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="../../privacy.html">Privacy Policy</a></li>
+                    <li><a href="../../terms.html">Terms of Service</a></li>
+                    <li><a href="../../contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 minigames365. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="logic.js"></script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Bubble Shooter",
+        "description": "A classic bubble shooting game where players aim and shoot bubbles to match colors and clear the board.",
+        "author": {
+            "@type": "Organization",
+            "name": "minigames365"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "minigames365"
+        },
+        "genre": "Arcade",
+        "playMode": "SinglePlayer",
+        "url": "https://minigames365.com/games/bubble-shooter/",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game"
+    }
+    </script>
+</body>
+</html>

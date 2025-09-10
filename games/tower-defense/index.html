@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塔防大师 - Tower Defense | MiniGames365</title>
+    <meta name="description" content="策略塔防游戏！建造防御塔，升级武器，抵御敌人入侵。考验你的战术思维和反应能力。">
+    <meta name="keywords" content="塔防游戏,策略游戏,防御游戏,战术游戏,在线游戏,免费游戏,MiniGames365">
+    <meta name="author" content="MiniGames365">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="塔防大师 - Tower Defense | MiniGames365">
+    <meta property="og:description" content="策略塔防游戏！建造防御塔，升级武器，抵御敌人入侵。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/tower-defense/">
+    <meta property="og:image" content="https://minigames365.com/games/tower-defense/preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="塔防大师 - Tower Defense | MiniGames365">
+    <meta name="twitter:description" content="策略塔防游戏！建造防御塔，升级武器，抵御敌人入侵。">
+    <meta name="twitter:image" content="https://minigames365.com/games/tower-defense/preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://minigames365.com/games/tower-defense/">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        
+        .nav {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 0.5rem;
+            text-align: center;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+        
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .game-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .game-stats {
+            display: flex;
+            gap: 2rem;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .stat-item {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stat-icon {
+            font-size: 1.5rem;
+        }
+        
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+        
+        .btn.tertiary {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+        }
+        
+        .game-layout {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .game-canvas {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            flex: 1;
+        }
+        
+        .tower-panel {
+            width: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            color: white;
+        }
+        
+        .tower-panel h3 {
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #f39c12;
+        }
+        
+        .tower-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .tower-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .tower-item.selected {
+            background: rgba(243, 156, 18, 0.3);
+            border-color: #f39c12;
+        }
+        
+        .tower-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tower-name {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        
+        .tower-cost {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .tower-stats {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 0.25rem;
+        }
+        
+        .wave-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            max-width: 1000px;
+        }
+        
+        .wave-info h3 {
+            margin-bottom: 0.5rem;
+            color: #e74c3c;
+        }
+        
+        .wave-progress {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            height: 20px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+        
+        .wave-progress-bar {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            max-width: 1000px;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 0.5rem;
+            color: #f39c12;
+        }
+        
+        .instructions p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer h3 {
+            margin-bottom: 1rem;
+            color: #f39c12;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #f39c12;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .game-stats {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .game-layout {
+                flex-direction: column;
+            }
+            
+            .tower-panel {
+                width: 100%;
+                order: -1;
+            }
+            
+            .tower-panel .tower-item {
+                display: inline-block;
+                width: calc(50% - 0.25rem);
+                margin-right: 0.5rem;
+            }
+            
+            .game-controls {
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .nav a {
+                margin: 0 0.5rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .footer-links {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 1rem 0.5rem;
+            }
+            
+            .game-stats {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .game-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+            
+            .tower-panel .tower-item {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🏰 塔防大师</h1>
+        <p>建造防御塔，抵御敌人入侵！</p>
+    </header>
+    
+    <nav class="nav">
+        <a href="/">🏠 首页</a>
+        <a href="/games/">🎮 所有游戏</a>
+        <a href="/strategy/">🧠 策略游戏</a>
+        <a href="/about/">ℹ️ 关于我们</a>
+    </nav>
+    
+    <main class="game-container">
+        <div class="game-info">
+            <div class="game-stats">
+                <div class="stat-item">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <div class="stat-label">金币</div>
+                        <div class="stat-value" id="money">500</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">❤️</div>
+                    <div class="stat-info">
+                        <div class="stat-label">生命</div>
+                        <div class="stat-value" id="lives">20</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🌊</div>
+                    <div class="stat-info">
+                        <div class="stat-label">波次</div>
+                        <div class="stat-value" id="wave">1</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-info">
+                        <div class="stat-label">得分</div>
+                        <div class="stat-value" id="score">0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button class="btn" id="startBtn">开始游戏</button>
+                <button class="btn secondary" id="pauseBtn">暂停</button>
+                <button class="btn tertiary" id="nextWaveBtn">下一波</button>
+            </div>
+        </div>
+        
+        <div class="game-layout">
+            <canvas id="gameCanvas" class="game-canvas" width="800" height="600"></canvas>
+            
+            <div class="tower-panel">
+                <h3>🏗️ 防御塔</h3>
+                
+                <div class="tower-item" data-tower="basic">
+                    <div class="tower-icon">🔫</div>
+                    <div class="tower-name">基础塔</div>
+                    <div class="tower-cost">💰50</div>
+                    <div class="tower-stats">伤害: 20 | 射程: 80</div>
+                </div>
+                
+                <div class="tower-item" data-tower="cannon">
+                    <div class="tower-icon">💣</div>
+                    <div class="tower-name">加农炮</div>
+                    <div class="tower-cost">💰100</div>
+                    <div class="tower-stats">伤害: 50 | 射程: 60</div>
+                </div>
+                
+                <div class="tower-item" data-tower="laser">
+                    <div class="tower-icon">⚡</div>
+                    <div class="tower-name">激光塔</div>
+                    <div class="tower-cost">💰150</div>
+                    <div class="tower-stats">伤害: 30 | 射程: 100</div>
+                </div>
+                
+                <div class="tower-item" data-tower="freeze">
+                    <div class="tower-icon">❄️</div>
+                    <div class="tower-name">冰冻塔</div>
+                    <div class="tower-cost">💰120</div>
+                    <div class="tower-stats">减速: 50% | 射程: 70</div>
+                </div>
+                
+                <div class="tower-item" data-tower="missile">
+                    <div class="tower-icon">🚀</div>
+                    <div class="tower-name">导弹塔</div>
+                    <div class="tower-cost">💰200</div>
+                    <div class="tower-stats">伤害: 100 | 射程: 120</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="wave-info">
+            <h3 id="waveStatus">准备开始第1波</h3>
+            <div class="wave-progress">
+                <div class="wave-progress-bar" id="waveProgress"></div>
+            </div>
+            <p id="enemyCount">敌人数量: 0/10</p>
+        </div>
+        
+        <div class="instructions">
+            <h3>🎯 游戏说明</h3>
+            <p>🖱️ <strong>建造：</strong>选择防御塔类型，点击路径旁边放置</p>
+            <p>💰 <strong>资源：</strong>击败敌人获得金币，用于建造和升级</p>
+            <p>🔫 <strong>基础塔：</strong>平衡的攻击力和射程</p>
+            <p>💣 <strong>加农炮：</strong>高伤害，短射程，溅射伤害</p>
+            <p>⚡ <strong>激光塔：</strong>快速攻击，远射程</p>
+            <p>❄️ <strong>冰冻塔：</strong>减慢敌人移动速度</p>
+            <p>🚀 <strong>导弹塔：</strong>最高伤害，最远射程</p>
+            <p>🌊 <strong>波次：</strong>每波敌人会越来越强</p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>MiniGames365</h3>
+            <div class="footer-links">
+                <a href="/">首页</a>
+                <a href="/games/">游戏大全</a>
+                <a href="/categories/">游戏分类</a>
+                <a href="/new/">最新游戏</a>
+                <a href="/popular/">热门游戏</a>
+                <a href="/about/">关于我们</a>
+                <a href="/contact/">联系我们</a>
+                <a href="/privacy/">隐私政策</a>
+            </div>
+            <p>&copy; 2024 MiniGames365. 让每一天都充满游戏的乐趣！</p>
+        </div>
+    </footer>
+    
+    <script src="logic.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "塔防大师 - Tower Defense",
+        "description": "策略塔防游戏！建造防御塔，升级武器，抵御敌人入侵。考验你的战术思维和反应能力。",
+        "url": "https://minigames365.com/games/tower-defense/",
+        "image": "https://minigames365.com/games/tower-defense/preview.jpg",
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiniGames365",
+            "url": "https://minigames365.com"
+        },
+        "genre": ["策略游戏", "塔防游戏", "防御游戏"],
+        "playMode": "SinglePlayer",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires HTML5 support",
+        "accessibilityFeature": [
+            "keyboard navigation",
+            "mouse navigation",
+            "touch navigation"
+        ],
+        "gameItem": {
+            "@type": "Thing",
+            "name": "防御塔"
+        },
+        "numberOfPlayers": {
+            "@type": "QuantitativeValue",
+            "value": 1
+        },
+        "gamePlatform": ["Web Browser", "Mobile", "Desktop"]
+    }
+    </script>
+</body>
+</html>

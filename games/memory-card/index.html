@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Card - Free Online Memory Training Game | minigames365</title>
+    <meta name="description" content="Play Memory Card, the classic memory training game. Flip cards to find matching pairs. Multiple difficulty levels available. Free to play online!">
+    <meta name="keywords" content="memory game, card matching, brain training, concentration, memory improvement, free online game">
+    <meta name="author" content="minigames365">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/memory-card/">
+    <meta property="og:title" content="Memory Card - Free Online Memory Training Game">
+    <meta property="og:description" content="Play Memory Card, the classic memory training game. Flip cards to find matching pairs.">
+    <meta property="og:image" content="https://minigames365.com/assets/images/games/memory-card.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://minigames365.com/games/memory-card/">
+    <meta property="twitter:title" content="Memory Card - Free Online Memory Training Game">
+    <meta property="twitter:description" content="Play Memory Card, the classic memory training game. Flip cards to find matching pairs.">
+    <meta property="twitter:image" content="https://minigames365.com/assets/images/games/memory-card.jpg">
+    
+    <link rel="canonical" href="https://minigames365.com/games/memory-card/">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .game-board {
+            display: grid;
+            gap: 10px;
+            margin: 30px auto;
+            justify-content: center;
+            perspective: 1000px;
+        }
+        
+        .game-board.easy {
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(3, 100px);
+        }
+        
+        .game-board.medium {
+            grid-template-columns: repeat(4, 90px);
+            grid-template-rows: repeat(4, 90px);
+        }
+        
+        .game-board.hard {
+            grid-template-columns: repeat(6, 80px);
+            grid-template-rows: repeat(4, 80px);
+        }
+        
+        .memory-card {
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .memory-card.matched {
+            transform: rotateY(180deg) scale(0.9);
+            opacity: 0.7;
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            border: 3px solid #2c3e50;
+        }
+        
+        .card-front {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        .card-back {
+            background: linear-gradient(45deg, #34495e, #2c3e50);
+            color: white;
+        }
+        
+        .card-back::before {
+            content: '?';
+            font-size: 1.5em;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .game-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .info-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .info-label {
+            display: block;
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        
+        .game-controls {
+            margin: 30px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+        }
+        
+        .btn.success {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+        }
+        
+        .difficulty-selector {
+            margin-bottom: 20px;
+        }
+        
+        .difficulty-selector select {
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: 2px solid #3498db;
+            font-size: 16px;
+        }
+        
+        .game-complete {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            display: none;
+        }
+        
+        .game-complete h2 {
+            margin-top: 0;
+            font-size: 2.5em;
+        }
+        
+        .stars {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+        
+        .star {
+            color: #f1c40f;
+            margin: 0 5px;
+            animation: twinkle 1s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        .best-score {
+            background: #f39c12;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .game-board.easy {
+                grid-template-columns: repeat(4, 70px);
+                grid-template-rows: repeat(3, 70px);
+            }
+            
+            .game-board.medium {
+                grid-template-columns: repeat(4, 65px);
+                grid-template-rows: repeat(4, 65px);
+            }
+            
+            .game-board.hard {
+                grid-template-columns: repeat(6, 50px);
+                grid-template-rows: repeat(4, 50px);
+            }
+            
+            .card-face {
+                font-size: 1.5em;
+            }
+            
+            .card-back::before {
+                font-size: 1.2em;
+            }
+            
+            .game-info {
+                grid-template-columns: repeat(2, 1fr);
+                font-size: 16px;
+            }
+            
+            .info-value {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-board.hard {
+                grid-template-columns: repeat(4, 60px);
+                grid-template-rows: repeat(6, 60px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="../../" class="nav-logo">
+                    <img src="../../assets/images/logo.svg" alt="minigames365" class="logo-img">
+                    <span class="logo-text">minigames365</span>
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="../../" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="../../categories/puzzle.html" class="nav-link">Puzzle</a></li>
+                    <li class="nav-item"><a href="../../categories/action.html" class="nav-link">Action</a></li>
+                    <li class="nav-item"><a href="../../categories/sports.html" class="nav-link">Sports</a></li>
+                    <li class="nav-item"><a href="../../about.html" class="nav-link">About</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="game-container">
+            <h1>Memory Card Game</h1>
+            <p>Flip cards to find matching pairs and train your memory!</p>
+            
+            <div class="difficulty-selector">
+                <label for="difficulty">Difficulty: </label>
+                <select id="difficulty" onchange="changeDifficulty()">
+                    <option value="easy">Easy (4x3)</option>
+                    <option value="medium" selected>Medium (4x4)</option>
+                    <option value="hard">Hard (6x4)</option>
+                </select>
+            </div>
+            
+            <div class="game-info">
+                <div class="info-item">
+                    <span class="info-label">Moves</span>
+                    <div class="info-value" id="moves">0</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Matches</span>
+                    <div class="info-value" id="matches">0</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Time</span>
+                    <div class="info-value" id="timer">00:00</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Best Time</span>
+                    <div class="info-value" id="bestTime">--:--</div>
+                </div>
+            </div>
+            
+            <div class="game-board" id="gameBoard"></div>
+            
+            <div class="game-controls">
+                <button class="btn" onclick="newGame()">New Game</button>
+                <button class="btn secondary" onclick="pauseGame()">Pause</button>
+                <button class="btn secondary" onclick="showHint()">Hint</button>
+                <button class="btn secondary" onclick="resetStats()">Reset Stats</button>
+            </div>
+            
+            <div class="game-complete" id="gameComplete">
+                <h2>🎉 Congratulations!</h2>
+                <div class="stars">
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                </div>
+                <p>You completed the game in <span id="finalTime">00:00</span> with <span id="finalMoves">0</span> moves!</p>
+                <div id="newRecord" style="display: none;">
+                    <div class="best-score">🏆 New Best Time!</div>
+                </div>
+                <button class="btn success" onclick="newGame()">Play Again</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>minigames365</h3>
+                <p>Your ultimate destination for free online games. Play anytime, anywhere!</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../../categories/puzzle.html">Puzzle Games</a></li>
+                    <li><a href="../../categories/action.html">Action Games</a></li>
+                    <li><a href="../../about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="../../privacy.html">Privacy Policy</a></li>
+                    <li><a href="../../terms.html">Terms of Service</a></li>
+                    <li><a href="../../contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 minigames365. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="logic.js"></script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Memory Card",
+        "description": "A classic memory training game where players flip cards to find matching pairs.",
+        "author": {
+            "@type": "Organization",
+            "name": "minigames365"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "minigames365"
+        },
+        "genre": "Puzzle",
+        "playMode": "SinglePlayer",
+        "url": "https://minigames365.com/games/memory-card/",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game"
+    }
+    </script>
+</body>
+</html>

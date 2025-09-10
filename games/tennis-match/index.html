@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis Match - 网球比赛 | MiniGames365</title>
+    <meta name="description" content="体验真实的网球比赛！控制球拍击球，掌握力度和角度，在激烈的网球对战中获得胜利。支持移动端触控操作。">
+    <meta name="keywords" content="网球游戏,体育游戏,网球比赛,在线游戏,免费游戏,移动游戏">
+    <meta name="author" content="MiniGames365">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/tennis-match/">
+    <meta property="og:title" content="Tennis Match - 网球比赛 | MiniGames365">
+    <meta property="og:description" content="体验真实的网球比赛！控制球拍击球，掌握力度和角度，在激烈的网球对战中获得胜利。">
+    <meta property="og:image" content="https://minigames365.com/images/tennis-match-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://minigames365.com/games/tennis-match/">
+    <meta property="twitter:title" content="Tennis Match - 网球比赛 | MiniGames365">
+    <meta property="twitter:description" content="体验真实的网球比赛！控制球拍击球，掌握力度和角度，在激烈的网球对战中获得胜利。">
+    <meta property="twitter:image" content="https://minigames365.com/images/tennis-match-preview.jpg">
+    
+    <link rel="canonical" href="https://minigames365.com/games/tennis-match/">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2E8B57 0%, #228B22 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.5rem;
+            text-align: center;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .game-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .game-wrapper {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .game-header {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        
+        .score, .level, .best-score {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        .game-canvas {
+            display: block;
+            width: 100%;
+            height: 400px;
+            background: #2E8B57;
+            border: none;
+        }
+        
+        .game-controls {
+            padding: 1rem;
+            text-align: center;
+            background: #f8f9fa;
+        }
+        
+        .control-btn {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
+        }
+        
+        .instructions {
+            background: #e9ecef;
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .instructions p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .footer a {
+            color: #4ECDC4;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .nav a {
+                margin: 0 0.5rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .game-canvas {
+                height: 300px;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .control-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 0.5rem;
+            }
+            
+            .game-canvas {
+                height: 250px;
+            }
+            
+            .control-btn {
+                padding: 0.5rem 1rem;
+                margin: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🎾 Tennis Match - 网球比赛</h1>
+        <p>体验真实的网球比赛，掌握击球技巧！</p>
+    </header>
+    
+    <nav class="nav">
+        <a href="/">🏠 首页</a>
+        <a href="/games/">🎮 所有游戏</a>
+        <a href="/sports/">⚽ 体育游戏</a>
+        <a href="/about/">ℹ️ 关于我们</a>
+    </nav>
+    
+    <main class="game-container">
+        <div class="game-wrapper">
+            <div class="game-header">
+                <h2>🎾 Tennis Match</h2>
+                <div class="game-info">
+                    <div class="score">得分: <span id="score">0</span></div>
+                    <div class="level">回合: <span id="level">1</span></div>
+                    <div class="best-score">最高分: <span id="bestScore">0</span></div>
+                </div>
+            </div>
+            
+            <canvas id="gameCanvas" class="game-canvas" width="800" height="400"></canvas>
+            
+            <div class="game-controls">
+                <button id="startBtn" class="control-btn">🎾 开始游戏</button>
+                <button id="pauseBtn" class="control-btn">⏸️ 暂停</button>
+                <button id="restartBtn" class="control-btn">🔄 重新开始</button>
+            </div>
+        </div>
+    </main>
+    
+    <div class="instructions">
+        <h3>🎯 游戏说明</h3>
+        <p>🖱️ <strong>电脑操作：</strong>移动鼠标控制球拍位置，点击击球</p>
+        <p>📱 <strong>手机操作：</strong>触摸屏幕控制球拍，点击击球</p>
+        <p>🎯 <strong>游戏目标：</strong>击败对手，赢得网球比赛！掌握击球时机和角度是关键</p>
+        <p>⚡ <strong>游戏技巧：</strong>观察球的轨迹，提前预判落点，控制击球力度和方向</p>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2024 <a href="https://minigames365.com">MiniGames365</a> - 精品小游戏合集 | 
+        <a href="/privacy/">隐私政策</a> | 
+        <a href="/terms/">使用条款</a></p>
+    </footer>
+    
+    <script src="logic.js"></script>
+    
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Tennis Match - 网球比赛",
+        "description": "体验真实的网球比赛！控制球拍击球，掌握力度和角度，在激烈的网球对战中获得胜利。支持移动端触控操作。",
+        "url": "https://minigames365.com/games/tennis-match/",
+        "image": "https://minigames365.com/images/tennis-match-preview.jpg",
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiniGames365",
+            "url": "https://minigames365.com"
+        },
+        "genre": ["体育游戏", "网球游戏", "竞技游戏"],
+        "playMode": "SinglePlayer",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires HTML5 support",
+        "accessibilityFeature": ["touchControl", "keyboardControl"],
+        "gamePlatform": ["Web Browser", "Mobile", "Desktop"]
+    }
+    </script>
+</body>
+</html>

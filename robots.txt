@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://minigames365.com/sitemaps/index.xml
+Sitemap: https://minigames365.com/sitemap.xml

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku - Free Online Logic Puzzle Game | minigames365</title>
+    <meta name="description" content="Play Sudoku, the classic number logic puzzle game. Fill the 9x9 grid with digits 1-9. Multiple difficulty levels available. Free to play online!">
+    <meta name="keywords" content="sudoku, number puzzle, logic game, brain training, puzzle game, free online game">
+    <meta name="author" content="minigames365">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/sudoku/">
+    <meta property="og:title" content="Sudoku - Free Online Logic Puzzle Game">
+    <meta property="og:description" content="Play Sudoku, the classic number logic puzzle game. Fill the 9x9 grid with digits 1-9.">
+    <meta property="og:image" content="https://minigames365.com/assets/images/games/sudoku.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://minigames365.com/games/sudoku/">
+    <meta property="twitter:title" content="Sudoku - Free Online Logic Puzzle Game">
+    <meta property="twitter:description" content="Play Sudoku, the classic number logic puzzle game. Fill the 9x9 grid with digits 1-9.">
+    <meta property="twitter:image" content="https://minigames365.com/assets/images/games/sudoku.jpg">
+    
+    <link rel="canonical" href="https://minigames365.com/games/sudoku/">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .game-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(9, 50px);
+            grid-template-rows: repeat(9, 50px);
+            gap: 1px;
+            margin: 20px auto;
+            background: #2c3e50;
+            padding: 5px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 3px solid #2c3e50;
+        }
+        
+        .sudoku-cell {
+            width: 50px;
+            height: 50px;
+            background: #ecf0f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            outline: none;
+        }
+        
+        .sudoku-cell:hover {
+            background: #bdc3c7;
+        }
+        
+        .sudoku-cell.selected {
+            background: #3498db;
+            color: white;
+        }
+        
+        .sudoku-cell.given {
+            background: #95a5a6;
+            color: white;
+            cursor: not-allowed;
+        }
+        
+        .sudoku-cell.error {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .sudoku-cell.highlight {
+            background: #f39c12;
+            color: white;
+        }
+        
+        /* 3x3 box borders */
+        .sudoku-cell:nth-child(3n) {
+            border-right: 3px solid #2c3e50;
+        }
+        
+        .sudoku-cell:nth-child(n+19):nth-child(-n+27),
+        .sudoku-cell:nth-child(n+46):nth-child(-n+54) {
+            border-bottom: 3px solid #2c3e50;
+        }
+        
+        .number-pad {
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            gap: 10px;
+            margin: 20px auto;
+            justify-content: center;
+        }
+        
+        .number-btn {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .number-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .number-btn.erase {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .game-controls {
+            margin: 20px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+        }
+        
+        .difficulty-selector {
+            margin-bottom: 20px;
+        }
+        
+        .difficulty-selector select {
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: 2px solid #3498db;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 600px) {
+            .game-board {
+                grid-template-columns: repeat(9, 35px);
+                grid-template-rows: repeat(9, 35px);
+            }
+            
+            .sudoku-cell {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            
+            .number-pad {
+                grid-template-columns: repeat(5, 50px);
+            }
+            
+            .number-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="../../" class="nav-logo">
+                    <img src="../../assets/images/logo.svg" alt="minigames365" class="logo-img">
+                    <span class="logo-text">minigames365</span>
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="../../" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="../../categories/puzzle.html" class="nav-link">Puzzle</a></li>
+                    <li class="nav-item"><a href="../../categories/action.html" class="nav-link">Action</a></li>
+                    <li class="nav-item"><a href="../../categories/sports.html" class="nav-link">Sports</a></li>
+                    <li class="nav-item"><a href="../../about.html" class="nav-link">About</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="game-container">
+            <h1>Sudoku</h1>
+            <p>Fill the 9×9 grid with digits 1-9. Each row, column, and 3×3 box must contain all digits!</p>
+            
+            <div class="difficulty-selector">
+                <label for="difficulty">Difficulty: </label>
+                <select id="difficulty" onchange="changeDifficulty()">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                    <option value="expert">Expert</option>
+                </select>
+            </div>
+            
+            <div class="game-info">
+                <div>Time: <span id="timer">00:00</span></div>
+                <div>Errors: <span id="errors">0</span>/3</div>
+                <div>Remaining: <span id="remaining">0</span></div>
+            </div>
+            
+            <div class="game-board" id="gameBoard"></div>
+            
+            <div class="number-pad">
+                <button class="number-btn" onclick="selectNumber(1)">1</button>
+                <button class="number-btn" onclick="selectNumber(2)">2</button>
+                <button class="number-btn" onclick="selectNumber(3)">3</button>
+                <button class="number-btn" onclick="selectNumber(4)">4</button>
+                <button class="number-btn" onclick="selectNumber(5)">5</button>
+                <button class="number-btn" onclick="selectNumber(6)">6</button>
+                <button class="number-btn" onclick="selectNumber(7)">7</button>
+                <button class="number-btn" onclick="selectNumber(8)">8</button>
+                <button class="number-btn" onclick="selectNumber(9)">9</button>
+                <button class="number-btn erase" onclick="selectNumber(0)">✗</button>
+            </div>
+            
+            <div class="game-controls">
+                <button class="btn" onclick="newGame()">New Game</button>
+                <button class="btn secondary" onclick="getHint()">Hint</button>
+                <button class="btn secondary" onclick="checkSolution()">Check</button>
+            </div>
+            
+            <div id="gameComplete" style="display: none; margin-top: 20px;">
+                <h2>🎉 Congratulations!</h2>
+                <p>You solved the puzzle in <span id="finalTime">00:00</span>!</p>
+                <button class="btn" onclick="newGame()">Play Again</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>minigames365</h3>
+                <p>Your ultimate destination for free online games. Play anytime, anywhere!</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../../categories/puzzle.html">Puzzle Games</a></li>
+                    <li><a href="../../categories/action.html">Action Games</a></li>
+                    <li><a href="../../about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="../../privacy.html">Privacy Policy</a></li>
+                    <li><a href="../../terms.html">Terms of Service</a></li>
+                    <li><a href="../../contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 minigames365. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="logic.js"></script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Sudoku",
+        "description": "A classic number logic puzzle game where players fill a 9x9 grid with digits 1-9.",
+        "author": {
+            "@type": "Organization",
+            "name": "minigames365"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "minigames365"
+        },
+        "genre": "Puzzle",
+        "playMode": "SinglePlayer",
+        "url": "https://minigames365.com/games/sudoku/",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game"
+    }
+    </script>
+</body>
+</html>

@@ -3,194 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sports Games - Athletic Challenges | MiniGames365</title>
-    <meta name="description" content="Play fun and competitive sports games. Enjoy athletic challenges and quick matches in your browser.">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="canonical" href="https://minigames365.com/categories/sports.html"></head>
+    <title>体育竞技游戏 - Minigames365</title>
+    <meta name="description" content="精选体育竞技小游戏合集，包括足球射门、篮球投篮、网球对战、高尔夫挑战等运动游戏，展现你的运动技巧。">
+    <meta name="keywords" content="体育游戏,竞技游戏,足球射门,篮球投篮,网球对战,高尔夫挑战,在线小游戏">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="体育竞技游戏 - Minigames365">
+    <meta property="og:description" content="精选体育竞技小游戏合集，包括足球射门、篮球投篮、网球对战、高尔夫挑战等运动游戏">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/categories/sports.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="体育竞技游戏 - Minigames365">
+    <meta name="twitter:description" content="精选体育竞技小游戏合集，展现你的运动技巧">
+    
+    <link rel="canonical" href="https://minigames365.com/categories/sports.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+        
+        .category-header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            color: white;
+        }
+        
+        .category-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .game-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .game-description {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .play-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #4CAF50, #2E7D32);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #4CAF50;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .category-title {
+                font-size: 2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .game-card {
+                padding: 1.5rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
 <body>
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="/" class="logo">
-                    <img src="/assets/images/logo.svg" alt="MiniGames365" width="40" height="40">
-                    <span class="logo-text">MiniGames365</span>
-                </a>
-                <div class="nav-search">
-                    <input type="text" placeholder="Search games..." id="searchInput" onkeyup="searchGames()">
-                    <button class="search-btn">🔍</button>
-                </div>
-            </nav>
-        </div>
+    <header>
+        <nav class="container">
+            <a href="../index.html" class="logo">Minigames365</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="puzzle.html">休闲益智</a></li>
+                <li><a href="action.html">动作冒险</a></li>
+                <li><a href="sports.html">体育竞技</a></li>
+                <li><a href="strategy.html">策略模拟</a></li>
+            </ul>
+        </nav>
     </header>
-
+    
     <main>
-        <div class="container">
-            <section class="hero-section">
-                <h1>⚽ Sports Games</h1>
-                <p class="hero-description">
-                    Athletic challenges and competitive fun. Enjoy quick, browser-based sports experiences.
+        <section class="category-header">
+            <div class="container">
+                <h1 class="category-title">⚽ 体育竞技游戏</h1>
+                <p class="category-description">
+                    体验运动的激情与竞技的魅力！精选体育竞技游戏，从足球射门到篮球投篮，展现你的运动天赋和竞技精神。
                 </p>
-            </section>
-
-            <section id="sports-games" class="featured-games">
-                <h2 class="section-title">Available Sports Games</h2>
-                <div class="games-grid" id="sports-games-grid"></div>
-            </section>
-
-            <div class="ad-container mobile-only">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-6583243933606323"
-                     data-ad-slot="XXXXXXXXX"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
             </div>
-
-            <section class="featured-games">
-                <h2 class="section-title">🎮 Explore Other Categories</h2>
-                <div class="categories-grid">
-                    <a href="/categories/puzzle.html" class="category-card">
-                        <div class="category-icon">🧩</div>
-                        <h3>Puzzle Games</h3>
-                        <p>Test your brain power</p>
-                    </a>
-                    <a href="/categories/arcade.html" class="category-card">
-                        <div class="category-icon">🕹️</div>
-                        <h3>Arcade Games</h3>
-                        <p>Classic retro fun</p>
-                    </a>
-                    <a href="/categories/strategy.html" class="category-card">
-                        <div class="category-icon">🎯</div>
-                        <h3>Strategy Games</h3>
-                        <p>Think and conquer</p>
-                    </a>
+        </section>
+        
+        <section class="container">
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-icon">⚽</div>
+                    <h3 class="game-title">足球射门</h3>
+                    <p class="game-description">
+                        成为足球射门高手！瞄准球门，躲避守门员，在限定时间内尽可能多地进球，挑战你的射门技巧。
+                    </p>
+                    <a href="../games/soccer-shootout/index.html" class="play-btn">开始游戏</a>
                 </div>
-            </section>
-        </div>
+                
+                <div class="game-card">
+                    <div class="game-icon">🏀</div>
+                    <h3 class="game-title">篮球投篮</h3>
+                    <p class="game-description">
+                        展现你的投篮技巧！掌握力度和角度，连续投篮得分，挑战更高的分数和更远的投篮距离。
+                    </p>
+                    <a href="../games/basketball-shots/index.html" class="play-btn">开始游戏</a>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-icon">🎾</div>
+                    <h3 class="game-title">网球对战</h3>
+                    <p class="game-description">
+                        激烈的网球对决！控制球拍击球，与AI对手进行精彩对战，掌握节奏赢得比赛胜利。
+                    </p>
+                    <a href="../games/tennis-match/index.html" class="play-btn">开始游戏</a>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-icon">⛳</div>
+                    <h3 class="game-title">高尔夫挑战</h3>
+                    <p class="game-description">
+                        精准的高尔夫挑战！控制力度和方向，克服各种地形障碍，用最少的杆数完成每个洞。
+                    </p>
+                    <a href="../games/golf-challenge/index.html" class="play-btn">开始游戏</a>
+                </div>
+            </div>
+        </section>
     </main>
-
-    <footer class="footer">
+    
+    <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h4>MiniGames365</h4>
-                    <p>The best destination for free online games. Play instantly without downloads on any device.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Categories</h4>
-                    <ul>
-                        <li><a href="/categories/puzzle.html">Puzzle Games</a></li>
-                        <li><a href="/categories/action.html">Action Games</a></li>
-                        <li><a href="/categories/arcade.html">Arcade Games</a></li>
-                        <li><a href="/categories/strategy.html">Strategy Games</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="/about.html">About Us</a></li>
-                        <li><a href="/privacy.html">Privacy Policy</a></li>
-                        <li><a href="/terms.html">Terms of Service</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 MiniGames365. All rights reserved.</p>
+                <p>&copy; 2024 Minigames365. 专注于提供优质的在线小游戏体验。</p>
+                <ul class="footer-links">
+                    <li><a href="../index.html">首页</a></li>
+                    <li><a href="../about.html">关于我们</a></li>
+                    <li><a href="../contact.html">联系我们</a></li>
+                </ul>
             </div>
         </div>
     </footer>
-
-    <script src="/assets/js/main.js"></script>
-    <script>
-        const SPORTS_GAMES = [
-            {
-                slug: 'sprint-league',
-                title: 'Sprint League',
-                description: '3-lane sprint race. Tap rhythm, manage stamina, win!',
-                category: 'Sports',
-                rating: 4.6,
-                thumbnail: '/assets/images/games/sprint-league-thumb.svg'
-            },
-            {
-                slug: 'futebol-frenzy',
-                title: 'Futebol Frenzy',
-                description: 'Arcade soccer mini game – shoot, pass, and score! Perfect for quick matches.',
-                category: 'Sports',
-                rating: 4.5,
-                thumbnail: '/assets/images/games/futebol-frenzy-thumb.svg'
-            },
-            {
-                slug: 'fifa-mobile',
-                title: 'FIFA Mobile (Lite)',
-                description: 'Quick shootout fun. Aim, shoot, score!',
-                category: 'Sports',
-                rating: 4.5,
-                thumbnail: '/assets/images/games/fifa-mobile-thumb.svg'
-            }
-        ];
     
-        function playGame(slug) {
-            window.location.href = `/games/${slug}/`;
-        }
-
-        // NEW/HOT flags & weights
-        const GAME_FLAGS = {
-            'sprint-league': { badge: 'NEW', weight: 100 }
-        };
-    
-        function renderSportsGames() {
-            const grid = document.getElementById('sports-games-grid');
-            if (!grid) return;
-            const sorted = SPORTS_GAMES.slice().sort((a,b)=>{
-                const wa = (GAME_FLAGS[a.slug]?.weight)||0;
-                const wb = (GAME_FLAGS[b.slug]?.weight)||0;
-                return wb - wa;
-            });
-            sorted.forEach(game => {
-                const flags = GAME_FLAGS[game.slug] || {};
-                const el = document.createElement('div');
-                el.className = 'game-card';
-                el.onclick = () => playGame(game.slug);
-                el.innerHTML = `
-                    <div class="game-thumbnail">
-                        ${flags.badge ? `<span class="badge" style="position:absolute;top:8px;left:8px;background:#ef4444;color:#fff;font-weight:700;font-size:12px;padding:2px 6px;border-radius:6px;">${flags.badge}</span>` : ''}
-                        <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
-                        <div class="play-overlay"><div class="play-button">▶</div></div>
-                    </div>
-                    <div class="game-info">
-                        <h3 class="game-title">${game.title}</h3>
-                        <p class="game-description">${game.description}</p>
-                        <div class="game-meta">
-                            <span class="game-category">${game.category}</span>
-                            <span class="game-rating">⭐ ${game.rating}</span>
-                        </div>
-                    </div>`;
-                grid.appendChild(el);
-            });
-        }
-    
-        document.addEventListener('DOMContentLoaded', () => {
-            renderSportsGames();
-            if (window.adsbygoogle) {
-            }
-        });
-
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'category_view', {
-                category_name: 'sports',
-                page_title: 'Sports Games'
-            });
-        }
-    </script>
-
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        "name": "Sports Games",
-        "description": "Play fun and competitive sports games.",
-        "url": "https://minigames365.com/categories/sports.html"
+        "name": "体育竞技游戏",
+        "description": "精选体育竞技小游戏合集，包括足球射门、篮球投篮、网球对战、高尔夫挑战等运动游戏",
+        "url": "https://minigames365.com/categories/sports.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {
+                    "@type": "Game",
+                    "name": "足球射门",
+                    "description": "足球射门技巧挑战游戏",
+                    "url": "https://minigames365.com/games/soccer-shootout/index.html",
+                    "genre": "体育游戏"
+                },
+                {
+                    "@type": "Game",
+                    "name": "篮球投篮",
+                    "description": "篮球投篮技巧挑战游戏",
+                    "url": "https://minigames365.com/games/basketball-shots/index.html",
+                    "genre": "体育游戏"
+                },
+                {
+                    "@type": "Game",
+                    "name": "网球对战",
+                    "description": "激烈的网球对决游戏",
+                    "url": "https://minigames365.com/games/tennis-match/index.html",
+                    "genre": "体育游戏"
+                },
+                {
+                    "@type": "Game",
+                    "name": "高尔夫挑战",
+                    "description": "精准的高尔夫挑战游戏",
+                    "url": "https://minigames365.com/games/golf-challenge/index.html",
+                    "genre": "体育游戏"
+                }
+            ]
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "首页",
+                    "item": "https://minigames365.com"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "体育竞技游戏",
+                    "item": "https://minigames365.com/categories/sports.html"
+                }
+            ]
+        }
     }
     </script>
 </body>

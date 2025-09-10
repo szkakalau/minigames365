@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>农场经理 - Farm Manager | MiniGames365</title>
+    <meta name="description" content="经营你的农场！种植作物，饲养动物，管理资源。体验农场生活的乐趣，打造繁荣的农业帝国。">
+    <meta name="keywords" content="农场游戏,经营游戏,模拟游戏,种植游戏,在线游戏,免费游戏,MiniGames365">
+    <meta name="author" content="MiniGames365">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="农场经理 - Farm Manager | MiniGames365">
+    <meta property="og:description" content="经营你的农场！种植作物，饲养动物，管理资源。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/farm-manager/">
+    <meta property="og:image" content="https://minigames365.com/games/farm-manager/preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="农场经理 - Farm Manager | MiniGames365">
+    <meta name="twitter:description" content="经营你的农场！种植作物，饲养动物，管理资源。">
+    <meta name="twitter:image" content="https://minigames365.com/games/farm-manager/preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://minigames365.com/games/farm-manager/">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        
+        .nav {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 0.5rem;
+            text-align: center;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+        
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .game-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .farm-stats {
+            display: flex;
+            gap: 2rem;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .stat-item {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stat-icon {
+            font-size: 1.5rem;
+        }
+        
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #4CAF50, #388E3C);
+        }
+        
+        .btn.tertiary {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+        }
+        
+        .game-layout {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .game-canvas {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            flex: 1;
+        }
+        
+        .action-panel {
+            width: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            color: white;
+        }
+        
+        .action-panel h3 {
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #FF9800;
+        }
+        
+        .action-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .action-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .action-item.selected {
+            background: rgba(255, 152, 0, 0.3);
+            border-color: #FF9800;
+        }
+        
+        .action-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .action-name {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        
+        .action-cost {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .action-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 0.25rem;
+        }
+        
+        .season-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            max-width: 1000px;
+        }
+        
+        .season-info h3 {
+            margin-bottom: 0.5rem;
+            color: #FF9800;
+        }
+        
+        .season-progress {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            height: 20px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+        
+        .season-progress-bar {
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .weather-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 0.5rem;
+        }
+        
+        .weather-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            max-width: 1000px;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 0.5rem;
+            color: #FF9800;
+        }
+        
+        .instructions p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer h3 {
+            margin-bottom: 1rem;
+            color: #FF9800;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #FF9800;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .farm-stats {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .game-layout {
+                flex-direction: column;
+            }
+            
+            .action-panel {
+                width: 100%;
+                order: -1;
+            }
+            
+            .action-panel .action-item {
+                display: inline-block;
+                width: calc(50% - 0.25rem);
+                margin-right: 0.5rem;
+            }
+            
+            .game-controls {
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .nav a {
+                margin: 0 0.5rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .footer-links {
+                gap: 1rem;
+            }
+            
+            .weather-info {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 1rem 0.5rem;
+            }
+            
+            .farm-stats {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .game-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+            
+            .action-panel .action-item {
+                width: 100%;
+                margin-right: 0;
+            }
+            
+            .weather-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🚜 农场经理</h1>
+        <p>种植作物，饲养动物，经营你的农场！</p>
+    </header>
+    
+    <nav class="nav">
+        <a href="/">🏠 首页</a>
+        <a href="/games/">🎮 所有游戏</a>
+        <a href="/strategy/">🧠 策略游戏</a>
+        <a href="/about/">ℹ️ 关于我们</a>
+    </nav>
+    
+    <main class="game-container">
+        <div class="game-info">
+            <div class="farm-stats">
+                <div class="stat-item">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <div class="stat-label">金币</div>
+                        <div class="stat-value" id="money">500</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🌾</div>
+                    <div class="stat-info">
+                        <div class="stat-label">作物</div>
+                        <div class="stat-value" id="crops">0</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🐄</div>
+                    <div class="stat-info">
+                        <div class="stat-label">动物</div>
+                        <div class="stat-value" id="animals">0</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-info">
+                        <div class="stat-label">经验</div>
+                        <div class="stat-value" id="experience">0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button class="btn" id="startBtn">开始游戏</button>
+                <button class="btn secondary" id="pauseBtn">暂停</button>
+                <button class="btn tertiary" id="harvestBtn">收获全部</button>
+            </div>
+        </div>
+        
+        <div class="game-layout">
+            <canvas id="gameCanvas" class="game-canvas" width="800" height="600"></canvas>
+            
+            <div class="action-panel">
+                <h3>🌱 农场操作</h3>
+                
+                <div class="action-item" data-action="wheat">
+                    <div class="action-icon">🌾</div>
+                    <div class="action-name">小麦</div>
+                    <div class="action-cost">💰20</div>
+                    <div class="action-time">⏰30秒</div>
+                </div>
+                
+                <div class="action-item" data-action="corn">
+                    <div class="action-icon">🌽</div>
+                    <div class="action-name">玉米</div>
+                    <div class="action-cost">💰30</div>
+                    <div class="action-time">⏰45秒</div>
+                </div>
+                
+                <div class="action-item" data-action="tomato">
+                    <div class="action-icon">🍅</div>
+                    <div class="action-name">番茄</div>
+                    <div class="action-cost">💰40</div>
+                    <div class="action-time">⏰60秒</div>
+                </div>
+                
+                <div class="action-item" data-action="cow">
+                    <div class="action-icon">🐄</div>
+                    <div class="action-name">奶牛</div>
+                    <div class="action-cost">💰200</div>
+                    <div class="action-time">⏰产奶</div>
+                </div>
+                
+                <div class="action-item" data-action="chicken">
+                    <div class="action-icon">🐔</div>
+                    <div class="action-name">鸡</div>
+                    <div class="action-cost">💰100</div>
+                    <div class="action-time">⏰产蛋</div>
+                </div>
+                
+                <div class="action-item" data-action="well">
+                    <div class="action-icon">🏗️</div>
+                    <div class="action-name">水井</div>
+                    <div class="action-cost">💰150</div>
+                    <div class="action-time">⏰灌溉</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="season-info">
+            <h3 id="seasonName">🌸 春季</h3>
+            <div class="season-progress">
+                <div class="season-progress-bar" id="seasonProgress"></div>
+            </div>
+            <div class="weather-info">
+                <div class="weather-item">
+                    <span id="weatherIcon">☀️</span>
+                    <span id="weatherName">晴天</span>
+                </div>
+                <div class="weather-item">
+                    <span>🌡️</span>
+                    <span id="temperature">22°C</span>
+                </div>
+                <div class="weather-item">
+                    <span>💧</span>
+                    <span id="humidity">60%</span>
+                </div>
+            </div>
+            <p id="seasonEffect">春季：作物生长速度+20%</p>
+        </div>
+        
+        <div class="instructions">
+            <h3>🎯 游戏说明</h3>
+            <p>🖱️ <strong>种植：</strong>选择作物类型，点击空地种植</p>
+            <p>💰 <strong>经济：</strong>种植作物和饲养动物获得收入</p>
+            <p>🌾 <strong>小麦：</strong>基础作物，生长快，收益稳定</p>
+            <p>🌽 <strong>玉米：</strong>中等作物，收益较高</p>
+            <p>🍅 <strong>番茄：</strong>高级作物，收益最高但生长慢</p>
+            <p>🐄 <strong>奶牛：</strong>定期产奶，持续收益</p>
+            <p>🐔 <strong>鸡：</strong>定期产蛋，快速收益</p>
+            <p>🏗️ <strong>水井：</strong>提高周围作物生长速度</p>
+            <p>🌦️ <strong>天气：</strong>不同天气影响作物生长</p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>MiniGames365</h3>
+            <div class="footer-links">
+                <a href="/">首页</a>
+                <a href="/games/">游戏大全</a>
+                <a href="/categories/">游戏分类</a>
+                <a href="/new/">最新游戏</a>
+                <a href="/popular/">热门游戏</a>
+                <a href="/about/">关于我们</a>
+                <a href="/contact/">联系我们</a>
+                <a href="/privacy/">隐私政策</a>
+            </div>
+            <p>&copy; 2024 MiniGames365. 让每一天都充满游戏的乐趣！</p>
+        </div>
+    </footer>
+    
+    <script src="logic.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "农场经理 - Farm Manager",
+        "description": "经营你的农场！种植作物，饲养动物，管理资源。体验农场生活的乐趣，打造繁荣的农业帝国。",
+        "url": "https://minigames365.com/games/farm-manager/",
+        "image": "https://minigames365.com/games/farm-manager/preview.jpg",
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiniGames365",
+            "url": "https://minigames365.com"
+        },
+        "genre": ["模拟游戏", "经营游戏", "农场游戏"],
+        "playMode": "SinglePlayer",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires HTML5 support",
+        "accessibilityFeature": [
+            "keyboard navigation",
+            "mouse navigation",
+            "touch navigation"
+        ],
+        "gameItem": {
+            "@type": "Thing",
+            "name": "农场作物"
+        },
+        "numberOfPlayers": {
+            "@type": "QuantitativeValue",
+            "value": 1
+        },
+        "gamePlatform": ["Web Browser", "Mobile", "Desktop"]
+    }
+    </script>
+</body>
+</html>

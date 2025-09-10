@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>城市建造者 - City Builder | MiniGames365</title>
+    <meta name="description" content="建造你的梦想城市！管理资源，规划布局，发展经济。体验城市规划的乐趣，打造繁荣的都市。">
+    <meta name="keywords" content="城市建造,模拟游戏,策略游戏,建造游戏,在线游戏,免费游戏,MiniGames365">
+    <meta name="author" content="MiniGames365">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="城市建造者 - City Builder | MiniGames365">
+    <meta property="og:description" content="建造你的梦想城市！管理资源，规划布局，发展经济。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/city-builder/">
+    <meta property="og:image" content="https://minigames365.com/games/city-builder/preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="城市建造者 - City Builder | MiniGames365">
+    <meta name="twitter:description" content="建造你的梦想城市！管理资源，规划布局，发展经济。">
+    <meta name="twitter:image" content="https://minigames365.com/games/city-builder/preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://minigames365.com/games/city-builder/">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        
+        .nav {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 0.5rem;
+            text-align: center;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+        
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .game-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .resources {
+            display: flex;
+            gap: 2rem;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .resource-item {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .resource-icon {
+            font-size: 1.5rem;
+        }
+        
+        .resource-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .resource-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .resource-value {
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+        
+        .btn.tertiary {
+            background: linear-gradient(45deg, #feca57, #ff9ff3);
+        }
+        
+        .game-layout {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .game-canvas {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            flex: 1;
+        }
+        
+        .building-panel {
+            width: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            color: white;
+        }
+        
+        .building-panel h3 {
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #feca57;
+        }
+        
+        .building-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .building-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .building-item.selected {
+            background: rgba(254, 202, 87, 0.3);
+            border-color: #feca57;
+        }
+        
+        .building-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .building-name {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        
+        .building-cost {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            max-width: 1000px;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 0.5rem;
+            color: #feca57;
+        }
+        
+        .instructions p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer h3 {
+            margin-bottom: 1rem;
+            color: #feca57;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #feca57;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .resources {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .game-layout {
+                flex-direction: column;
+            }
+            
+            .building-panel {
+                width: 100%;
+                order: -1;
+            }
+            
+            .building-panel .building-item {
+                display: inline-block;
+                width: calc(50% - 0.25rem);
+                margin-right: 0.5rem;
+            }
+            
+            .game-controls {
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .nav a {
+                margin: 0 0.5rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .footer-links {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 1rem 0.5rem;
+            }
+            
+            .resources {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .game-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+            
+            .building-panel .building-item {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🏙️ 城市建造者</h1>
+        <p>规划布局，管理资源，建造繁荣都市！</p>
+    </header>
+    
+    <nav class="nav">
+        <a href="/">🏠 首页</a>
+        <a href="/games/">🎮 所有游戏</a>
+        <a href="/strategy/">🧠 策略游戏</a>
+        <a href="/about/">ℹ️ 关于我们</a>
+    </nav>
+    
+    <main class="game-container">
+        <div class="game-info">
+            <div class="resources">
+                <div class="resource-item">
+                    <div class="resource-icon">💰</div>
+                    <div class="resource-info">
+                        <div class="resource-label">金币</div>
+                        <div class="resource-value" id="money">1000</div>
+                    </div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon">👥</div>
+                    <div class="resource-info">
+                        <div class="resource-label">人口</div>
+                        <div class="resource-value" id="population">0</div>
+                    </div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon">😊</div>
+                    <div class="resource-info">
+                        <div class="resource-label">幸福度</div>
+                        <div class="resource-value" id="happiness">100</div>
+                    </div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon">⚡</div>
+                    <div class="resource-info">
+                        <div class="resource-label">电力</div>
+                        <div class="resource-value" id="power">0/0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button class="btn" id="startBtn">开始游戏</button>
+                <button class="btn secondary" id="pauseBtn">暂停</button>
+                <button class="btn tertiary" id="restartBtn">重新开始</button>
+            </div>
+        </div>
+        
+        <div class="game-layout">
+            <canvas id="gameCanvas" class="game-canvas" width="800" height="600"></canvas>
+            
+            <div class="building-panel">
+                <h3>🏗️ 建筑</h3>
+                
+                <div class="building-item" data-building="house">
+                    <div class="building-icon">🏠</div>
+                    <div class="building-name">住宅</div>
+                    <div class="building-cost">💰100</div>
+                </div>
+                
+                <div class="building-item" data-building="shop">
+                    <div class="building-icon">🏪</div>
+                    <div class="building-name">商店</div>
+                    <div class="building-cost">💰200</div>
+                </div>
+                
+                <div class="building-item" data-building="factory">
+                    <div class="building-icon">🏭</div>
+                    <div class="building-name">工厂</div>
+                    <div class="building-cost">💰500</div>
+                </div>
+                
+                <div class="building-item" data-building="park">
+                    <div class="building-icon">🌳</div>
+                    <div class="building-name">公园</div>
+                    <div class="building-cost">💰150</div>
+                </div>
+                
+                <div class="building-item" data-building="power">
+                    <div class="building-icon">⚡</div>
+                    <div class="building-name">发电厂</div>
+                    <div class="building-cost">💰800</div>
+                </div>
+                
+                <div class="building-item" data-building="road">
+                    <div class="building-icon">🛣️</div>
+                    <div class="building-name">道路</div>
+                    <div class="building-cost">💰50</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>🎯 游戏说明</h3>
+            <p>🖱️ <strong>建造：</strong>选择建筑类型，点击空地放置</p>
+            <p>💰 <strong>资源：</strong>管理金币、人口、幸福度和电力</p>
+            <p>🏠 <strong>住宅：</strong>增加人口，需要电力和道路连接</p>
+            <p>🏪 <strong>商店：</strong>产生收入，提高幸福度</p>
+            <p>🏭 <strong>工厂：</strong>产生大量收入，但降低幸福度</p>
+            <p>🌳 <strong>公园：</strong>大幅提高幸福度</p>
+            <p>⚡ <strong>发电厂：</strong>提供电力供应</p>
+            <p>🛣️ <strong>道路：</strong>连接建筑，提高效率</p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>MiniGames365</h3>
+            <div class="footer-links">
+                <a href="/">首页</a>
+                <a href="/games/">游戏大全</a>
+                <a href="/categories/">游戏分类</a>
+                <a href="/new/">最新游戏</a>
+                <a href="/popular/">热门游戏</a>
+                <a href="/about/">关于我们</a>
+                <a href="/contact/">联系我们</a>
+                <a href="/privacy/">隐私政策</a>
+            </div>
+            <p>&copy; 2024 MiniGames365. 让每一天都充满游戏的乐趣！</p>
+        </div>
+    </footer>
+    
+    <script src="logic.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "城市建造者 - City Builder",
+        "description": "建造你的梦想城市！管理资源，规划布局，发展经济。体验城市规划的乐趣，打造繁荣的都市。",
+        "url": "https://minigames365.com/games/city-builder/",
+        "image": "https://minigames365.com/games/city-builder/preview.jpg",
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiniGames365",
+            "url": "https://minigames365.com"
+        },
+        "genre": ["策略游戏", "模拟游戏", "建造游戏"],
+        "playMode": "SinglePlayer",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires HTML5 support",
+        "accessibilityFeature": [
+            "keyboard navigation",
+            "mouse navigation",
+            "touch navigation"
+        ],
+        "gameItem": {
+            "@type": "Thing",
+            "name": "城市建筑"
+        },
+        "numberOfPlayers": {
+            "@type": "QuantitativeValue",
+            "value": 1
+        },
+        "gamePlatform": ["Web Browser", "Mobile", "Desktop"]
+    }
+    </script>
+</body>
+</html>
