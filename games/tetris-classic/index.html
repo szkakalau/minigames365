@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>经典俄罗斯方块 - 永恒的益智游戏 | 小游戏合集</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="经典俄罗斯方块游戏，永恒的益智挑战！支持移动端操作，多种难度等级，体验最纯正的方块消除乐趣。">
+    <meta name="keywords" content="俄罗斯方块,Tetris,益智游戏,方块游戏,消除游戏,手机游戏,在线游戏,免费游戏">
+    <meta name="author" content="小游戏合集">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="经典俄罗斯方块 - 永恒的益智游戏">
+    <meta property="og:description" content="经典俄罗斯方块游戏，永恒的益智挑战！支持移动端操作，多种难度等级。">
+    <meta property="og:type" content="game">
+    <meta property="og:url" content="https://yourdomain.com/games/tetris-classic/">
+    <meta property="og:image" content="https://yourdomain.com/games/tetris-classic/preview.jpg">
+    <meta property="og:site_name" content="小游戏合集">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="经典俄罗斯方块 - 永恒的益智游戏">
+    <meta name="twitter:description" content="经典俄罗斯方块游戏，永恒的益智挑战！支持移动端操作，多种难度等级。">
+    <meta name="twitter:image" content="https://yourdomain.com/games/tetris-classic/preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "经典俄罗斯方块",
+        "description": "经典俄罗斯方块游戏，永恒的益智挑战！支持移动端操作，多种难度等级。",
+        "genre": "益智游戏",
+        "gamePlatform": "Web Browser",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .game-container {
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .game-area {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .side-panel {
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            color: #718096;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+        
+        .game-board {
+            width: 300px;
+            height: 600px;
+            background: #2d3748;
+            border: 3px solid #4a5568;
+            border-radius: 10px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        .info-panel {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .info-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .next-piece {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .next-canvas {
+            width: 80px;
+            height: 80px;
+            background: #2d3748;
+            border-radius: 5px;
+            margin: 10px auto;
+            display: block;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .control-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
+        }
+        
+        .control-btn.wide {
+            grid-column: span 2;
+        }
+        
+        .mobile-controls {
+            display: none;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .mobile-btn {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            user-select: none;
+        }
+        
+        .mobile-btn:active {
+            transform: scale(0.95);
+            background: linear-gradient(135deg, #3182ce, #2c5282);
+        }
+        
+        .game-over {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        
+        .game-over-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-top: 20px;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .game-container {
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
+            
+            .side-panel {
+                width: 100%;
+                order: -1;
+            }
+            
+            .info-panel {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .info-item {
+                margin-bottom: 0;
+            }
+            
+            .next-piece {
+                grid-column: span 3;
+            }
+            
+            .game-board {
+                width: 250px;
+                height: 500px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .mobile-controls {
+                display: grid;
+            }
+            
+            .controls {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 15px;
+                margin: 10px;
+            }
+            
+            .game-board {
+                width: 200px;
+                height: 400px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .mobile-btn {
+                padding: 12px;
+                font-size: 1em;
+            }
+            
+            .info-panel {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .next-piece {
+                grid-column: span 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-area">
+            <h1>🧩 俄罗斯方块</h1>
+            <p class="subtitle">永恒的益智挑战</p>
+            
+            <div class="game-board">
+                <canvas class="game-canvas" id="gameCanvas" width="300" height="600"></canvas>
+                <div class="game-over" id="gameOver">
+                    <div class="game-over-content">
+                        <h2>🎮 游戏结束</h2>
+                        <p>最终得分: <span id="finalScore">0</span></p>
+                        <p>消除行数: <span id="finalLines">0</span></p>
+                        <div class="controls" style="margin-top: 20px;">
+                            <button class="control-btn" onclick="game.restart()">重新开始</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Controls -->
+            <div class="mobile-controls">
+                <button class="mobile-btn" id="leftBtn">←</button>
+                <button class="mobile-btn" id="downBtn">↓</button>
+                <button class="mobile-btn" id="rightBtn">→</button>
+                <button class="mobile-btn" id="rotateBtn">↻</button>
+            </div>
+            
+            <div class="instructions">
+                <strong>操作说明：</strong><br>
+                ← → 移动方块 | ↓ 快速下降 | ↻ 旋转方块 | 空格键 瞬间下降
+            </div>
+        </div>
+        
+        <div class="side-panel">
+            <div class="info-panel">
+                <div class="info-item">
+                    <div class="info-label">得分</div>
+                    <div class="info-value" id="score">0</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">等级</div>
+                    <div class="info-value" id="level">1</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">消除行数</div>
+                    <div class="info-value" id="lines">0</div>
+                </div>
+                
+                <div class="next-piece">
+                    <div class="info-label">下一个</div>
+                    <canvas class="next-canvas" id="nextCanvas" width="80" height="80"></canvas>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn" id="pauseBtn">⏸️ 暂停</button>
+                <button class="control-btn" id="restartBtn">🔄 重启</button>
+                <button class="control-btn wide" id="dropBtn">⬇️ 瞬间下降</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="logic.js"></script>
+</body>
+</html>

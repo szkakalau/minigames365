@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moto Racing - High Speed Motorcycle Racing Game | MiniGames365</title>
+    <meta name="description" content="Experience thrilling motorcycle racing with realistic physics and stunning graphics. Race through challenging tracks, avoid obstacles, and compete for the best time in this exciting moto racing game.">
+    <meta name="keywords" content="motorcycle racing, moto racing, bike racing, speed racing, racing game, motorcycle game, online racing, free racing game">
+    <meta name="author" content="MiniGames365">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Moto Racing - High Speed Motorcycle Racing Game">
+    <meta property="og:description" content="Experience thrilling motorcycle racing with realistic physics and stunning graphics. Race through challenging tracks and compete for the best time.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/moto-racing/">
+    <meta property="og:image" content="https://minigames365.com/games/moto-racing/preview.jpg">
+    <meta property="og:site_name" content="MiniGames365">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Moto Racing - High Speed Motorcycle Racing Game">
+    <meta name="twitter:description" content="Experience thrilling motorcycle racing with realistic physics and stunning graphics.">
+    <meta name="twitter:image" content="https://minigames365.com/games/moto-racing/preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Moto Racing",
+        "description": "Experience thrilling motorcycle racing with realistic physics and stunning graphics. Race through challenging tracks, avoid obstacles, and compete for the best time.",
+        "genre": "Racing",
+        "gamePlatform": "Web Browser",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiniGames365"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .game-container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .game-canvas {
+            border: 3px solid #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: #000;
+            margin: 20px auto;
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .score, .speed, .time {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .control-btn {
+            padding: 15px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            user-select: none;
+            touch-action: manipulation;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .action-btn {
+            padding: 12px 24px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .instructions h3 {
+            margin-bottom: 15px;
+            color: #feca57;
+        }
+        
+        .instructions p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .game-canvas {
+                width: 100%;
+                max-width: 400px;
+                height: 300px;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .controls {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 250px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .controls {
+                grid-template-columns: 1fr;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🏍️ Moto Racing</h1>
+        <p class="subtitle">High-speed motorcycle racing adventure!</p>
+        
+        <canvas id="gameCanvas" class="game-canvas" width="600" height="400"></canvas>
+        
+        <div class="game-info">
+            <div class="score">Score: <span id="score">0</span></div>
+            <div class="speed">Speed: <span id="speed">0</span> km/h</div>
+            <div class="time">Time: <span id="time">0</span>s</div>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn" id="leftBtn">⬅️ Left</button>
+            <button class="control-btn" id="upBtn">⬆️ Accelerate</button>
+            <button class="control-btn" id="rightBtn">➡️ Right</button>
+            <button class="control-btn" id="downBtn">⬇️ Brake</button>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="action-btn" id="pauseBtn">⏸️ Pause</button>
+            <button class="action-btn" id="restartBtn">🔄 Restart</button>
+        </div>
+        
+        <div class="instructions">
+            <h3>🎮 How to Play</h3>
+            <p>🏍️ Use arrow keys or touch controls to steer your motorcycle</p>
+            <p>⬆️ Accelerate to gain speed and overtake other vehicles</p>
+            <p>⬇️ Brake to slow down and avoid crashes</p>
+            <p>🎯 Avoid obstacles and other vehicles to survive</p>
+            <p>🏆 Collect coins and power-ups for bonus points</p>
+            <p>📱 Fully optimized for mobile devices with touch controls</p>
+        </div>
+    </div>
+    
+    <script src="logic.js"></script>
+</body>
+</html>

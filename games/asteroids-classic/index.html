@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小行星 - Asteroids | 经典太空射击游戏</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="经典小行星游戏，驾驶飞船在太空中躲避和摧毁小行星。移动端完美适配，支持触控操作，体验刺激的太空冒险！">
+    <meta name="keywords" content="小行星,Asteroids,太空游戏,射击游戏,经典游戏,街机游戏,在线游戏,免费游戏,移动游戏">
+    <meta name="author" content="Mini Games">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="小行星 - Asteroids | 经典太空射击游戏">
+    <meta property="og:description" content="经典小行星游戏，驾驶飞船在太空中躲避和摧毁小行星。移动端完美适配，支持触控操作，体验刺激的太空冒险！">
+    <meta property="og:type" content="game">
+    <meta property="og:url" content="https://minigames.example.com/games/asteroids-classic/">
+    <meta property="og:image" content="https://minigames.example.com/assets/images/asteroids-preview.jpg">
+    <meta property="og:site_name" content="Mini Games">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="小行星 - Asteroids | 经典太空射击游戏">
+    <meta name="twitter:description" content="经典小行星游戏，驾驶飞船在太空中躲避和摧毁小行星。移动端完美适配，支持触控操作，体验刺激的太空冒险！">
+    <meta name="twitter:image" content="https://minigames.example.com/assets/images/asteroids-preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "小行星 - Asteroids",
+        "description": "经典小行星游戏，驾驶飞船在太空中躲避和摧毁小行星。移动端完美适配，支持触控操作，体验刺激的太空冒险！",
+        "genre": "街机游戏",
+        "gamePlatform": "Web Browser",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00d4ff, #ffffff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .info-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            min-width: 100px;
+        }
+        
+        .info-label {
+            font-size: 0.9rem;
+            color: #00d4ff;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        #gameCanvas {
+            border: 3px solid #00d4ff;
+            border-radius: 10px;
+            background: #000;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+            user-select: none;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
+        }
+        
+        .mobile-controls {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+        
+        .mobile-btn {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        
+        .mobile-btn:active {
+            background: rgba(0, 212, 255, 0.4);
+            transform: scale(0.95);
+        }
+        
+        .mobile-btn.thrust {
+            grid-column: 2;
+            grid-row: 1;
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+            border-color: #ffa500;
+        }
+        
+        .mobile-btn.thrust:active {
+            background: rgba(255, 165, 0, 0.4);
+        }
+        
+        .mobile-btn.left {
+            grid-column: 1;
+            grid-row: 2;
+        }
+        
+        .mobile-btn.right {
+            grid-column: 3;
+            grid-row: 2;
+        }
+        
+        .mobile-btn.shoot {
+            grid-column: 2;
+            grid-row: 3;
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+            border-color: #ff0000;
+        }
+        
+        .mobile-btn.shoot:active {
+            background: rgba(255, 0, 0, 0.4);
+        }
+        
+        .instructions {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .instructions li:before {
+            content: "▶";
+            color: #00d4ff;
+            position: absolute;
+            left: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .game-info {
+                justify-content: center;
+            }
+            
+            .info-item {
+                min-width: 80px;
+                padding: 8px 12px;
+            }
+            
+            .mobile-controls {
+                display: grid;
+            }
+            
+            .controls {
+                display: none;
+            }
+            
+            #gameCanvas {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .info-item {
+                min-width: 70px;
+                padding: 6px 10px;
+            }
+            
+            .info-label {
+                font-size: 0.8rem;
+            }
+            
+            .info-value {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🚀 小行星 ☄️</h1>
+        
+        <div class="game-info">
+            <div class="info-item">
+                <div class="info-label">得分</div>
+                <div class="info-value" id="score">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">等级</div>
+                <div class="info-value" id="level">1</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">生命</div>
+                <div class="info-value" id="lives">3</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">小行星</div>
+                <div class="info-value" id="asteroids">4</div>
+            </div>
+        </div>
+        
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <div class="controls">
+            <button class="control-btn" id="pauseBtn">⏸️ 暂停</button>
+            <button class="control-btn" id="restartBtn">🔄 重新开始</button>
+        </div>
+        
+        <div class="mobile-controls">
+            <button class="mobile-btn thrust" id="thrustBtn">🔥</button>
+            <button class="mobile-btn left" id="leftBtn">↺</button>
+            <button class="mobile-btn right" id="rightBtn">↻</button>
+            <button class="mobile-btn shoot" id="shootBtn">💥</button>
+        </div>
+        
+        <div class="instructions">
+            <h3>🎮 游戏说明</h3>
+            <ul>
+                <li><strong>目标：</strong>摧毁所有小行星，避免碰撞</li>
+                <li><strong>旋转：</strong>使用 A/D 键或左右箭头键旋转飞船</li>
+                <li><strong>推进：</strong>按 W 键或上箭头键推进飞船</li>
+                <li><strong>射击：</strong>按空格键发射激光</li>
+                <li><strong>移动端：</strong>点击屏幕按钮进行操作</li>
+                <li><strong>提示：</strong>大小行星会分裂成更小的碎片</li>
+                <li><strong>奖励：</strong>清除所有小行星进入下一关</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="logic.js"></script>
+</body>
+</html>

@@ -105,10 +105,28 @@
     <script>
         // NEW/HOT flags & weights
         const GAME_FLAGS = {
+            'speed-racer': { badge: 'NEW', weight: 200 },
+            'extreme-moto': { badge: 'NEW', weight: 180 },
             'highway-dash': { badge: 'NEW', weight: 100 }
         };
         
         const RACING_GAMES = [
+            {
+                slug: 'speed-racer',
+                title: 'Speed Racer',
+                description: 'High-speed racing with stunning graphics and realistic physics.',
+                category: 'Racing',
+                rating: 4.8,
+                thumbnail: '/assets/images/games/speed-racer-thumb.svg'
+            },
+            {
+                slug: 'extreme-moto',
+                title: 'Extreme Moto',
+                description: 'Perform stunts and race through challenging motorcycle tracks.',
+                category: 'Racing',
+                rating: 4.7,
+                thumbnail: '/assets/images/games/extreme-moto-thumb.svg'
+            },
             {
                 slug: 'moto-race-go',
                 title: 'Moto Race Go',

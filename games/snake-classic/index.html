@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Classic - Retro Snake Game | Free Online Games</title>
+    <meta name="description" content="Play the classic Snake game online! Control the snake to eat food and grow longer while avoiding walls and your own tail. Free retro arcade game with mobile support.">
+    <meta name="keywords" content="snake game, classic snake, retro games, arcade games, online games, mobile games, free games">
+    <meta name="author" content="MiniGames">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Snake Classic - Retro Snake Game">
+    <meta property="og:description" content="Play the classic Snake game online! Control the snake to eat food and grow longer while avoiding obstacles.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/snake-classic/">
+    <meta property="og:image" content="https://minigames365.com/assets/images/games/snake-classic.jpg">
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Snake Classic - Retro Snake Game">
+    <meta name="twitter:description" content="Play the classic Snake game online! Control the snake to eat food and grow longer.">
+    <meta name="twitter:image" content="https://minigames365.com/assets/images/games/snake-classic.jpg">
+    
+    <link rel="canonical" href="https://minigames365.com/games/snake-classic/">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .game-container {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        #gameCanvas {
+            border: 3px solid #fff;
+            border-radius: 10px;
+            background: #000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .controls {
+            margin-top: 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .mobile-controls {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .direction-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .direction-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        .instructions {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .mobile-controls {
+                display: grid;
+            }
+            
+            .instructions {
+                font-size: 0.8rem;
+            }
+            
+            #gameCanvas {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .game-info {
+                font-size: 1rem;
+            }
+            
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🐍 Snake Classic</h1>
+        
+        <div class="game-info">
+            <div>Score: <span id="score">0</span></div>
+            <div>High Score: <span id="highScore">0</span></div>
+        </div>
+        
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        
+        <div class="controls">
+            <button class="btn" onclick="startGame()">Start Game</button>
+            <button class="btn" onclick="pauseGame()">Pause</button>
+            <button class="btn" onclick="resetGame()">Reset</button>
+        </div>
+        
+        <div class="mobile-controls">
+            <div></div>
+            <button class="direction-btn" onclick="changeDirection('up')">↑</button>
+            <div></div>
+            <button class="direction-btn" onclick="changeDirection('left')">←</button>
+            <div></div>
+            <button class="direction-btn" onclick="changeDirection('right')">→</button>
+            <div></div>
+            <button class="direction-btn" onclick="changeDirection('down')">↓</button>
+            <div></div>
+        </div>
+        
+        <div class="instructions">
+            <p><strong>How to Play:</strong></p>
+            <p>🎮 Use arrow keys or on-screen buttons to control the snake</p>
+            <p>🍎 Eat the red food to grow and increase your score</p>
+            <p>⚠️ Avoid hitting walls or your own tail</p>
+            <p>🏆 Try to beat your high score!</p>
+        </div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>Game Over!</h2>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <button class="btn" onclick="resetGame()">Play Again</button>
+        </div>
+    </div>
+    
+    <script src="logic.js"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Snake Classic",
+        "description": "Play the classic Snake game online! Control the snake to eat food and grow longer while avoiding walls and your own tail.",
+        "url": "https://minigames365.com/games/snake-classic/",
+        "image": "https://minigames365.com/assets/images/games/snake-classic.jpg",
+        "author": {
+            "@type": "Organization",
+            "name": "MiniGames"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiniGames"
+        },
+        "genre": "Arcade",
+        "gamePlatform": ["Web Browser", "Mobile"],
+        "operatingSystem": "Any",
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</body>
+</html>

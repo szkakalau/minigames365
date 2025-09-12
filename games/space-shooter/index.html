@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>太空射击 - 经典太空战斗游戏 | 小游戏合集</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="经典太空射击游戏，驾驶战机在宇宙中战斗。躲避敌机攻击，收集道具，挑战高分。支持移动端触控操作，画面炫酷，节奏紧张刺激。">
+    <meta name="keywords" content="太空射击,飞机大战,射击游戏,太空战斗,在线游戏,HTML5游戏,移动端游戏,免费游戏">
+    <meta name="author" content="小游戏合集">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourdomain.com/games/space-shooter/">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="太空射击 - 经典太空战斗游戏">
+    <meta property="og:description" content="经典太空射击游戏，驾驶战机在宇宙中战斗。躲避敌机攻击，收集道具，挑战高分。">
+    <meta property="og:type" content="game">
+    <meta property="og:url" content="https://yourdomain.com/games/space-shooter/">
+    <meta property="og:image" content="https://yourdomain.com/images/space-shooter-preview.jpg">
+    <meta property="og:site_name" content="小游戏合集">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="太空射击 - 经典太空战斗游戏">
+    <meta name="twitter:description" content="经典太空射击游戏，驾驶战机在宇宙中战斗。躲避敌机攻击，收集道具，挑战高分。">
+    <meta name="twitter:image" content="https://yourdomain.com/images/space-shooter-preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "太空射击",
+        "description": "经典太空射击游戏，驾驶战机在宇宙中战斗。躲避敌机攻击，收集道具，挑战高分。",
+        "genre": "动作游戏",
+        "gamePlatform": "Web Browser",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            overflow-x: hidden;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        .game-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .game-title {
+            font-size: 2.5em;
+            color: #00d4ff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #00d4ff;
+            font-weight: bold;
+        }
+        
+        .game-subtitle {
+            color: #a0a0a0;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        
+        .game-board {
+            position: relative;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            background: #000;
+        }
+        
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 800px;
+            background: radial-gradient(ellipse at center, #001122 0%, #000000 100%);
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 10px;
+            color: white;
+            flex-wrap: wrap;
+            gap: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+        }
+        
+        .info-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+            color: #00d4ff;
+        }
+        
+        .info-value {
+            font-size: 1.4em;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00d4ff;
+            color: #ffffff;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            min-width: 120px;
+            border: 1px solid rgba(0, 212, 255, 0.5);
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
+        }
+        
+        .pause-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+        
+        .restart-btn {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+        
+        .mute-btn {
+            background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
+            color: #2c3e50;
+        }
+        
+        .mobile-controls {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .mobile-btn {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #00d4ff;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            font-size: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        
+        .mobile-btn:active {
+            background: rgba(0, 212, 255, 0.5);
+            transform: scale(0.95);
+        }
+        
+        .movement-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .game-instructions {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .game-instructions h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        
+        .game-instructions p {
+            color: #a0a0a0;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .modal h2 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+        
+        .modal p {
+            color: #a0a0a0;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .modal-btn {
+            padding: 12px 30px;
+            margin: 10px;
+            border: 1px solid #00d4ff;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+        }
+        
+        .modal-btn:hover {
+            background: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-controls {
+                display: flex;
+            }
+            
+            .game-container {
+                padding: 15px;
+                margin: 5px;
+            }
+            
+            .game-title {
+                font-size: 2em;
+            }
+            
+            .game-info {
+                justify-content: space-around;
+            }
+            
+            .info-item {
+                min-width: 60px;
+            }
+            
+            .info-value {
+                font-size: 1.2em;
+            }
+            
+            .control-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+                min-width: 100px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-title {
+                font-size: 1.8em;
+            }
+            
+            .game-subtitle {
+                font-size: 1em;
+            }
+            
+            .controls {
+                gap: 10px;
+            }
+            
+            .control-btn {
+                padding: 8px 16px;
+                font-size: 0.8em;
+                min-width: 90px;
+            }
+            
+            .mobile-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2em;
+            }
+            
+            .info-value {
+                font-size: 1.1em;
+            }
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px #00d4ff; }
+            50% { text-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff; }
+            100% { text-shadow: 0 0 10px #00d4ff; }
+        }
+        
+        .glow {
+            animation: glow 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container fade-in">
+        <div class="game-header">
+            <h1 class="game-title glow">🚀 太空射击</h1>
+            <p class="game-subtitle">驾驶战机，征服宇宙</p>
+        </div>
+        
+        <div class="game-info">
+            <div class="info-item">
+                <div class="info-label">生命值</div>
+                <div class="info-value" id="health">3</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">得分</div>
+                <div class="info-value" id="score">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">等级</div>
+                <div class="info-value" id="level">1</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">击杀</div>
+                <div class="info-value" id="kills">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">武器</div>
+                <div class="info-value" id="weapon">基础</div>
+            </div>
+        </div>
+        
+        <div class="game-board">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+        </div>
+        
+        <div class="mobile-controls">
+            <div class="movement-controls">
+                <div class="mobile-btn" id="leftBtn">←</div>
+                <div class="mobile-btn" id="rightBtn">→</div>
+            </div>
+            <div class="action-controls">
+                <div class="mobile-btn" id="shootBtn">🔥</div>
+                <div class="mobile-btn" id="specialBtn">⚡</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn pause-btn" id="pauseBtn">⏸️ 暂停</button>
+            <button class="control-btn restart-btn" id="restartBtn">🔄 重新开始</button>
+            <button class="control-btn mute-btn" id="muteBtn">🔊 音效</button>
+        </div>
+        
+        <div class="game-instructions">
+            <h3>🎮 游戏说明</h3>
+            <p>• 使用方向键或触摸按钮控制战机移动</p>
+            <p>• 空格键或射击按钮发射子弹攻击敌机</p>
+            <p>• 收集道具可以升级武器和恢复生命值</p>
+            <p>• 蓝色道具：升级武器，提升火力</p>
+            <p>• 红色道具：恢复生命值</p>
+            <p>• 绿色道具：获得特殊武器</p>
+            <p>• 躲避敌机和子弹，挑战更高分数！</p>
+        </div>
+    </div>
+    
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOver">
+        <div class="modal-content">
+            <h2>🎮 游戏结束</h2>
+            <p>你的战机被击毁了！</p>
+            <p>最终得分: <span id="finalScore">0</span></p>
+            <p>最高等级: <span id="finalLevel">1</span></p>
+            <p>击杀敌机: <span id="finalKills">0</span></p>
+            <p>历史最高: <span id="highScore">0</span></p>
+            <button class="modal-btn" onclick="game.hideGameOver(); game.restart();">重新开始</button>
+        </div>
+    </div>
+    
+    <!-- Level Up Modal -->
+    <div class="modal" id="levelUp">
+        <div class="modal-content">
+            <h2>🎉 等级提升</h2>
+            <p>恭喜升级到第 <span id="newLevel">2</span> 级！</p>
+            <p>敌机变得更强了，小心应对！</p>
+            <p>奖励分数: <span id="levelBonus">500</span></p>
+            <button class="modal-btn" onclick="game.hideLevelUp();">继续游戏</button>
+        </div>
+    </div>
+    
+    <script src="logic.js"></script>
+</body>
+</html>

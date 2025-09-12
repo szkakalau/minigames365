@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Blaster - Retro Space Shooter Game | Free Online Games</title>
+    <meta name="description" content="Defend Earth from alien invasion! Classic space shooter with modern graphics. Shoot enemies, collect power-ups, and survive waves of alien attacks. Free arcade game.">
+    <meta name="keywords" content="space shooter, arcade game, alien invasion, retro games, space blaster, online games, mobile games, free games">
+    <meta name="author" content="MiniGames">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Space Blaster - Retro Space Shooter Game">
+    <meta property="og:description" content="Defend Earth from alien invasion! Classic space shooter with modern graphics and exciting gameplay.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames365.com/games/space-blaster/">
+    <meta property="og:image" content="https://minigames365.com/assets/images/games/space-blaster.jpg">
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Space Blaster - Retro Space Shooter Game">
+    <meta name="twitter:description" content="Defend Earth from alien invasion! Classic space shooter with modern graphics.">
+    <meta name="twitter:image" content="https://minigames365.com/assets/images/games/space-blaster.jpg">
+    
+    <link rel="canonical" href="https://minigames365.com/games/space-blaster/">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .game-container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #00ffff;
+            color: #00ffff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ffff; }
+            to { text-shadow: 0 0 30px #00ffff, 0 0 40px #00ffff; }
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid #00ffff;
+        }
+        
+        .health-bar {
+            width: 100px;
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        
+        .health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00);
+            transition: width 0.3s ease;
+        }
+        
+        #gameCanvas {
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            background: #000;
+            box-shadow: 0 0 30px rgba(0,255,255,0.5);
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .controls {
+            margin-top: 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0,255,255,0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0,255,255,0.5);
+        }
+        
+        .mobile-controls {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #00ffff;
+        }
+        
+        .movement-controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+            max-width: 150px;
+        }
+        
+        .action-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .control-btn {
+            background: rgba(0,255,255,0.2);
+            border: 2px solid rgba(0,255,255,0.5);
+            color: #00ffff;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            min-width: 45px;
+        }
+        
+        .control-btn:hover, .control-btn:active {
+            background: rgba(0,255,255,0.4);
+            box-shadow: 0 0 15px rgba(0,255,255,0.5);
+        }
+        
+        .fire-btn {
+            background: rgba(255,0,0,0.2);
+            border-color: rgba(255,0,0,0.5);
+            color: #ff0000;
+            padding: 15px 25px;
+        }
+        
+        .fire-btn:hover, .fire-btn:active {
+            background: rgba(255,0,0,0.4);
+            box-shadow: 0 0 15px rgba(255,0,0,0.5);
+        }
+        
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            display: none;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 30px rgba(0,255,255,0.5);
+        }
+        
+        .instructions {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.5;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .wave-indicator {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: none;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .mobile-controls {
+                display: block;
+            }
+            
+            .instructions {
+                font-size: 0.8rem;
+            }
+            
+            #gameCanvas {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .game-info {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            body {
+                padding: 10px;
+            }
+            
+            .mobile-controls {
+                bottom: 10px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🚀 Space Blaster</h1>
+        
+        <div class="game-info">
+            <div>
+                Score: <span id="score">0</span><br>
+                <small>High: <span id="highScore">0</span></small>
+            </div>
+            <div>
+                Wave: <span id="wave">1</span><br>
+                <small>Enemies: <span id="enemies">0</span></small>
+            </div>
+            <div>
+                Health: <span id="health">100</span><br>
+                <div class="health-bar">
+                    <div class="health-fill" id="healthFill" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <canvas id="gameCanvas" width="600" height="400"></canvas>
+        
+        <div class="wave-indicator" id="waveIndicator">Wave 1 Starting!</div>
+        
+        <div class="controls">
+            <button class="btn" onclick="startGame()">Start Game</button>
+            <button class="btn" onclick="pauseGame()">Pause</button>
+            <button class="btn" onclick="resetGame()">Reset</button>
+        </div>
+        
+        <div class="mobile-controls" id="mobileControls">
+            <div class="movement-controls">
+                <div></div>
+                <button class="control-btn" onmousedown="setMovement('up')" onmouseup="setMovement('stop')" ontouchstart="setMovement('up')" ontouchend="setMovement('stop')">↑</button>
+                <div></div>
+                <button class="control-btn" onmousedown="setMovement('left')" onmouseup="setMovement('stop')" ontouchstart="setMovement('left')" ontouchend="setMovement('stop')">←</button>
+                <div></div>
+                <button class="control-btn" onmousedown="setMovement('right')" onmouseup="setMovement('stop')" ontouchstart="setMovement('right')" ontouchend="setMovement('stop')">→</button>
+                <div></div>
+                <button class="control-btn" onmousedown="setMovement('down')" onmouseup="setMovement('stop')" ontouchstart="setMovement('down')" ontouchend="setMovement('stop')">↓</button>
+                <div></div>
+            </div>
+            <div class="action-controls">
+                <button class="control-btn fire-btn" onmousedown="startFiring()" onmouseup="stopFiring()" ontouchstart="startFiring()" ontouchend="stopFiring()">🔥 FIRE</button>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <p><strong>How to Play:</strong></p>
+            <p>🎮 Use WASD or arrow keys to move your spaceship</p>
+            <p>🔥 Press SPACE or click FIRE button to shoot</p>
+            <p>👾 Destroy all enemies to advance to the next wave</p>
+            <p>💎 Collect power-ups for better weapons and health</p>
+            <p>🛡️ Avoid enemy bullets and survive as long as possible!</p>
+        </div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>Game Over!</h2>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <p>Waves Survived: <span id="finalWave">0</span></p>
+            <button class="btn" onclick="resetGame()">Play Again</button>
+        </div>
+    </div>
+    
+    <script src="logic.js"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Space Blaster",
+        "description": "Defend Earth from alien invasion! Classic space shooter with modern graphics. Shoot enemies, collect power-ups, and survive waves of alien attacks.",
+        "url": "https://minigames365.com/games/space-blaster/",
+        "image": "https://minigames365.com/assets/images/games/space-blaster.jpg",
+        "author": {
+            "@type": "Organization",
+            "name": "MiniGames"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiniGames"
+        },
+        "genre": "Arcade",
+        "gamePlatform": ["Web Browser", "Mobile"],
+        "operatingSystem": "Any",
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</body>
+</html>

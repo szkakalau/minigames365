@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="华容道 - 经典中国传统益智游戏，挑战你的逻辑思维和空间想象力">
+    <meta name="keywords" content="华容道,益智游戏,逻辑游戏,滑块拼图,中国传统游戏,在线游戏">
+    <meta name="author" content="Mini Games">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames.example.com/games/klotski-puzzle/">
+    <meta property="og:title" content="华容道 - 经典中国传统益智游戏">
+    <meta property="og:description" content="挑战经典华容道拼图，锻炼逻辑思维，体验中国传统智慧游戏的魅力">
+    <meta property="og:image" content="https://minigames.example.com/assets/images/klotski-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://minigames.example.com/games/klotski-puzzle/">
+    <meta property="twitter:title" content="华容道 - 经典中国传统益智游戏">
+    <meta property="twitter:description" content="挑战经典华容道拼图，锻炼逻辑思维，体验中国传统智慧游戏的魅力">
+    <meta property="twitter:image" content="https://minigames.example.com/assets/images/klotski-preview.jpg">
+    
+    <title>华容道 - 经典中国传统益智游戏 | Mini Games</title>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "华容道",
+        "description": "经典中国传统益智游戏，挑战你的逻辑思维和空间想象力",
+        "url": "https://minigames.example.com/games/klotski-puzzle/",
+        "image": "https://minigames.example.com/assets/images/klotski-preview.jpg",
+        "author": {
+            "@type": "Organization",
+            "name": "Mini Games"
+        },
+        "genre": "益智游戏",
+        "gamePlatform": "Web Browser",
+        "operatingSystem": "Any"
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .game-board {
+            background: rgba(139, 69, 19, 0.8);
+            border: 4px solid #8B4513;
+            border-radius: 15px;
+            padding: 10px;
+            position: relative;
+            width: 320px;
+            height: 400px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .puzzle-piece {
+            position: absolute;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border: 2px solid #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            user-select: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .puzzle-piece:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        
+        .puzzle-piece.selected {
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+        
+        .puzzle-piece.cao-cao {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            font-size: 14px;
+        }
+        
+        .puzzle-piece.general {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            font-size: 12px;
+        }
+        
+        .puzzle-piece.soldier {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            font-size: 10px;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 400px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .info-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            min-width: 100px;
+        }
+        
+        .info-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            display: block;
+        }
+        
+        .info-value {
+            font-size: 1.2em;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+        
+        .instructions {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        
+        .instructions strong {
+            color: #feca57;
+        }
+        
+        .victory-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .victory-message h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+        
+        .difficulty-selector {
+            margin: 15px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .difficulty-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .difficulty-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .difficulty-btn.active {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border-color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 15px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+            
+            .game-board {
+                width: 280px;
+                height: 350px;
+            }
+            
+            .game-info {
+                gap: 8px;
+            }
+            
+            .info-item {
+                min-width: 80px;
+                padding: 8px 12px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .instructions {
+                font-size: 12px;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 10px;
+                margin: 5px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .game-board {
+                width: 240px;
+                height: 300px;
+            }
+            
+            .info-item {
+                min-width: 70px;
+                padding: 6px 10px;
+            }
+            
+            .info-label {
+                font-size: 0.8em;
+            }
+            
+            .info-value {
+                font-size: 1em;
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .pulse {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(5deg); }
+            75% { transform: scale(1.1) rotate(-5deg); }
+        }
+        
+        .celebrate {
+            animation: celebrate 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🧩 华容道</h1>
+        
+        <div class="difficulty-selector">
+            <button class="difficulty-btn active" data-level="easy">简单</button>
+            <button class="difficulty-btn" data-level="medium">中等</button>
+            <button class="difficulty-btn" data-level="hard">困难</button>
+        </div>
+        
+        <div class="game-board" id="gameBoard">
+            <!-- Puzzle pieces will be generated here -->
+        </div>
+        
+        <div class="game-info">
+            <div class="info-item">
+                <span class="info-label">步数</span>
+                <span class="info-value" id="moves">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">时间</span>
+                <span class="info-value" id="time">00:00</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">最佳</span>
+                <span class="info-value" id="bestMoves">-</span>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="resetBtn">🔄 重置</button>
+            <button class="btn secondary" id="hintBtn">💡 提示</button>
+            <button class="btn secondary" id="undoBtn">↶ 撤销</button>
+        </div>
+        
+        <div class="instructions">
+            <strong>游戏目标：</strong>将曹操（红色大块）移动到底部出口<br>
+            <strong>操作方法：</strong>点击拼图块进行移动，只能移动到相邻的空位<br>
+            <strong>游戏规则：</strong>曹操占2×2格，武将占1×2或2×1格，士兵占1×1格
+        </div>
+    </div>
+    
+    <div class="victory-message" id="victoryMessage">
+        <h2>🎉 恭喜过关！</h2>
+        <p>您用了 <span id="finalMoves"></span> 步完成挑战</p>
+        <p>用时 <span id="finalTime"></span></p>
+        <button class="btn" onclick="game.nextLevel()">下一关</button>
+        <button class="btn secondary" onclick="game.hideVictory()">继续游戏</button>
+    </div>
+    
+    <script src="logic.js"></script>
+</body>
+</html>

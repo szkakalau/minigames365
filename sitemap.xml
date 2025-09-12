@@ -60,6 +60,13 @@
   </url>
   
   <url>
+    <loc>https://minigames365.com/games/klotski-puzzle/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
     <loc>https://minigames365.com/games/memory-cards/</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -69,6 +76,13 @@
   <!-- 动作冒险类游戏 -->
   <url>
     <loc>https://minigames365.com/games/space-shooter/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://minigames365.com/games/platform-jumper/</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -148,6 +162,36 @@
   
   <url>
     <loc>https://minigames365.com/games/stock-trader/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- 街机类游戏 -->
+  <url>
+    <loc>https://minigames365.com/games/pac-man-classic/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://minigames365.com/games/asteroids-classic/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- 竞速类游戏 -->
+  <url>
+    <loc>https://minigames365.com/games/speed-racer/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://minigames365.com/games/extreme-moto/</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

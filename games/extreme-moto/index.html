@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="极限摩托 - 刺激的3D摩托车竞速游戏，体验极速驾驶和特技表演的快感">
+    <meta name="keywords" content="极限摩托,摩托车游戏,竞速游戏,3D游戏,特技表演,在线游戏">
+    <meta name="author" content="Mini Games">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://minigames.example.com/games/extreme-moto/">
+    <meta property="og:title" content="极限摩托 - 3D摩托车竞速游戏">
+    <meta property="og:description" content="体验刺激的3D摩托车竞速，挑战极限速度，展示特技表演技巧">
+    <meta property="og:image" content="https://minigames.example.com/assets/images/extreme-moto-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://minigames.example.com/games/extreme-moto/">
+    <meta property="twitter:title" content="极限摩托 - 3D摩托车竞速游戏">
+    <meta property="twitter:description" content="体验刺激的3D摩托车竞速，挑战极限速度，展示特技表演技巧">
+    <meta property="twitter:image" content="https://minigames.example.com/assets/images/extreme-moto-preview.jpg">
+    
+    <title>极限摩托 - 3D摩托车竞速游戏 | Mini Games</title>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "极限摩托",
+        "description": "刺激的3D摩托车竞速游戏，体验极速驾驶和特技表演的快感",
+        "url": "https://minigames.example.com/games/extreme-moto/",
+        "image": "https://minigames.example.com/assets/images/extreme-moto-preview.jpg",
+        "author": {
+            "@type": "Organization",
+            "name": "Mini Games"
+        },
+        "genre": "竞速游戏",
+        "gamePlatform": "Web Browser",
+        "operatingSystem": "Any"
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        #gameCanvas {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            background: #000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 800px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .info-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            min-width: 120px;
+        }
+        
+        .info-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            display: block;
+        }
+        
+        .info-value {
+            font-size: 1.2em;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .mobile-controls {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .mobile-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+        }
+        
+        .mobile-btn:active {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0.95);
+        }
+        
+        .direction-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .instructions {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        
+        .instructions strong {
+            color: #feca57;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-controls {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .game-container {
+                padding: 15px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+            
+            .game-info {
+                gap: 8px;
+            }
+            
+            .info-item {
+                min-width: 100px;
+                padding: 8px 12px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .instructions {
+                font-size: 12px;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 10px;
+                margin: 5px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .info-item {
+                min-width: 80px;
+                padding: 6px 10px;
+            }
+            
+            .info-label {
+                font-size: 0.8em;
+            }
+            
+            .info-value {
+                font-size: 1em;
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .pulse {
+            animation: pulse 1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🏍️ 极限摩托</h1>
+        
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <div class="game-info">
+            <div class="info-item">
+                <span class="info-label">得分</span>
+                <span class="info-value" id="score">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">速度</span>
+                <span class="info-value" id="speed">0 km/h</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">特技分</span>
+                <span class="info-value" id="stuntScore">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">等级</span>
+                <span class="info-value" id="level">1</span>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="pauseBtn">⏸️ 暂停</button>
+            <button class="btn" id="restartBtn">🔄 重新开始</button>
+        </div>
+        
+        <div class="instructions">
+            <strong>操作说明：</strong><br>
+            🖥️ 电脑：方向键或WASD移动，空格键特技<br>
+            📱 手机：点击屏幕下方的控制按钮<br>
+            🎯 目标：避开障碍物，收集金币，表演特技获得高分！
+        </div>
+    </div>
+    
+    <!-- Mobile Controls -->
+    <div class="mobile-controls">
+        <div class="direction-controls">
+            <div class="mobile-btn" id="leftBtn">⬅️</div>
+            <div class="mobile-btn" id="rightBtn">➡️</div>
+        </div>
+        <div class="action-controls">
+            <div class="mobile-btn" id="accelerateBtn">⬆️</div>
+            <div class="mobile-btn" id="brakeBtn">⬇️</div>
+            <div class="mobile-btn" id="stuntBtn">🤸</div>
+        </div>
+    </div>
+    
+    <script src="logic.js"></script>
+</body>
+</html>
